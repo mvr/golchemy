@@ -1,0 +1,3 @@
+[submodule "python-lifelib/lifelib"]
+	path = python-lifelib/lifelib
+	url = https://gitlab.com/apgoucher/lifelib.git
