@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
-# import lifelib
+import lifelib
 
-# lifelib.reset_tree()
+lifelib.reset_tree()
 
 import os
 this_directory = os.path.abspath(os.path.dirname(__file__))
@@ -10,7 +10,7 @@ with open(os.path.join(this_directory, 'lifelib', 'README.md'), 'r') as f:
 
 setup(
     name='python-lifelib',
-    version="2.4.14",
+    version=lifelib.__version__,
     description='Algorithms for manipulating and simulating patterns in cellular automata',
     long_description=long_description,
     long_description_content_type='text/markdown',
