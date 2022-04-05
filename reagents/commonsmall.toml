@@ -1,0 +1,34 @@
+[pspark]
+rle = "2o$2o$o!"
+predecessors = ["b3o$o", "2o$bo$2bo", "o$2o2$2bo", "bo$2o2$2bo"]
+
+[ttetromino]
+rle = "3o$bo!"
+predecessors = ["2o$obo$3b2o", "4b2o$4o"]
+
+[phispark]
+rle = "b3o$o3bo$o3bo$b3o!"
+predecessors = [
+  "4o$4bo$5bo", "b3o$o3b2o", "b3obo$o3bo", "o2b3o$b2o", "2ob3o$2bo",
+  "bob3o$obo", "2bo$bo$bo2$2o$o", "2bo$2bo$bo2$2o$o", "b2o2$bo2$2o$o",
+  "bo$2bo$bo2$2o$o", "2bo$bo$bo2$2o$bo", "2bo$2bo$bo2$2o$bo",
+  "b2o2$bo2$2o$bo", "bo$2bo$bo2$2o$bo", "4bo$bo$ob2o$bo",
+  "bo$ob2o$o$3bo", "o2b3o$2bo$2bo", "obo$2obo$o", "2bo2$4o$o",
+  "2o$o2$2o$o", "2o$o2$2o$bo" 
+]
+
+[twoloaves]
+rle = "b3o$o3bo$2o$2b3o!"
+
+[twoloaves2]
+rle = "2o$obo$obo$2b2o$b2o!"
+
+[tlg]
+rle = "2b2o$bobo$2obo$3o!"
+
+[sputter]
+rle = "2b2o$bo$3o$bo!"
+
+[table]
+rle = "4o$o2bo!"
+

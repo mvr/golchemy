@@ -1,0 +1,61 @@
+[honeyfarm]
+rle = "2b3o$bo3bo$o5bo$bo3bo$2b3o!"
+predecessors = [
+  "o2$b2o$2o$bo", "o2$b2o$2o$o", "bo$2b2o$bo2$2o", "2b3o$o$bo$o",
+  "2b3o$o$bo$bo", "3b3o$obo$o", "b2o2$bo$2o2$bo", "b2o2$bo$2o2$o",
+  "b2o2$bo$2o$o", "3b2o$bo$2o2bo", "3bo$bo2bo$2o2bo3bo$bo2bo$2o2bo",
+  "3b2o$o$2obo", "3bo$o$2ob2o", "3bo$o2bo$2o2bo", "3bo$2o2bo$o2bo",
+  "3b2o$2o$o2bo", "3bo$2o$o2b2o", "3b2o$2o$bo2bo", "3bo$2o2bo$bo2bo",
+  "o$2b4o$2bo", "3bo$b2ob2o$o", "3b2o$b2o2bo$o", "o$obo2$2b2o$4bo",
+  "bo$obo2$2b2o$4bo", "2bo$obo2$2b2o$4bo", "3o2$3b2o$2bo",
+  "o$3o$3b2o", "o$3obo$3bo", "3o3$bo$2o", "3o2$bo$2o", "2ob3o$o",
+  "2ob3o$bo", "o2b3o$2o", "bob3o$2o", "bo$b2o2$2o$o", "bo$b2o2$2o$bo",
+  "2o$o2$bo$b2o", "2o$bo2$bo$b2o", "2o$o2$2bo$b2o", "3o3$2o$o",
+  "3o3$2o$bo", "3o3$o$2o"
+]
+
+[bakery]
+rle = "4b2o4b$3bo2bo3b$3bobo4b$b2obo3bob$o2bo3bobo$obo3bo2bo$bo3bob2ob$4bobo3b$3bo2bo3b$4b2o!"
+predecessors = [
+  "b3o2$3o$bo", "b3o2$2obo$bo", "2b3o2$ob2o$2bo", "o$2o2$o$b2o2$3bo",
+  "bo$2o2$o$b2o2$3bo"
+]
+
+[fleet]
+rle = "4b2o4b$3bobo4b$3b2o5b$b2o7b$obo5b2o$2o5bobo$7b2ob$5b2o3b$4bobo3b$4b2o!"
+predecessors = [
+  "3o$o2bo$o$bo", "b3o$bo2bo$o$2bo", "3bo$b2o$bo2bo$o$2bo",
+  "2bo$bobo$o3bo$bo$2bo", "o$o$b2o2$3bo$3b2o", "2o$obo2$2bobo$2bo",
+  "2o$obo2$2bobo$3bo", "2o$obo2$2bobo$4bo", "2o$o$2bo$2bobo2$2bo",
+  "2o$o$2bo$2bobo2$3bo", "2o$o$2bo$2bobo2$4bo", "2o$o2bo$2bo$bobo",
+  "2o$o$2b2o$2bobo", "2o$o$2b2o$2bo$4bo", "obo$bobo$3bo$4b2o",
+  "2bo$2obo$3bo$4b2o", "o$b2o$bobo$2bobo", "o$b2o$bobo$2bo$4bo",
+  "o$b2o$bo$2b2o2$4bo", "o$b2o$bo2bo$3bo$2bo", "o$b2o$bobo$4bo$2bo",
+  "bo$b3o$o$4b2o", "bo$b3o$o4bo$4bo", "bo$b3obo$o$4bo",
+  "o$b2o2bo$o2bo$4bo", "3bo2$b3o$o$o$bo", "3bo$b2o$o2bo$o$bo",
+  "2bo$bobo$o3bo$2o", "2b2o$bobo$bo$o$2bo", "2bobo$bobo$bo$o$2bo",
+  "2bo$bob2o$bo$o$2bo", "3bo$bo$2b2o$o$2o", "2b3o$bo$o4bo$o",
+  "2b3o$bo$o4bo$bo", "o$2o$ob2o2$2bo", "o$b2o2$3b2o$5bo$2bo"
+]
+messypredecessors = ["2b3o$2o$2o"]
+
+[landoflakes]
+rle = "8b2o$7bo2bo$7bo2bo$8b2ob2o$10bo2bo$10bo2bo$11b2o$b2o$o2bo$o2bo$b2ob2o$3bo2bo$3bo2bo$4b2o!"
+
+[foureaters]
+rle = "3bo7bo$b3o7b3o$o13bo$2o11b2o8$2o11b2o$o13bo$b3o7b3o$3bo7bo!"
+
+[trafficlight]
+rle = "2b3o2b2$o5bo$o5bo$o5bo2$2b3o!"
+
+[interchange]
+rle = "2b3o4b3o2$o12bo$o12bo$o12bo2$2b3o4b3o!"
+predecessors = [
+  "bo$obo$bo2$3o", "3bo$b2ob2o$o$6bo", "5o$o$3bo", "bo2bo$ob3o$bo",
+  "o3bo$ob3o$bo", "2bo$obob3o$2bo", "obo$2bo$bo$b3o",
+  "2bo$2obo$b2o$4bo"
+]
+
+[beethoven]
+rle = "bo5bo$obo3bobo$obo3bobo$bo5bo2$3b3o!"
+predecessors = ["3ob3o$3bo", "b3o$o3bo$o3bo$o3bo"]

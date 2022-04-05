@@ -1,0 +1,382 @@
+[bun]
+rle = "b2ob$o2bo$b3o!"
+predecessors = [
+  "2o2$o2$b2o$bo", "o$bo$o2$b2o$bo", "bo$o$o2$b2o$bo",
+  "bo$bo$o2$b2o$bo", "2o2$o2$b2o$2bo", "o$bo$o2$b2o$2bo",
+  "bo$o$o2$b2o$2bo", "3b3o$b2o$o", "2bo$b2o$o2bo$o",
+  "2b2o$bo2b2o$o,2b2obo$bo2bo$o", "4bo$o$b2obo$bo", "4bo$o3bo$b2o$bo",
+  "o$b2o$o$obo", "o$b2o$o$bo$2bo", "obo$bo$o$b2o", "3bo2$4o$o",
+  "obo2$bo$2o$o", "b2o2$o$2o$bo", "obo2$o$2o$bo", "obo2$bo$2o2$o",
+  "b2o2$o$2o2$o", "obo2$o$2o2$o", "obo2$bo$2o2$bo", "b2o2$o$2o2$bo",
+  "obo2$o$2o2$bo", "2bo2$2o$bo2$2o", "2bo2$2o$o2$2o", "2bo$2o$o2$2o",
+  "o$2bobo$bobobo", "o$bobobo$2bobo", "o$2b2o$bo2b2o",
+  "o$3b2o$b2o2bo", "o$3bo$b2ob2o", "o$2bob2o$bobo", "o$bobo$2bob2o",
+  "o$bob2o$obo", "o$2b2obo$bo2bo", "o$3bobo$b2obo", "ob2o$bo2bo$o",
+  "o$o2b3o$2bo", "o$3b3o$obo", "o2b3o$2bo$o", "b3o$obo2$o",
+  "b3o$obo2$bo", "b3o$obo2$2bo", "b3o$2bo$o$o", "b3o$2bo$o$bo",
+  "b3o$2bo$o$2bo", "o$b3o$bo$2bo", "o$b3o$bo$3bo", "o$b3o$bo$4bo",
+  "bo2$b2o2$o$2o", "2bo2$b2o2$o$2o", "2b3o$bo$o4bo", "bobo$obo$bo2bo",
+  "2bo2$2o$o$b2o", "2bo$2o$o$b2o", "b2o$2b2o$2o", "b2o$2bo$2o2bo",
+  "bobo$obo$o3bo", "o$b2o$b2o2$o", "bo2$2b2o$obo$bo",
+  "2o$4bo$b2o$2bo", "3bo$o$2b3o$bo", "3bo$o$b3o$o", "3o$o$bo$2bo",
+  "3o$o$2bo$o", "3o$2bo$o$o3o$2bo$o$o"
+]
+
+[r]
+rle = "b2o$2ob$bo!"
+predecessors = [
+  "o$3o2$bo", "3o$3bo$3bo", "3bo$b2o$o$bo", "o$3bo$2o$2bo",
+  "3bo$o$b2o$o", "o3bo$2b2o$bo", "2bo$3o$4bo"
+]
+
+[pi]
+rle = "3o$obo$obo!"
+predecessors = ["3o$o2bo", "bo$3o2$bo"]
+
+[lom]
+rle = "2o2b$b2ob$2b2o2o2b$b2ob$2b2o!"
+predecessors = [
+  "bo2$2ob2o2$2bo", "bo2$2obo$4bo$2bo", "bo2$2obo2$2bobo",
+  "obo2$2b2o2$3bobo", "2bo$o$2b2o2$3bobo", "2bo2$ob2o2$3bobo",
+  "2bo$o$2b2o$5bo$3bo", "2bo2$ob2o$5bo$3bo", "2bo2$ob2obo2$3bo",
+  "2b3o$2o2$o", "2b3o$2o2$bo", "bo$o2b2o$bo$3bo", "bo$2b2o2$2o$2bo",
+  "2b2o$2obo2$o", "o$3o$3bo$4bo", "b2o$o2bo$3b2o", "o2$b2o2$3b3o",
+  "2bo$2o$2bobo$3bo", "2bo$2o$2bo$3b2o", "bo2$2b2o$bo$o$o",
+  "bo2$2b2o$bo$o$bo", "2b3o$bo$o$2bo", "bo$2b2o$bo$o$bo",
+  "bo$2b2o$bo$o$o", "o$2bo$bob2o$5bo", "o$bo$ob2o$4bo", "o2$b5o",
+  "3bo$b2o2$bo$obo", "obo$bo$3b2o$2bo", "2bobo$3bo$bo$obo",
+  "o$3o2$3b2o", "o$3o$4bo$3bo", "o$3obo2$3bo", "3bobo2$2b2o$2bo$o",
+  "2bobo2$b2o$bo$o", "3bo$5bo$2b2o$2bo$o", "2bo$4bo$b2o$bo$o",
+  "3bo2$2b2obo$2bo$o", "2bo2$b2obo$bo$o", "o$b2o$2b2o$4bo",
+  "o2$b4o2$5bo", "3o$3b2o2$2bo", "o$b2o2$bo$bobo", "2b3o2$bo$o$bo",
+  "2b3o2$bo$bo$o", "2b3o2$bo$o$o", "2b3o2$bo2$2o", "2b3o$2bo$o$bo",
+  "2b3o$2bo$o$2bo", "2b3o$2bo$bo$o", "3b2o$o$b2o$o", "3bo$o3bo$b2o$o",
+  "3bo$o$b2obo$o", "2bo$bobo$4bo$2o", "o$bo$b2o$3bo$4bo",
+  "o$bo$b2o2$3b2o", "o$bo$b2o$4bo$3bo", "o$bo$b2obo2$3bo",
+  "5bo$4bo$2b2o$2bo$o", "4b2o2$2b2o$2bo$o", "4bo$5bo$2b2o$2bo$o",
+  "4bo2$2b2obo$2bo$o", "o$bo$b3o2$4bo", "5bo$3bo$b3o2$o",
+  "3bo2$ob2o$bo$bo", "2bo2$ob2o$bo$bo", "3bo2$ob2o$bo$o",
+  "2bo2$ob2o$bo$o", "o2$2obo$2bo$4bo", "bo2$2obo$2bo$4bo",
+  "o2$b3o$4bo$5bo", "o$2bo$bo$2bobo$3bo", "obo$bo$2bobo$3bo",
+  "b3o$o2$2o", "3bo$b2o$bo2$2o", "3bo2$b2o$bo2$2o",
+  "o$bo$2b2o$4bo$5bo", "2b2o$bo2$2o$o", "2b2o$bo2$2o$bo",
+  "bobo$bo2$2o$o", "bobo$bo2$2o$bo", "bo$2o$b2o$3bo",
+  "bo$2o$b2o2$3bo", "bo$2b2o$o$3bobo", "bo$2b2o$o4bo$3bo",
+  "bo$2b2obo$o$3bo", "o2$b2o$2b3o", "o$b2o$2b3o", "2b3o$obo2$o",
+  "2b3o$obo2$bo", "2b3o$obo2$2bo", "3o2$2o$o", "3o2$2o$bo",
+  "b3o2$o$obo", "bo$2b2o$o$bo$bo", "bo$2b2o$o$bo$o", "bo$3b2o$2o$3bo",
+  "2o$3bo$bo$3b2o", "2o$3b2o$bo$3bo", "o$b2o2$bo$2b2o" ]
+
+[century]
+rle = "2b2o$3ob$bo!"
+predecessors = [
+  "b3o$o$o$bo", "2obo$3b2o$o", "2ob2o$3bo$o", "bob2o$o2bo$o",
+  "bobo$o2b2o$o", "bo2bo$bob2o$o", "bob2o$bo2bo$o", "o2b2o$bobo$o",
+  "o2bo$bob2o$o", "2bo$bobo$o3bo$o", "2o$o$b2o$3bo", "2bo$bob2o$bo$o",
+  "2bobo$bobo$bo$o", "2b3o$2o$bo", "b3o$bo$o$2bo", "2b3o2$bo$2o",
+  "4o2$4b2o", "2b4o$o$bo", "ob4o2$bo", "o2b3o$2bo$bo",
+  "o$o3bo$bo$2b2o", "bo$o3bo$bo$2b2o", "o$5bo$b3o$3bo",
+  "5bo$o3bo$2b2o$bo", "2o$o$2b2o$bo" 
+]
+
+[b]
+rle = "ob2o$3ob$bo!"
+predecessors = [
+  "3o$o2bo$o", "b3o$bo2bo$o", "2b3o$2bo2bo$o", "3o$o2bo$4bo", "5o2$o",
+  "o$bob3o$bo", "o$b2o$o2bo$4bo", "bo$2b2o$o2bo$4bo",
+  "bo$2b2o$o2bo$5bo", "o$b2o$bo2$2b2o", "o$b2o$bo2$bobo",
+  "bo$b3o$o$4bo" 
+]
+
+[wing]
+rle = "b2ob$o2bo$bobo$2b2o!"
+predecessors = [
+  "3o$3bo$4bo$5bo", "3bo$b2o$o$o$bo", "o2$2o$3bo$2b2o",
+  "bo2$2o$3bo$2b2o", "2o$bob2o$2bo", "2o$bobo$2bobo", "2o$o$2b2o$4bo",
+  "bobo$2bo$o$2o"
+]
+
+[teardrop]
+rle = "b3o$o2bo$o2bo$b2o!"
+predecessors = [
+  "2b3o$o$o$o", "3o$o$bo$bo", "ob3o$o$3bo", "obo$bob2o$bo",
+  "obobo$bobo$bo", "ob3o$o$bo"
+]
+
+[i]
+rle = "2o$bo$b2o$2b2o!"
+predecessors = [
+  "2b2o$2obo2$bo", "o$2o$b2o2$3bo", "o$bo$2bo$3b2o$5bo",
+  "4bo2$2b2o$bo$o$o", "4bo2$2b2o$bo$o$bo", "o$b2o$3bo$4b2o",
+  "2bo2$2b2o$bo$o$o", "3bo2$2b2o$bo$o$o", "2bo2$2b2o$bo$o$bo",
+  "3bo2$2b2o$bo$o$bo"
+]
+
+[2glideroctomino]
+rle = "2b2o$2b2o$3o$bo!"
+predecessors = [
+  "b5o$o", "2o$bo$3b2o$2bo", "2o$bo$2bo$3b2o", "2o$bo$2bobo$3bo",
+  "2bo$2b2o$2o2$o", "2bo$2b2o$2o2$bo"
+]
+
+[objecthassledinjasonsp33]
+rle = "bobo$o2b2o$o2bo!"
+
+[procrastinator]
+rle = "o$3o$3bo$b3o!"
+predecessors = [
+  "b3o$bo2$2o$2bo", "3bo$b2o$o2$2o$2bo", "b2o$3bobo$o3bo$6bo",
+  "2bo$bobobo$o3bo$6bo", "b2o$3bobo$o3bo$5bo", "2bo$bobobo$o3bo$5bo",
+  "4b3o$2b2o$o$o", "4b3o$ob2o2$o", "o$b2o$2bobo$6bo$6bo",
+  "o$b2o$2bobo$5bo$6bo", "o$b2o$2bob2o2$6bo", "o$b2o$2bobo2$5b2o",
+  "o$b2o$2bobobo2$6bo", "o$b2o$2bobobo2$5bo", "o$b2o$2bobo$6bo$5bo",
+  "o2$b2o$2bobo$6bo$6bo", "o2$b2o$2bobo$5bo$6bo",
+  "o2$b2o$2bob2o2$6bo", "o2$b2o$2bobo2$5b2o", "o2$b2o$2bobobo2$6bo",
+  "o2$b2o$2bobobo2$5bo", "o2$b2o$2bobo$6bo$5bo", "3b2o$2bo$bo$obo2$o",
+  "3b2o$2bo$bo$obo2$bo", "3b2o$2bo$bo$obo2$2bo",
+  "3b2o$2bo$bo$2bo$o$o", "3b2o$2bo$bo$2bo$o$bo",
+  "3b2o$2bo$bo$2bo$o$2bo", "o$2bo$o$bo$2b2o$4bo",
+  "bo$2bo$o$bo$2b2o$4bo", "2bo$2bo$o$bo$2b2o$4bo",
+  "bo$2bo$o2b2o$5bo$6bo", "obo$2o2$2b2o$bo", "bo$o$2o2$2b2o$bo",
+  "2bo$o$2o2$2b2o$bo", "o$o$3o2$3b2o", "o$o$3o$4bo$3bo",
+  "o$o$3obo2$3bo", "5bo$4bo$2b3o2$2o", "5bo$4bo$2b3o$o$bo",
+  "5bo$4bo$ob3o2$bo", "6bo$4bo$2b3o2$2o", "6bo$4bo$2b3o$o$bo",
+  "6bo$4bo$ob3o2$bo", "2b3o$2bo$o$o$2bo", "2b3o$2bo$bo$o$2bo",
+  "2b3o$2bo$o$2bo$2bo", "2b3o$2bo$o$bo$2bo", "2b3o$2bo$o$o$2bo",
+  "obo$o$3bo$b3o", "b2o$o$3bo$bo$2o", "3o2$o$2o$2bo", "3o2$o$2o2$2bo",
+  "o$b2o2$3bo$3o", "b3o$o$bo$b2o", "3bo$b2o$o$b2o$bo",
+  "4bo$2bo$2bo$bo$b2o2$o", "4o$bobo$5bo", "3b2o$o$bobo$b2o",
+  "2o$5bo$bobo$2b2o", "2bo$2o$o$2b2o$4bo", "2bo2$2o$o$2b2o$4bo",
+  "2b3o$bo2$2obo", "o$3o2$3bo$bobo", "3o$3bo2$2b2obo",
+  "2bo2$3b2o$obo$bo$bo", "3o$o$3bo$2bobo", "b3o$o$3bo$4b2o",
+  "b3o$4bo$bo$obo", "2bo$bobo$4bo$b2o$o", "bo$2b2o2$b2o$o$bo",
+  "b2o$3bo$o3b2o2$3bo", "2bo$bobo$o3b2o2$3bo", "2b2o$bo$o3b2o$3bo",
+  "2b2o2$obo$bo$o$2bo", "o2b3o$bo$2bo$3bo", "3b3o$2o$2bo$2bo",
+  "bo$2o$bo$b2o$3bo", "bo$2o$bo$b2o2$o", "bo$2o$bo$b2o2$bo",
+  "bo$2o$bo$b2o2$2bo", "bo$2o$bo$b2o2$3bo", "bo$bo$ob2obo2$3bo",
+  "bo$bo$ob2o$5bo$3bo", "bo$bo$ob2o2$3bobo" 
+]
+
+[blonktie]
+rle = "2o$2o$2bo$2bo$2bo!"
+predecessors = [
+  "bo$2obo$3bo$4bo", "2o$bo2$bobo$bo", "2o$bo2$bobo$2bo",
+  "2o$bo2$bobo$3bo", "3bo$b2o2$2o$o", "3bo$b2o2$2o$bo"
+]
+
+[iwona]
+rle = "ob3o$2o!"
+
+[uturner]
+rle = "b3o$b3o$obo$2o!"
+predecessors = ["o$o$o2$2o$2bo"]
+
+[rturner]
+rle = "2b2o$4bo$o2bo$3o!"
+predecessors = [
+  "2bo$b3o$o$bo$bo", "2bo$b3o$o$bo$o", "2b2o$b2o$o$o$bo",
+  "2bobo$b2o$o$o$bo", "2bo$b2obo$o$o$bo", "2b2o$bo$o3bo$2o",
+  "bobo$2bo$o3bo$2o", "3bo$b2o$o3bo$o$bo", "2b2o$bobo$bo$obo",
+  "2bobo$bobo$bo$obo", "o$bo$o$2b2o2$obo", "bo$bo$o$2b2o2$obo",
+  "o$bo$bo$2bo2$ob2o", "o$bo$bo$2bo2$b2obo", "3o2$b2o$2bobo",
+  "2bo$b2o$o2b2o$3bo", "2bo$b2o$3b2o$o2bo", "bo$b2o$3bo$o2b2o",
+  "bo$2o$2b2o$bo2bo", "o$2o$2bo$bob2o", "o$2o$2bobo$bobo",
+  "bo2$b2o$o2bo$3b2o", "2bo2$b2o$o2bo$3b2o", "bo2$2b3o$bo$2o",
+  "b2o$2bo$2o2bo$o"
+]
+
+[diehard]
+rle = "6bob$2o6b$bo3b3o!"
+
+[objecthassledinjasonsp22]
+rle = "2b3o$bo3bo$o4bo$bob2o$2bo!"
+
+[trafficlighthitsblock]
+rle = "2o$2o4bo$5b3o!"
+
+[dove]
+rle = "2b2o$bo2bo$o2bo$3o!"
+predecessors = ["2b3o$bo$bo$o"]
+
+[piandloaf]
+rle = "o2bo$bob2o$bo3b2o$4bo!"
+
+[herschel]
+rle = "o2b$3o$obo$2bo!"
+predecessors = ["o$obo$3b2o$2bo", "o$b2o$3b2o$2bo"]
+messypredecessors = ["b2o$2o$bo"]
+
+[herschelprime]
+rle = "2o$o2b2o$bo2bo$b3o!"
+predecessors = [
+  "o$b2o$o2$b3o", "bo$bo$ob3o$bo", "3bo$3obo$4bo$6bo",
+  "bo$5bo$ob3o2$o", "2o$o3$3o2$bo", "2o$bo3$3o2$bo", "o$2o3$3o2$bo",
+  "bo$2o3$3o2$bo", "o$2o2$bo$bo$obo", "bo$2o2$bo$bo$obo",
+  "bo2$2obo$ob2o", "o$b2o2$bo$2b2o$bo", "obo$o$o2$b3o",
+  "o$bo$bo$2bo$3b2o2$2bo", "o$b2o$o2bo$4bo$3bo", "o$b2o$o2bo$4bo$4bo",
+  "o$b2o$bo$4bo$2b2o", "o$b2o$o2bo$4bo$4bo", "o$b2o$o2bo$4bo$3bo" 
+]
+messypredecessors = ["o2b$3o$obo$2bo"]
+
+[butterfly]
+rle = "o3b$2o2b$obob$b3o!"
+predecessors = ["b3o$o$o$o"]
+
+[octominoii]
+rle = "bo$3o$ob2o$3bo!"
+predecessors = [
+  "2bo$2b2o2$bo$obo$bo", "3bo$2b2o2$bo$obo$bo", "2b2o$3bo2$bo$obo$bo",
+  "2b2o$2bo2$bo$obo$bo", "2bo$bo$o2bo$o$2o", "3bo2$3o$o$o$bo",
+  "3bo$2bo$2o$o$o$bo", "2b2o2$2o$o$o$bo", "2bo$3bo$2o$o$o$bo",
+  "2bo2$2obo$o$o$bo", "b3o2$o$b2o2$3bo", "3bo2$ob2o$bo$bo$2bo",
+  "4bo$3bo$2bo$bo$bo$obo", "2bo$obo$2bo$2b2o$3bo",
+  "2bo$obo$2bo$2b2o2$3bo", "2bo$obo$2bo$2b2o2$2bo"
+]
+
+[trafficlighthitsblock2]
+rle = "2o5bo$o4bobo$7bo!2o5bo$o4bobo$7bo!"
+
+[trafficlighthitsblock3]
+rle = "2o$2o$6bo$5b3o!"
+
+[karel]
+rle = "ob2o$bo2bo$2b3o!"
+
+[fizzle]
+rle = "b3o$o2bo$o2bo$2bo!"
+
+[merzenich]
+rle = "2o$obo$2b2o$4bo!"
+
+[7blinkers]
+rle = "3o$bo$bob2o$b2o!"
+
+[toady]
+rle = "bo$3o3$5b2o$5bo!"
+
+[threeseven]
+rle = "2bo$bobo$2ob2o$o!"
+
+[trafficlighthitsblock5]
+rle = "4b3o$2o3bo$2o!"
+
+[biblocker]
+rle = "obo$2ob2o$2bo!"
+
+[trafficlighthitsblock6]
+rle = "6b2o$o5b2o$2o$o!"
+
+[lomhitsblock]
+rle = "2o4bo$2o2b2ob2o$7b2o!"
+
+[commonsmallunnamedobject1]
+rle = "3o$4bo$3b2o!"
+
+[beehiveedgeshooter]
+rle = "2bo2bo$bo3bo$o4bo$o$b3o!"
+
+[flare]
+rle = "bo$2obo$bobo$2b2o!"
+
+[commonsmallunnamedobject2]
+rle = "b3o$o2bo$o2bo$obo!"
+
+[procrastinatorbeehive]
+rle = "b2o$bobo$o2b2o!"
+
+[cap]
+rle = "b2o$o2bo$4o!"
+
+[eight]
+rle = "8o!"
+
+[longbun]
+rle = "4o$o3bo$b3o!"
+predecessors = [
+  "obo$o3b3o$3bo", "obo3bo$o3b2o$4bo", "6bo$obo$o3b2o$4bo",
+  "b2o3bo$o3b2o$4bo", "6bo$b2o$o3b2o$4bo", "obo3bo$bo2b2o$4bo",
+  "6bo$obo$bo2b2o$4bo", "o$4bo$b2o2b2o$2bo", "o3bo$b2o2b2o$2bo",
+  "o$obo2$b2o$2o", "o$obo2$2o$b2o", "o$obo2$2o$bobo",
+  "bo$obo2$2o$bobo", "2bo$obo2$2o$bobo", "2obo2$bo$bo$2o",
+  "2obo2$bo$bo$b2o", "b3o2$obo$2b2o", "3o2$2o$bobo",
+  "obo$2bo2$bobo$2o", "2o$2bo2$bobo$2o", "obo$bo2$bobo$2o",
+  "3bo$b2o2$ob2o$2bo", "2bo$2o2$2obo$bo", "o$4o$o$2bo", "o$4o$o$3bo",
+  "bo$o2b3o$2bo$2bo", "o$bob3o$2bo$2bo", "o$b2ob2o$3bo$2bo",
+  "o$b2obo$3bobo$2bo", "o$ob2o$3b2o$bo", "o$ob2o$3bobo$bo",
+  "o$ob2obo$3bo$bo", "o$4o$4bo$o", "o$3o$3b2o$o", "o$3obo$3bo$o",
+  "bo$obob2o$3bo$o", "bo$obobo$3bobo$o", "bo$obo2bo$3b2o$o",
+  "o2$b2ob2o$bobo", "o2$b2obo$bobobo", "o2$b2o2bo$bob2o",
+  "o2$ob2o$bob2o", "o2$ob2obo$bobo", "o2$ob2o$bobobo",
+  "bo2$b3o$o2b2o", "bo2$b3obo$o2bo", "bo2$b3o$o2bobo", "bo2$4o$o3bo",
+  "o2$3o$o2b2o", "o2$3obo$o2bo", "2bo2$b4o$o2bo", "o2$ob3o$bobo",
+  "2bo2$b3o$o2b2o", "2bo2$b3obo$o2bo", "2bo2$b3o$o2bobo",
+  "o2$4o$o3bo", "bo2$3o$o2b2o", "bo2$3obo$o2bo", "bo2$b4o$o2bo",
+  "bo2$5o$3bo", "ob4o$o$bo", "2bo$bo$b2o2$2o$2bo",
+  "3bo$bo$b2o2$2o$2bo", "bobo$b2o2$2o$2bo", "b3o$o5bo$4b2o",
+  "b3o$o4b2o$4bo", "b3o$o4bo$4bobo", "o$bo$2bo$o$3o", "o$o$2bo$o$3o",
+  "bo$o$2bo$o$3o", "2bo$o$2bo$o$3o", "b2o2bo$bobo$o2bo",
+  "2b2o2bo$2bobo$o3bo", "obo2bo$bobo$o2bo", "bobo2bo$2bobo$o3bo",
+  "2b2o$2bob2o$o2bo", "bobo$2bob2o$o2bo", "b2o2$o$2o$b2o",
+  "obo2$o$2o$b2o", "2b2o$2obo$5bo$2bo", "3bo$o3bo$b2obo$o",
+  "o2b2o$2o$obo", "o2bo$2o2bo$obo", "o2bo$2o$obobo", "3bo2$2b3o$o$2o",
+  "2o$ob2o$o$4bo"
+]
+
+[toast]
+rle = "2bo$4o$3o!"
+
+[sandwich]
+rle = "3b2o$3b2o$3b2o2$2bo$2o!"
+
+[angel]
+rle = "2bo$2ob2o$bobo$2bo!"
+predecessors = [
+  "o$bo2bo$bobo$2bo", "b3o$o$o$2bo", "2bo$bobo$b2o2$o",
+  "3bo$bobo$b2o2$o", "2b2o$bo$b2o2$o", "2bo$bobo$obo2$o",
+  "3bo$bobo$obo2$o", "2bo$bobo$obo2$bo", "3bo$bobo$obo2$bo",
+  "2bo$bobo$obo2$2bo", "3bo$bobo$obo2$2bo", "3bo$b2o$b2o2$o",
+  "o$ob2o$bo$4bo", "bo$obo$bobo$4bo", "o$obo$bobo$4bo",
+  "2bo$obobo$3b2o", "obo$2bobo$3b2o", "2bo$obobo$3bobo",
+  "obo$2bobo$3bobo", "2bo$obob2o$3bo", "obo$2bob2o$3bo",
+  "4bo$2bo$bobo$bo$o", "3bo$2bo$bobo$bo$o", "obo$o$b2o$3bo",
+  "2o$o2$3o", "bo2bo$ob2o$bo", "o$2o2$obo$o", "o$2o2$obo$bo",
+  "o$2o2$obo$2bo", "bo$2o2$obo$o", "bo$2o2$obo$bo", "bo$2o2$obo$2bo",
+  "2o$2b2o$obo", "2o$2b3o$bo", "2b3o$bo2$2o", "2bo$bob2o$o2bo",
+  "obo$o$bobo$2bo", "bo$obo$bo$3b2o", "bo$obo$bo2bo$3bo",
+  "bo$obobo$bo$3bo", "3b3o$b2o2$o"
+]
+
+[thunderbird]
+rle = "3o2$bob$bob$bo!"
+predecessors = ["bo$o2b3o$bo"]
+
+[e]
+rle = "b3o$2o$b2o!"
+predecessors = ["3bo$2b2o2$bo$2o", "2bo$2b2o2$bo$2o"]
+
+[f]
+rle = "2o$bo$bo$b3o!"
+predecessors = ["bo$bo$o$2bo$2bo$2bo", "o$bo$o$2bo$2bo$2bo", "bo$o$o$2bo$2bo$2bo"]
+
+[thompson]
+rle = "2b3o$bo$2o!"
+
+[grate]
+rle = "2b2o$bo2b2o$o$6bo$b2o2bo$3b2o!"
+predecessors = ["3b4o2$b2o$o", "3o$bo$2bo$2bo$4bo"]
+
+[loaferfoot]
+rle = "2bo$bobo$2obo$3b2o!"
+predecessors = [
+  "o2$b2o3bo$3b3o", "bo2bo$3obo$o", "3o$bob2o2$2bo", "2b2o$2ob2o2$bo",
+  "2b2o$2obobo2$bo", "2b2obo$2obo2$bo"
+]
+
+[z]
+rle = "2o$bo$bo$b2o!"
+predecessors = [
+  "b2o$o4bo$3b2o", "b2o$o3b2o$3bo", "obo$bo2b2o$3bo",
+  "obo$bo2bo$3bobo", "2bo$2o2b2o$3bo", "obo$bo3bo$3b2o",
+  "o2$2o$2bo2$b2o", "bo2$2o$2bo2$b2o" 
+]
+

@@ -1,0 +1,548 @@
+# Predecessors taken from MathAndCode 
+# https://conwaylife.com/forums/viewtopic.php?f=2&t=4835&sid=3fdfcb15d7c9174fc7b2d6b4ef5c4f66
+
+[block]
+rle = "2o$2o!"
+predecessors = ["2o$o"]
+
+[blinker]
+rle = "3o!"
+
+[beehive]
+rle = "b2ob$o2bo$b2o!"
+predecessors = ["b3o2$o", "4o", "2bo$2o2$o", "2bo$2o2$bo", "o$b2o$3bo", "o$2o2$o", "bo$2o2$o"]
+
+[glider]
+rle = "bob$2bo$3o!"
+predecessors = ["3o$o$2bo", "3o$o$3bo", "obo$bobo$bo", "2o$2b2o$bo", "3o$3bo$o"]
+
+[loaf]
+rle = "b2ob$o2bo$bobo$2bo!"
+predecessors = [
+  "bo$o$bobo$2bo", "bo$o$bo$2b2o", "o$o$bo$2b2o", "3o2$3b2o",
+  "2b3o$o$bo", "ob3o2$bo", "3o$2bo$3bo", "3o$2bo$4bo",
+  "o$b2o$2bo$3bo", "o2$b2o$2bo$3bo", "o2$b2o$2bo$4bo", "b4o$o",
+  "2b3o$bo$o", "2bo$b3o$o", "2bo$b3o2$o", "o$b2o$3bo$4bo",
+  "o$obo2$2b2o", "bo$obo2$2b2o", "2bo$obo2$2b2o", "b2o$2o2$o",
+  "b2o$2o2$bo", "o$3o2$3bo", "bobo$2o2$o", "bo$2obo2$o",
+  "bo$2obo2$2bo" 
+]
+
+[boat]
+rle = "2ob$obo$bo!"
+predecessors = [
+  "bo$obo$bo$3bo", "bobo$obo$bo", "2o$o$b2o", "bo$ob2o$o",
+  "bobo$obo$o", "bo2$4o", "o2$3o$3bo", "o2$b2o$3b2o", "o2$b2obo$3bo",
+  "2b2o$bo$2o", "2b2o2$bo$2o", "bobo2$bo$2o" 
+]
+
+[ship]
+rle = "2ob$obo$b2o!"
+predecessors = [
+  "2o$bo$2b2o2$4bo", "2o$obo$bo$3bo", "2o$o$b2o2$3bo",
+  "o$bo$o$b2o2$3bo", "bo$bo$o$b2o2$3bo", "o$bo$obo$bobo",
+  "o$2bo$bobo$2bobo", "o$2bo$bobo$2bo$4bo", "obo$bobo$2bobo",
+  "bo$ob2o$bo$bo", "2o$o2bo$2bo$bo", "o$2b2o$b2o$bo", "b2o$o2bo$o$bo",
+  "bo$3bo$obo$2o"
+]
+
+[tub]
+rle = "bo$obo$bo!"
+predecessors = ["3o$obo$3bo$2b2o!"]
+
+[pond]
+rle = "b2ob$o2bo$o2bo$b2o!"
+predecessors = ["bo$2o$2bo"]
+
+[longboat]
+rle = "bo2b$obob$bobo$2b2o!"
+predecessors = [""]
+
+[toad]
+rle = "b3o$3o!"
+predecessors = [
+  "bo$2o$2bo$3b2o", "bo$2o$2bobo$3bo", "o$2o$2b2o$4bo",
+  "o$2o$2b2o2$2bo", "o$2o$2b2o2$3bo", "3o$3bo2$b2o",
+  "o2$b2o$b2o2$3bo", "obo2$bo$b2o$3bo", "obo2$bo$b2o2$3bo",
+  "2b2o2$bo$b2o2$o", "bobo2$bo$b2o2$o", "o$2bo$bo$bo$2bo$3bo",
+  "bo$o2bo$bo2bo$2bo", "bo$o2b2o$bo$2bo", "bo$o2bo$bo$2bobo",
+  "o$bo$2bo$bo$bo$3bo", "o$3b2o$b2o$5bo", "o$bobo$2bobo$5bo",
+  "5bo$bobo$2bobo$o", "4bo$obo$bobo$o", "3bo$obo$bobo$o",
+  "bo2$2b2o$2o2$2bo", "o2$obo$bobo2$bo", "o2$obo$bobo2$2bo",
+  "o2$obo$bobo2$3bo", "bo2$obo$bobo2$bo", "bo2$obo$bobo2$2bo",
+  "2bo2$obo$bobo2$bo", "bo$2b2o$bo$o$2bo", "bo$2b2o$o$bo$2bo" 
+]
+
+[ship-tie]
+rle = "4b2o$3bobo$3b2o$b2o$obo$2o!"
+predecessors = ["4b2o$4bo$2b2o2$bo$2o"]
+
+[beacon]
+rle = "2o$o$3bo$2b2o!"
+predecessors = [
+  "bo$2o$2b2o$2bo", "o$o$bo$2bo$3b2o", "o$o$bo$2bobo$3bo",
+  "bo$o$bo$2bobo$3bo", "bo2$2o$2bobo$2bo", "o2$2o$2bobo$2bo",
+  "o2$2o$2bo$2bobo", "o$bo$bo$2b2o$4bo"
+]
+
+[barge]
+rle = "bo$obo$bobo$2bo!"
+predecessors = ["3o$3bo$4b2o", "3o$3bobo$4bo", "o2$b2o$3b2o2$5bo", "2o$2bo$bo$2b2o"]
+
+[half-bakery]
+rle = "4b2o$3bo2bo$3bobo$b2obo$o2bo$obo$bo!"
+predecessors = ["o$o$o$bo$2bo$3b3o"", ""o$bo$bo$2bo$3bo$4b2o$6bo"]
+
+[mango]
+rle = "bo$obo$o2bo$bobo$2bo!"
+predecessors = [
+  "bo$obo$bo$2b2o2$bo", "2o$2bo$bo$2b2o2$bo", "2o2$bob3o2$bo",
+  "bo$o$bob3o2$bo", "2bo$bob2o$2bo$2o", "5bo2$bob2o$obo$bo",
+  "5bo2$bob2o$obo$o"
+]
+
+[eater]
+rle = "2o$bo$bobo$2b2o!"
+predecessors = [
+  "o$bo$2b2o2$4b2o$6bo", "2o$bo$bobo$2bobo", "2o$bo$bob2o$2bo",
+  "2bo$5bo$3b2o$o$b2o", "2bo$5bo$3b2o$2o$2bo", "2bo$5bo$3b2o$bo$obo",
+  "o$2bo$bo$3b2obo$5bo", "o$2bo$bo$3b2o$5b2o", "2o$bo2$2b3o2$2bo",
+  "2o$bo$4bo$2b2o2$bo", "o$2bo$2o2$2bo$2b2o", "bo$o$obo2$2bo$2b2o"
+]
+
+[lwss]
+rle = "b2o$3o$2obo$b3o$2bo!"
+predecessors = [
+  "4o$o3bo$o$bo", "3b4o$2bo4bo$bo$o", "bo$o3bo$o$4o",
+  "3b4o$2bo$bo5bo$o", "5bo$bo$b2ob2o$o$3bo", "2bo$2obo$4bo$bo2bo$6bo"
+]
+
+[longbarge]
+rle = "bo$obo$bobo$2bobo$3bo!"
+predecessors = ["ob2o$2bo$2o$o", "obo$2b2o$2o$bo"]
+
+[carrier]
+rle = "2o$o$2bo$b2o!"
+predecessors = ["bo3bo$2b2o$o3bo"]
+
+[pulsar]
+rle = "2b2o5b2o$3b2o3b2o$o2bobobobo2bo$3ob2ob2ob3o$bobobobobobo$2b3o3b3o2$2b3o3b3o$bobobobobobo$3ob2ob2ob3o$o2bobobobo2bo$3b2o3b2o$2b2o5b2o!"
+predecessors = [
+  "3o2$bo2$3o", "3bo$b2ob2o$o5bo", "bo$5bo$ob3o2$bo",
+  "bo$4b2o$ob2o2$2bo", "bo$4bo$ob2obo2$2bo", "3bo$2bo2b2o$2o2bo",
+  "3bo$obo3bo$bo2b2o", "3bo$2bo3bo$2o2b2o", "3bo$obo2bo$bo2bobo",
+  "3bo$obo2b2o$bo2bo", "3bo$2bo2bo$2o2bobo", "3bo$bo3bo$obobobo",
+  "3bo$bo3b2o$obobo", "3bo$bo4bo$obob2o", "3bo$o5bo$b2ob2o",
+  "3bo$o4b2o$b2obo", "3bo$2o3b2o$2bobo", "5o$o3bo"
+]
+
+[paperclip]
+rle = "b2o$ob3o$o4bo$b3obo$3b2o!"
+predecessors = ["o$2o2$b4o", "bo$2o2$b4o"]
+
+[mwss]
+rle = "b2o$2ob3o$b5o$2b3o!"
+predecessors = [
+  "5o$o4bo$o$bo", "3b5o$2bo5bo$bo$o", "2o2b2o$bob2o$o4bo",
+  "b2o2b2o$obob2o$6bo", "b2o2b2o$2bob2o$o5bo", "2bo$bo$o2b2o$o2bo$2o",
+  "2bo2$2ob2o$o2bo$o$bo", "bo$o4bo$o$5o", "3b5o$2bo$bo6bo$o"
+]
+messypredecessors = [
+  "5b3o25$2o$2bo$2bo$2bo", "5b3o25$bo$obo$2bo$3bo",
+  "5b3o25$2bo$obo$2b2o", "28b3o2$3bo$o$2b2o$bo", "27b3o2$3bo$o$b2o$o",
+  "27b3o2$2bo$bo$bo$o$2bo", "27b3o2$bo$bo$2o2$2bo",
+  "11b3o28$b2o$o$o$o", "12b3o28$2bo$bobo$bo$o", "12b3o28$bo$bobo$2o",
+  "31b3o11$bo$2b2o$o$3bo", "30b3o11$o$b2o$o$3bo",
+  "30b3o10$2bo$o$bo$bo$2bo", "30b3o10$2bo2$2o$bo$bo",
+  "17b3o31$o$o$o$b2o", "18b3o31$o$bo$bobo$2bo", "18b3o32$2o$bobo$bo",
+  "32b3o17$2bo$2o$3bo$o", "33b3o17$3bo$b2o$3bo$o",
+  "32b3o16$o$2bo$bo$bo$o", "32b3o16$o2$b2o$bo$bo",
+  "35b3o16$b2o$o$o$o", "36b3o16$2bo$bobo$bo$o", "36b3o16$bo$bobo$2o",
+  "19b3o35$bo$2b2o$o$3bo", "18b3o35$o$b2o$o$3bo",
+  "18b3o34$2bo$o$bo$bo$2bo", "18b3o34$2bo2$2o$bo$bo",
+  "36b3o16$b2o$o$o$o", "37b3o16$2bo$bobo$bo$o", "37b3o16$bo$bobo$2o",
+  "19b3o36$bo$2b2o$o$3bo", "18b3o36$o$b2o$o$3bo",
+  "18b3o35$2bo$o$bo$bo$2bo", "18b3o35$2bo2$2o$bo$bo",
+  "30b3o14$3o$3bo$3bo", "30b3o13$o$b2o$3bo$2bo", "29b3o13$o$3o2$bo",
+  "14b3o29$bobo$bo$o$2bo", "14b3o28$3bo$bo$bo$obo",
+  "15b3o29$o3bo$2b2o$bo", "15b3o29$o$2b3o$2bo", "33b3o6$b3o$o$o",
+  "33b3o5$3bo$b2o$o$bo", "33b3o5$2bo$3o2$bo", "6b3o30$2bo$o$bo$bobo",
+  "6b3o31$obo$bo$bo$3bo", "7b3o31$bo$2b2o$o3bo", "7b3o31$2bo$2b3o$o",
+  "49b3o18$3bo$3bo$3o", "49b3o18$2bo$3bo$b2o$o", "48b3o18$bo2$3o$o",
+  "21b3o48$obo$2bo$3bo$bo", "21b3o47$o$2bo$2bo$bobo",
+  "21b3o48$o3bo$b2o$3bo", "21b3o48$4bo$3o$2bo"", ""2bo$2obo$2bo$4b3o"
+]
+
+[longship]
+rle = "2o$obo$bobo$2b2o!"
+predecessors = ["2o$o$2b2o$4bo$bo"]
+
+[integral]
+rle = "2o$obo$2bo$2bobo$3b2o!"
+predecessors = [
+  "o$2bo$bo$3b2ob2o$5b2o", "o$2bo$bo$3b2obobo$5b2o",
+  "o$2bo$bo$3b2obo$5b2obo", "4bo$3bo$4bo$b3o$o$bo$o",
+  "3bo$3bo$4bo$b3o$o$bo$o", "3bo$3bo$4bo$b3o$o$bo$bo",
+  "obo2$bo2$3o2$3bo$3b2o", "2o2$bo2$3o2$3bo$3b2o",
+  "bobo2$bo2$3o2$3bo$3b2o", "obo2$2bo2$b3o2$4bo$4b2o",
+  "2o2$2bo2$b3o2$4bo$4b2o", "b2o2$3bo2$2b3o2$bo$2o",
+  "o$bo$bo2$3o2$3bo$3b2o", "o$o$bo2$3o2$3bo$3b2o",
+  "bo$o$bo2$3o2$3bo$3b2o", "2bo$o$bo2$3o2$3bo$3b2o",
+  "o$2bo$bo2$3o2$3bo$3b2o", "3bo$2bo$bo2$3o2$3bo$3b2o",
+  "o$bo$2bo2$b3o2$4bo$4b2o", "3bo$bo$bo2$3o2$3bo$3b2o",
+  "o$2bo$2bo2$b3o2$4bo$4b2o", "o2$obo2$3o2$3bo$3b2o",
+  "bo2$obo2$3o2$3bo$3b2o", "2bo2$obo2$3o2$3bo$3b2o",
+  "o2$2o2$b2o$o$3bo$3b2o", "bo2$2o2$b2o$o$3bo$3b2o",
+  "2bo2$2o2$b2o$o$3bo$3b2o", "o2$b2o2$2b2o$bo$4bo$4b2o"
+]
+messypredecessors = [
+  "o$2o8$bo$2obo$bo", "o$2o7$2bo$bo$bo$b2o", "o$2o8$b2o$bo$bo$2bo",
+  "bo$2o8$bo$2obo$bo", "bo$2o7$2bo$bo$bo$b2o", "bo$2o8$b2o$bo$bo$2bo",
+  "2o$o8$bo$2obo$bo", "2o$o7$2bo$bo$bo$b2o", "2o$o8$b2o$bo$bo$2bo",
+  "2o$bo8$bo$2obo$bo", "2o$bo7$2bo$bo$bo$b2o", "2o$bo8$b2o$bo$bo$2bo"
+]
+
+[shillelagh]
+rle = "2o$obo$2bo$bo$b2o!"
+predecessors = [
+  "2b3o$2bo$o$b2o2$3bo", "2b3o$2bo$o$b2o2$o", "b3o2$2o2b3o",
+  "o$b2o$2bo$2bo$3b2o2$2bo", "o2$b2o$2bo$2bo$3b2o2$2bo",
+  "bobo$obo$o$bo$2o", "2o$2bo$o$o$bo$2b2o", "2o$2bo$o$o$bobo$2bo",
+  "2o$2bo$o$bo$bo$2bo$3bo", "2o$2bo$o$bo$b3o"
+]
+
+[boat-tie]
+rle = "4bo$3bobo$3b2o$b2o$obo$bo!"
+predecessors = [
+  "4bo$3bobo$3bo2bo$b2o$o$bo$2bo", "4bo$3bobo$3bo2bo$b2o$o$obo",
+  "4b2o$3bo$3bobo$b2o$o$obo", "4b2o$3bo$3b2o$b2o$2bo$2o",
+  "o$bo$obo$2bo$3b2o$5bo$4bobo", "o$bo$obo$2bo$3b2o$5bo$4bo$6bo",
+  "o$bo$obo$2bo$3b2o$5bo$4bo$3bo", "o$bo$obo$2bo$3b2o$5bo$3bobo",
+  "7bo$5bo$4bobo$4bo$2b2o$bo$2bo$o", "6bo$4bo$3bobo$3bo$b2o$o$bo$2bo",
+  "6bo$4bo$3bobo$3bo$b2o$o$obo"
+]
+messypredecessors = [
+  "3o2$bo$6bo2$5b3o", "o$obo$o2$5bo2$4b3o", "3o2$bo3$5b3o2$6bo",
+  "o$obo$o4$4b3o2$5bo", "bo2$3o5$5b3o2$6bo", "2bo$obo$2bo4$6b3o2$7bo"
+]
+
+[snake]
+rle = "2o$o$bo$2o!"
+predecessors = [""]
+
+[big_S]
+rle = "3b2o$3bobo$5bo$b4o$o$obo$b2o!"
+predecessors = ["3bo$3obo$4bo$5bo"]
+
+[bipond]
+rle = "4b2o$3bo2bo$3bo2bo$b2ob2o$o2bo$o2bo$b2o!"
+predecessors = ["o$bo$bo$2bo$3b2o$5bo"]
+
+[boatwithtail]
+rle = "2o$bo$bobo$2bobo$3b2o!2o$bo$bobo$2bobo$3b2o!"
+predecessors = [
+  "3b2o$2bobo$2bo$o$o$bo", "3bobo$2bobo$2bo$o$o$bo",
+  "3bo$2bob2o$2bo$o$o$bo", "3b2o$2bobo$2bo$o$bo$bo",
+  "3bobo$2bobo$2bo$o$bo$bo", "3bo$2bob2o$2bo$o$bo$bo",
+  "3b2o$2bobo$2bo$o$bo$o", "3bobo$2bobo$2bo$o$bo$o",
+  "3bo$2bob2o$2bo$o$bo$o"
+]
+
+[boat-tie-ship]
+rle = "4bo$3bobo$3b2o$b2o$obo$2o!"
+predecessors = [
+  "4bo$3bobo$3bo2bo$b2o$o$2o", "4b2o$3bo$3bobo$b2o$o$2o",
+  "4bo$3bobo$3bo2bo$b2o$o$bo$o", "4b2o$3bo$3bobo$b2o$o$bo$o",
+  "4bo$3bobo$3bo2bo$b2o$o$bo$bo", "4b2o$3bo$3bobo$b2o$o$bo$bo",
+  "5bo$4bo$3bobo$3bo$b2o$o$2o", "6bo$4bo$3bobo$3bo$b2o$o$2o",
+  "5bo$4bo$3bobo$3bo$b2o$o$bo$o", "6bo$4bo$3bobo$3bo$b2o$o$bo$o",
+  "5bo$4bo$3bobo$3bo$b2o$o$bo$bo", "6bo$4bo$3bobo$3bo$b2o$o$bo$bo"
+]
+
+[hat]
+rle = "3bo$b3o$o$b3o$3bo!"
+predecessors = ["obobo$2bo2$b3o2$2bo"]
+
+[verylongship]
+rle = "2o$obo$bobo$2bobo$3b2o!"
+predecessors = [
+  "3b2o$4bo$b2o$o3bo$bo$bo", "4bo$3bo$4bo$b2obo$o$bo$bo",
+  "3bo$3bo$4bo$b2obo$o$bo$bo", "3b2o$4bo$b2o$o3bo$bo$o",
+  "4bo$3bo$4bo$b2obo$o$bo$o", "3bo$3bo$4bo$b2obo$o$bo$o",
+  "3b2o$4bo$b2o$o3bo$2o", "4bo$3bo$4bo$b2obo$o$2o",
+  "3bo$3bo$4bo$b2obo$o$2o"
+]
+
+[hwss]
+rle = "b2o$2ob4o$b6o$2b4o!"
+predecessors = [
+  "6o$o5bo$o$bo", "3b6o$2bo6bo$bo$o", "2bo2$b4o$o4bo$o5bo$bo",
+  "bo2$b3obo$o3bo$o5bo$bo", "bo2$b3obo$o3bo$o4bo$bo",
+  "o2$b2o2bo$o2b2o$o5bo$bo", "o2$b2ob2o$o2bo$o5bo$bo",
+  "o2$b2obo$o2bobo$o5bo$bo", "bo$3bo$b2o2bo$o3bo$2o2bo",
+  "bo$3bo$b2o2bo$o3bo$bo2bo$o", "bo$3bo$b2o2bo$o3bo$bo2bo$bo"
+]
+messypredecessors = [
+  "11b2o$12bo41$2bo$3o$bo", "12b2o$13bo41$o$2b3o$2bo",
+  "12b2o$13bo41$o3bo$2b2o$bo", "11b2o$12bo40$3bo$bo$bo$obo",
+  "11b2o$12bo41$bobo$bo$o$2bo", "11b2o$12bo40$o$bo$3o",
+  "12b2o$13bo40$bo$obo$2bo$3bo", "12b2o$13bo40$2o$2bo$2bo$2bo",
+  "12b2o$13bo40$2bo$obo$2b2o", "11b2o$11bo41$2bo$3o$bo",
+  "12b2o$12bo41$o$2b3o$2bo", "12b2o$12bo41$o3bo$2b2o$bo",
+  "11b2o$11bo40$3bo$bo$bo$obo", "11b2o$11bo41$bobo$bo$o$2bo",
+  "11b2o$11bo40$o$bo$3o", "12b2o$12bo40$bo$obo$2bo$3bo",
+  "12b2o$12bo40$2o$2bo$2bo$2bo", "12b2o$12bo40$2bo$obo$2b2o",
+  "12bo$11b2o41$2bo$3o$bo", "13bo$12b2o41$o$2b3o$2bo",
+  "13bo$12b2o41$o3bo$2b2o$bo", "12bo$11b2o40$3bo$bo$bo$obo",
+  "12bo$11b2o41$bobo$bo$o$2bo", "12bo$11b2o40$o$bo$3o",
+  "13bo$12b2o40$bo$obo$2bo$3bo", "13bo$12b2o40$2o$2bo$2bo$2bo",
+  "13bo$12b2o40$2bo$obo$2b2o", "11bo$11b2o41$2bo$3o$bo",
+  "12bo$12b2o41$o$2b3o$2bo", "12bo$12b2o41$o3bo$2b2o$bo",
+  "11bo$11b2o40$3bo$bo$bo$obo", "11bo$11b2o41$bobo$bo$o$2bo",
+  "11bo$11b2o40$o$bo$3o", "12bo$12b2o40$bo$obo$2bo$3bo",
+  "12bo$12b2o40$2o$2bo$2bo$2bo", "12bo$12b2o40$2bo$obo$2b2o",
+  "2bo$3o$7b3o$bo", "b3o$o6b3o$o", "3bo$b2o$o6b3o$bo",
+  "3o4$3bo$bo$2bo$2bobo", "3o5$bobo$2bo$2bo$4bo", "3o5$bo$2b2o$o3bo",
+  "3o5$2bo$2b3o$o"
+]
+
+[verylongboat]
+rle = "bo$obo$bobo$2bobo$3b2o!"
+
+[tubwithtail]
+rle = "2o$bo$bobo$2bobo$3bo!"
+predecessors = [
+  "3b2o$5bo$b2o$o$obo", "3b2o$5bo$b2o$o$bo$2bo", "3bo$4b2o$b2o$o$obo",
+  "3bo$4b2o$b2o$o$bo$2bo", "3bobo$4bo$b2o$o$obo",
+  "3bobo$4bo$b2o$o$bo$2bo", "5bo$3b2o$b2o$b2o$o"
+]
+
+[mirroredtable]
+rle = "o2bo$4o2$4o$o2bo!"
+predecessors = [
+  "obo2$bo$bo2bo$o2bo$b2o$bo", "obo2$o$bobo$o2bo$b2o$bo",
+  "b2o2$o$bobo$o2bo$b2o$bo", "obo2$bo$o2bo$o2bo$b2o$bo",
+  "bobo2$2bo$bo2bo$o2bo$b2o$2bo", "b2o2$3bo$obo$bo2bo$b2o$2bo",
+  "bobo2$3bo$obo$bo2bo$b2o$2bo", "obo2$2bobo$bo$2bo$4o",
+  "b2o2$obo$3bo$2bo$b4o", "3bo$2ob4o$bobo$bo", "o2bo$bob4o$bobo$2bo",
+  "4bo$2o$bo2b3o$2bo$2o", "4bo$2o$bo2b2o$2bo$2o4bo",
+  "5bo$2o$bo2b2o$2bo$2o4bo", "o3bo$bo$bo2b3o$obo$bo",
+  "o3bo$bo$bo2b2o$obo$bo4bo", "o4bo$bo$bo2b2o$obo$bo4bo",
+  "4bo$bo$2o2b3o$2bo$bo$o", "4bo$bo$2o2b2o$2bo$bo4bo$o",
+  "5bo$bo$2o2b2o$2bo$bo4bo$o", "2o$2b3o$bo2$2bo$obo$4bo"
+]
+
+[deadsparkcoil]
+rle = "2o3b2o$obobobo$2bobo$obobobo$2o3b2o!"
+predecessors = ["o2bo$3o6$3o$o2bo", "bo2bo$b3o6$b3o$o2bo", "bo2$3o$bo4$bo$3o2$bo"]
+
+[canoe]
+rle = "2o$obo$3bo$4bo$3b2o!"
+predecessors = ["2o$o$2bo$2bo2bo$3b2o"]
+
+[beehiveondock]
+rle = "2o3bo$obobobo$2bobobo$2bo2bo$obo$2o!"
+predecessors = ["o$o$o$4bo$b2o$3bob3o"]
+messypredecessors = [
+  "bo$bo$o2b3o3$3b3o", "2o2$bob3o3$3b3o", "bo$o$bob3o3$3b3o",
+  "bo2$2ob3o3$3b3o", "4bo$3bobo$2bo3bo$2bo2$2o$2bo",
+  "4b2o$3bo$2bo3bo$2bo2$2o$2bo", "4bo$3bobo$2bo3bo$2bo2$obo$2bo",
+  "4b2o$3bo$2bo3bo$2bo2$obo$2bo", "4bo$3bobo$2bo3bo$2bo2$obo$bo",
+  "4b2o$3bo$2bo3bo$2bo2$obo$bo", "4bo$3bobo$2bo3bo$2bo2$obo$o",
+  "4b2o$3bo$2bo3bo$2bo2$obo$o", "4bo$2b3o$6bo$bo2$obo$o",
+  "5bo$3b2o$2bo3bo$bo2$obo$o", "4bo$2b3o$6bo$bo2$obo$bo",
+  "5bo$3b2o$2bo3bo$bo2$obo$bo", "4bo$2b3o$6bo$bo2$obo$2bo",
+  "5bo$3b2o$2bo3bo$bo2$obo$2bo"
+]
+
+[mirroredbuns]
+rle = "b2ob2o$obobobo$obobobo$bo3bo!"
+predecessors = ["bo$2o$2bo2$2bo$2o$bo"]
+
+[mooseantlers]
+rle = "2o5b2o$o7bo$b3ob3o$3bobo$4bo!"
+predecessors = [
+  "5o2$bo$bo$2bo$o", "5o2$bo$bo$2bo$bo", "5o2$bo$bo$2bo$2bo",
+  "5o2$bo$bo$2bo$3bo", "5o2$bo$2bo$bo$o", "5o2$bo$2bo$bo$bo",
+  "5o2$bo$2bo$bo$2bo", "5o2$bo$2bo$bo$3bo", "5o2$bo$2bo$2bo$o",
+  "5o2$bo$2bo$2bo$bo", "5o2$bo$2bo$bobo", "5o2$3bo$obo$bo",
+  "5o2$3bo$2bo$2o", "5o2$3bo$o$b2o", "5o2$3bo$2o$2bo",
+  "5o2$3bo$bo$obo"
+]
+
+[blockontable]
+rle = "o2bo$4o2$2b2o$2b2o!"
+predecessors = [
+  "3bo$2o$bo2$3bo$b2o$4bo$o", "3bo$bo$2o2$3bo$b2o$4bo$o",
+  "2bo$bo$2o2$3bo$b2o$4bo$o", "3bo$2o$bo2$3bo$b2o$3bo$bo",
+  "3bo$bo$2o2$3bo$b2o$3bo$bo", "2bo$bo$2o2$3bo$b2o$3bo$bo",
+  "3bo$2o$bo3$b3o$4bo$2bo", "3bo$bo$2o3$b3o$4bo$2bo",
+  "2bo$bo$2o3$b3o$4bo$2bo", "b3o$bobo2$bo$2o$2bo",
+  "b2obo$bobo2$bo$2o$2bo", "b2o$bob2o2$bo$2o$2bo",
+  "ob2o$bobo2$bo$2o$2bo"
+]
+
+[blockondock]
+rle = "2o$obob2o$2bob2o$2bo$obo$2o!"
+predecessors = [""]
+
+[scorpion]
+rle = "bo$obob2o$obobobo$b2o3bo$3b3o$3bo!"
+predecessors = ["3b2o$o3bo$2o$4b2o$6bo", "3b2o$2o2bo$o$4b2o$6bo", "4bo$o2b2o$2o$5b2o$4bo", "4bo$2ob2o$o$5b2o$4bo"]
+
+[beehivewithtail]
+rle = "2o$bo$bob2o$2bo2bo$3b2o!"
+predecessors = [
+  "4bo$2b3o$bo$2bo$2o2$2bo", "3b2o$5bo$b2o$o$obo2$o",
+  "3b2o$5bo$b2o$o$obo2$bo", "3b2o$5bo$b2o$o$obo2$2bo",
+  "3b2o$5bo$b2o$o$bo$2bo$o", "3b2o$5bo$b2o$o$bo$bo$3bo",
+  "3bo$4b2o$b2o$o$obo2$o", "3bo$4b2o$b2o$o$obo2$bo",
+  "3bo$4b2o$b2o$o$obo2$2bo", "3bo$4b2o$b2o$o$bo$2bo$o",
+  "3bo$4b2o$b2o$o$bo$bo$3bo", "3bobo$4bo$b2o$o$obo2$o",
+  "3bobo$4bo$b2o$o$obo2$bo", "3bobo$4bo$b2o$o$obo2$2bo",
+  "3bobo$4bo$b2o$o$bo$2bo$o", "3bobo$4bo$b2o$o$bo$bo$3bo"
+]
+
+[twinhat]
+rle = "4bo$2obobob2o$bobobobo$bobobobo$2bo3bo!"
+predecessors = ["3o3b3o3$3b3o$2bo2bo", "3o2$4bo$3b2obo$4bo2$3o"]
+
+[loop]
+rle = "bobo$ob2o$o$b3o$3bo!"
+predecessors = ["4bo$2b2o$2o$obobo$2bo", "2b3o$2o$obo$2bobo"]
+
+[longsnake]
+rle = "2o$o$bo$2bo$b2o!"
+predecessors = [
+  "2o$3bo$2bo$bo$o$2o", "o$2b2o$bo2$obo$2o", "obo$3bo$bo$2bo$o$2o",
+  "o$bobo$2bo2$obo$2o", "bo$2bobo$3bo2$b2o$o$3bo"
+]
+
+[fourteener]
+rle = "4b2ob$2o2bobo$o5bo$b5ob$3bo!"
+predecessors = [
+  "b3o$o$bo$2bo$2bo$bo2$2b2o", "b3o$o$bo$2bo$2bo$bo2$bobo",
+  "b3o$o$bo$2bo$2bo$bo2$obo", "b3o$o$bo$2bo$bo$2bo2$bobo",
+  "b3o$o$bo$2bo$bo$2bo2$obo", "b3o$o$bo$2bo$bo$2bo2$2o",
+  "b3o$o$bo$2bo$bo$bo2$2b2o", "b3o$o$bo$2bo$bo$bo2$bobo",
+  "b3o$o$bo$2bo$bo$bo2$obo"
+]
+
+[pentadecathlon]
+rle = "bo2$3o5$3o2$bo!"
+
+[elevener]
+rle = "4b2o$3bobo$3bo2b$b3o2b$o5b$2o!"
+predecessors = [
+  "2o$obo2$2b2o$4bo$4b2o", "2o$obo2$2b2o$4bobo$4bo",
+  "2o$obo2$2b2o$4bo$4bobo"
+]
+
+[clock]
+rle = "2bo$2o$2b2o$bo"
+
+[brokensnake]
+rle = "b2o$2bo$bo$b2o$2bo$o$2o!"
+predecessors = ["2o2bo$o2b4o$bo3bo", "2o$o2b2obo$bobob2o"]
+
+[siameseeater]
+rle = "2o3b2o$bo4bo$bob3o$2b2o!"
+predecessors = [
+  "o2$b2o2b3o$3bo$4bo$3b2o", "2bo2$2o2b3o$2bo$3bo$2b2o",
+  "o$obob3o2$bobo$2b2o", "bo$obob3o2$bobo$2b2o",
+  "3ob3o2$3bo$2bobo$bo", "4bo$3o2b2o2$3b2o$2bo$bo",
+  "2bo$2o2b3o2$2b2o$4bo$bo", "2bobo$2o3b2o2$2b3o2$bo",
+  "4bo$2bo$2o3b2o$4bo$2b2o2$3bo", "4bo$2bo$2o3b2o$4bo$2b2o2$2bo",
+  "o$bo2b3o$o$2b2o$4bo$5bo", "bo$bo2b3o$o$2b2o$4bo$5bo",
+  "o3bo$bo3b2o$o$2b3o2$5bo", "bo2bo$bo3b2o$o$2b3o2$5bo",
+  "o3bo$bo3b2o$obo$3b2o2$4bo", "o4bo$2bo3b2o$bobo$4b2o2$5bo",
+  "o3bo$bo3b2o$obo$3b2o2$3bo", "o4bo$2bo3b2o$bobo$4b2o2$4bo",
+  "o$bo2b3o$obo$3bo$4bo$4bo", "o$2bo2b3o$bobo$4bo$5bo$5bo",
+  "o$bo2b3o$obo$3bo$4bo$3bo", "o$2bo2b3o$bobo$4bo$5bo$4bo",
+  "2bo2$2o2b3o$2bo$3bo$4bo$3bo", "2bo2$2o2b3o$2bo$3bo$4bo$4bo",
+  "3ob3o2$3bo$2bobo$2bo"
+]
+
+[blockoncover]
+rle = "2ob2o$bob2o$bo$2b3o$4bo!"
+predecessors = [
+  "2obo$2b2o2$bo$bo$b2o$2bo", "2obo$2b2o2$bo$bo$b2o2$2bo",
+  "2obo$2b2o2$bo$bo$b2o2$bo", "2obo$2b2o2$bo2$2o$2b2o",
+  "2bo$2o$b2o2$o$o$2o$bo", "2bo$2o$b2o2$o$o$2o2$bo",
+  "2bo$2o$b2o2$o$o$2o2$o", "3bo$b2o$2b2o2$bo2$2o$2b2o",
+  "o2bo$b3o3$2o$bo$bo$2bo", "bo2bo$b3o3$2o$bo$bo$2bo",
+  "bo2bo$2b3o2$o$bo$2b2o$3bo", "2bo2bo$2b3o2$o$bo$2b2o$3bo",
+  "bo2bo$2b3o2$o2$b3o$4bo", "2bo2bo$2b3o2$o2$b3o$4bo",
+  "bo2bo$2b3o3$2o$2b2o$2bo", "2bo2bo$2b3o3$2o$2b2o$2bo"
+]
+
+[cisboatondock]
+rle = "2o$obob2o$2bobobo$2bo2bo$obo$2o!"
+predecessors = [
+  "2b3o3$b2o$bo2$2o$2bo", "bo$bobo2$bo$bo$o$2o$o",
+  "2bo$bobo2$bo$bo$o$2o$o", "3bo$bobo2$bo$bo$o$2o$o",
+  "bo$2b2o2$bo$bo$o$2o$o", "4bo$2b2o2$bo$b2o2$o$b2o",
+  "4bo$2b2o2$bo$b2o2$o$obo", "2bobo$3bo2$b2o$2bo2$2o$2bo",
+  "2bobo$3bo2$b2o$2bo2$obo$o", "2bobo$3bo2$b2o$2bo2$obo$bo",
+  "2bobo$3bo2$b2o$2bo2$obo$2bo", "2bobo$3bo2$b2o$bo2$obo$o",
+  "2bobo$3bo2$b2o$bo2$obo$bo", "2bobo$3bo2$b2o$bo2$obo$2bo"
+]
+
+[symmetricscorpion]
+rle = "b2ob2o$obobobo$o5bo$b5o$3bo!"
+predecessors = [
+  "o$b2o$bo3$3obo$2bo", "o$b2o$bo3$3o$2bobo", "o$b2o$bo3$3o$2b2o",
+  "o$b2o$bo2$bo$b3o$4bo", "o$b2o$bo2$o$b2o$3b2o",
+  "o$b2o$bo2$o$b2obo$3bo", "o$b2o$bo2$o$ob2o$3bo",
+  "o4bo$b2o$bo2b2o$6b2o"
+]
+
+[beehat]
+rle = "2o2bo$o2bobo$b3obo$4bo$b3o$bo!"
+predecessors = [
+  "2o$bo2b3o2$2bo$obo$3bo", "2o$o3b3o2$2bo$obo$3bo",
+  "bo3bo$2o3bo$5bo$bo$b3o", "o4bo$2o3bo$5bo$bo$b3o",
+  "bo3bo$2o3bo$5bo$o$b2o$3bo", "o4bo$2o3bo$5bo$o$b2o$3bo"
+]
+
+[snorkelloop]
+rle = "4b2o$2obobo$bobo$bo2bo$2b2o!"
+predecessors = [
+  "2bo$2b2o2$o2b2o$2o3bo", "3bo$2b2o2$o2b2o$2o3bo",
+  "bobo$2obobo2$3bo$2b2o", "o3bo$2obobo2$3bo$2b2o",
+  "o4bo$2obobo2$3bo$2b2o"
+]
+
+[longboattieship]
+rle = "5b2o$4bobo$4b2o$2b2o$bobo$obo$bo!"
+predecessors = [
+  "2o$bo$2b2o2$4bo$4b2o$6bo$6bo", "2o$bo2$2b2o$4bo$4b2o$6bo$6bo",
+  "2o$bo$2b2o2$4bo$4b2o$7bo$7bo", "2o$bo2$2b2o$4bo$4b2o$7bo$7bo",
+  "2o$bo$2b2o2$4bo$4b2obo2$7bo", "2o$bo2$2b2o$4bo$4b2obo2$7bo"
+]
+
+[housesiameseshillelagh]
+rle = "2ob2o$o3bo$b3o$3bobo$4b2o!"
+predecessors = ["2bo$b2o$o$2b2o$2bo2bo$4b2o"]
+
+[cismirroredworm]
+rle = "b2o$obo$o4bo$b5o2$b5o$o4bo$obo$b2o!"
+predecessors = ["bo2$3o$bo27$3o$o2bo"]
+
+[krake]
+rle = "2o3b2o$obobobo$2bobo$2bobo$3bo!"
+predecessors = ["2o$bo2$2b3o2$bo$2o"]
+
+[transcerberus]
+rle = "2o2b2o$o2bobo$b3o$4bo$3b2o!"
+predecessors = ["2o$bo$5bo$2b2o$o2bo$2o"]
+
+[integralsiameseeater]
+rle = "2o$obo3b2o$2bo4bo$2bob3o$3b2o!"
+predecessors = [
+  "o$bobo$ob2o3$2o$bo$bo$o", "o$2bobo$bob2o3$b2o$2bo$2bo$bo",
+  "b2o2$2bo$3o2b3o$5bo2bo", "o4bo2bo$b2o2b3o$2bo$bo$bo",
+  "o$5bo2bo$b2o2b3o$2bo$bo$bo", "o4bo2bo$b2o2b3o$2bo$bo$2bo",
+  "o$5bo2bo$b2o2b3o$2bo$bo$2bo", "bo$bo2bo$ob2o3$2o$bo$bo$o"
+]
+
