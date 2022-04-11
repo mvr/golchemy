@@ -20,17 +20,54 @@ class Vec:
     def __add__(self, other):
         return Vec(self.x + other.x, self.y + other.y)
 
+    def __sub__(self, other):
+        return Vec(self.x - other.x, self.y - other.y)
+
     def __neg__(self):
         return Vec(-self.x, -self.y)
 
+    def __rmul__(self, scale):
+        return Vec(scale*self.x, scale*self.y)
+
     def __eq__(self, other):
-        return (self.x == other.x & self.y == other.y)
+        return (self.x == other.x and self.y == other.y)
 
     def as_tuple(self):
         return (self.x, self.y)
 
     def __repr__(self):
         return "Vec(%i, %i)" % self.as_tuple()
+
+    def __hash__(self):
+        return hash((self.x, self.y))
+
+class BB:
+    x : int
+    y : int
+    w : int
+    h : int
+
+    def __init__(self, x, y, w, h):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+
+    def contains(self,vec):
+        return not (vec.x < self.x or
+                    vec.x > self.x + self.w or
+                    vec.y < self.y or
+                    vec.y > self.y + self.h)
+
+    def inflate(self, amount):
+        if self.w == 0: return self
+        return BB(self.x-amount, self.y-amount, self.w + 2 * amount, self.h + 2*amount)
+
+    def overlaps(self,other):
+        return not (self.x > other.x + other.w or
+                    self.x + self.w < other.x or
+                    self.y > other.y + other.h or
+                    self.y + self.h < other.y)
 
 class LinearTransform:
     x : Vec
@@ -65,14 +102,13 @@ class LinearTransform:
 
     def __mul__(self, other):
         if isinstance(other, Vec):
-            return Vec(self.x.x * other.x + self.y.x * other.x,
-                       self.x.y * other.y + self.y.y * other.y)
+            return (other.x * self.x) + (other.y * self.y)
 
         if isinstance(other, LinearTransform):
             return LinearTransform(self * other.x, self * other.y)
 
         if isinstance(other, Transform):
-            return LinearTransform(self, Vec(0,0)) * other
+            return Transform(self, Vec(0,0)) * other
 
         if isinstance(other, Pattern):
             return other.transform(self.name)
@@ -80,7 +116,9 @@ class LinearTransform:
         raise TypeError("Cannot apply LinearTransform to " + str(type(other)))
 
     def inverse(self):
-        return
+        if self.x == Vec(0, -1) and self.y == Vec(1, 0): return LinearTransform(Vec(0,1), Vec(-1,0))
+        if self.x == Vec(0, 1)  and self.y == Vec(-1, 0): return LinearTransform(Vec(0,-1), Vec(1,0))
+        return self
 
     @property
     def name(self):
@@ -96,6 +134,7 @@ class LinearTransform:
         }
         return table[(self.x.as_tuple(), self.y.as_tuple())]
 
+    @property
     def lifeviewer_name(self):
         table: dict[tuple[tuple[int, int], tuple[int, int]], str] = {
             ((1, 0), (0, 1)): "IDENTITY",
@@ -109,11 +148,21 @@ class LinearTransform:
         }
         return table[(self.x.as_tuple(), self.y.as_tuple())]
 
+    def __repr__(self):
+        return "%s(x=%r, y=%r)" % (self.__class__.__name__, self.x, self.y)
+
     @classmethod
+    @property
     def id(cls):
         return LinearTransform(Vec(1, 0), Vec(0, 1))
 
     @classmethod
+    @property
+    def flip(cls):
+        return LinearTransform(Vec(-1, 0), Vec(0, -1))
+
+    @classmethod
+    @property
     def all(cls):
         return [LinearTransform(Vec(1, 0), Vec(0, 1)),
                 LinearTransform(Vec(0, -1), Vec(1, 0)),
@@ -162,19 +211,29 @@ class Transform:
             return (self.lin * other).shift(self.offset.x, self.offset.y)
 
         if isinstance(other, Instance):
-            return Instance(other.reagent, other.time, self * other.trans)
+            return Instance(other.reagent, other.time, self * other.trans, self * other.pattern)
+
+        if isinstance(other, Schematic):
+            s = Schematic()
+            s.pattern = self * other.pattern
+            s.reagents = [ self * r for r in other.reagents ]
+            s.chaos = [ self * c for c in other.chaos ]
+            return s
 
         raise TypeError("Cannot apply Transform to " + str(type(other)))
 
-    def __neg__(self):
-        return Transform(self.lin.inverse(), -self.offset)
+    def inverse(self):
+        return Transform(self.lin.inverse(), -(self.lin.inverse() * self.offset))
+
+    def __repr__(self):
+        return "%s(lin=%r, offset=%r)" % (self.__class__.__name__, self.lin, self.offset)
 
     @classmethod
     def translate(cls, v):
-        return Transform(LinearTransform.id(), v)
+        return Transform(LinearTransform.id, v)
 
 # Monkey patching, sue me
-def open(cls):
+def monkey_patch(cls):
   def update(extension):
     for k,v in extension.__dict__.items():
       if k != '__dict__':
@@ -183,29 +242,54 @@ def open(cls):
   return update
 
 # Only general purpose things
-@open(Pattern)
+@monkey_patch(Pattern)
 class PatternExt(Pattern):
-    def touches(self, coords):
+    def translate(self, vec):
+        return Transform.translate(vec) * self
+
+    def coord_vecs(self) -> list[Vec]:
+        return [Vec(x, y) for x,y in self.coords()]
+
+    def touches(self, coords, margin=1):
+        bb = self.bb
+        if not bb.inflate(margin).contains(coords):
+            return False
+
         x, y = coords.as_tuple()
-        square = slice(x-1,x+2), slice(y-1,y+2) # Slices are not inclusive
+        square = slice(x-margin,x+margin+1), slice(y-margin,y+margin+1) # Slices are not inclusive
         return not self[square].empty()
 
     @cached_property
     def first_on_coord(self):
-        cell = self.onecell()
-        bb = cell.getrect()
-        return Vec(bb[0], bb[1])
+        x,y,w,h = self.getrect()
+
+        for i in range(x, x+w):
+            if self[i, y] == 1:
+                return Vec(i, y)
+
+    @property
+    def bb(self):
+        if self.empty(): return BB(0,0,0,0)
+        x,y,w,h = self.getrect()
+        return BB(x,y,w,h)
+
+    @property
+    def top_left(self) -> Vec:
+        if self.empty(): return Vec(0,0)
+        x,y,_,_ = self.getrect()
+        return Vec(x,y)
 
     def normalise_origin(self):
         first = self.first_on_coord
-        return (self.shift(-first.x, -first.y), Transform.translate(-first))
+        return (self.shift(-first.x, -first.y), Transform.translate(first))
 
     def first_cluster(self):
         halo = "5o$5o$5o$5o$5o!"
-        return self.component_containing(halo = halo)
+        return self.component_containing(self.first_on_coord.as_tuple(), halo = halo)
+        # return self.component_containing(halo = halo)
 
     # ripped from apgmera/includes/stabilise.h
-    def overadvance_to_stable(self) -> tuple[Pattern, int, int]:
+    def overadvance_to_stable(self, security = 15) -> tuple[Pattern, int | None, int]:
         p = self
 
         t = 0
@@ -213,12 +297,13 @@ class PatternExt(Pattern):
         prevpop = 0
         currpop = 0
         period = 12
-        security = 15
 
+        candidate = self
+        candidatetime = 0
         for i in range (0, 1000):
-            if (i == 40):  security = 20
-            if (i == 60):  security = 25
-            if (i == 80):  security = 30
+            if (i == 40 and security < 20):  security = 20
+            if (i == 60 and security < 25):  security = 25
+            if (i == 80 and security < 30):  security = 30
 
             if (i == 400): period = 18;
             if (i == 500): period = 24;
@@ -232,43 +317,80 @@ class PatternExt(Pattern):
                 depth += 1
             else:
                 depth = 0
+                candidate = p
+                candidatetime = t
                 period ^= 4
 
             prevpop = currpop;
 
             if depth == security:
-                return (p, period, t)
+                return (candidate, period, candidatetime)
 
-        raise RuntimeError("Pattern did not stabilise")
+        return (p, None, t)
 
     @cached_property
-    def approximate_time_to_stable(self) -> int:
+    def over_time_to_stable(self) -> int:
         _, period, t = self.overadvance_to_stable()
+        if period == None:
+            return None
+        return t
+
+    @cached_property
+    def approximate_time_to_stable(self) -> int | None:
+        _, period, t = self.overadvance_to_stable()
+
+        if period == None:
+            return None
 
         pops = []
         p = self
-        for _ in range(0, t+period):
+        for _ in range(0, t+period + period):
             p = p.advance(1)
             pops.append(p.population)
 
         pops.reverse()
         for i, pop in enumerate(pops):
             if pop != pops[i + period]:
-                return t - i + 1
+                return t + period - i + 1
 
         return t + period
 
     # This is dumb, should expose RleWriter from lifelib
     @cached_property
     def rle_string_only(self) -> str:
-        return self.rle_string().splitlines()[2]
+        return ''.join(self.rle_string().splitlines()[2:])
+
+    def zoi(self):
+        inner = lt.pattern("3o$3o$3o!").shift(-1,-1)
+        return self.convolve(inner)
+
+    # Until I have proper gencols
+    # Should be done using convolve
+    def collisions_with(self, other):
+        hits = self.zoi().convolve((LinearTransform.flip * other).zoi())
+        overlaps = self.convolve(LinearTransform.flip * other)
+        diff = hits - overlaps
+
+        return set(diff.coord_vecs())
 
     def __repr__(self):
+        if self.empty():
+            return "Pattern()"
+
+        x,y,_,_ = self.getrect()
         logdiam = self.lifelib('GetDiameterOfPattern', self.ptr)
-        if logdiam <= 5:
-            return ("Pattern(%r)" % self.rle_string_only)
+        if logdiam <= 7:
+            return f"Pattern(x={x}, y={y}, rle={self.rle_string_only})"
         else:
-            return ("Pattern(logdiam=%d)" % logdiam)
+            return f"Pattern(x={x}, y={y}, logdiam={logdiam})"
+
+    def fast_match_live(self, live):
+        newptr = self.lifelib('MatchLive', self.ptr, live.ptr)
+        return Pattern(self.session, newptr, self.owner)
+
+    def fast_match(self, live, corona):
+        newptr = self.lifelib('MatchLiveAndDead', self.ptr, live.ptr, corona.ptr)
+        return Pattern(self.session, newptr, self.owner)
 
 # My kingdom for a sum type
 class Fate:
@@ -294,6 +416,7 @@ class Fate:
 
 class Reagent:
     name: str
+    pattern_rle: str
     pattern: Pattern
     origin_age: int
     phases: list | None
@@ -301,14 +424,21 @@ class Reagent:
 
     def __init__(self, name, pattern, origin_age = 0):
         self.name = name
+        self.pattern_rle = pattern
         self.pattern = lt.pattern(pattern)
         self.origin_age = origin_age
         self.phases = None
         self.fate = None
 
     def all_orientations(self, pat):
-        return [ (n.unnormalised_wechsler, tr * l)
-                 for l in LinearTransform.all()
+        # r = []
+        # for l in LinearTransform.all:
+        #     n, tr = (l*pat).normalise_origin()
+        #     r.append((n.unnormalised_wechsler, l.inverse() * tr))
+        # return r
+
+        return [ (n.unnormalised_wechsler, l.inverse() * tr)
+                 for l in LinearTransform.all
                  for (n, tr) in [(l*pat).normalise_origin()] ]
 
     def all_phases(self, endt = None) -> list[tuple[str, int, Transform]]:
@@ -332,7 +462,7 @@ class Reagent:
 
     def determine_fate(self, book: Book):
         if self.oscillation:
-            return (Fate.OSC,) + self.oscillation
+            return Fate.OSC
 
         p = self.pattern
         p = p.advance(1)
@@ -340,18 +470,43 @@ class Reagent:
         endt = self.pattern.approximate_time_to_stable
         for t in range(1, endt+1):
             if p.population == 0:
-                return (Fate.DIE, t)
+                return (Fate.BECOME, t, Schematic())
             if p in book:
-                return (Fate.BECOME, t, book[p])
+                return (Fate.BECOME, t, Schematic().add_instance(book[p]))
             p = p.advance(1)
-        return (Fate.OTHER, endt) # Puffers I guess?
+        return (Fate.OTHER, endt)
+        # if self.oscillation:
+        #     return (Fate.OSC,) + self.oscillation
+
+        # p = self.pattern
+        # p = p.advance(1)
+
+        # endt = self.pattern.approximate_time_to_stable
+        # for t in range(1, endt+1):
+        #     if p.population == 0:
+        #         return (Fate.DIE, t)
+        #     if p in book:
+        #         return (Fate.BECOME, t, book[p])
+        #     p = p.advance(1)
+        # return (Fate.OTHER, endt) # Puffers I guess?
 
 
     @cached_property
+    def is_active(self) -> bool:
+        if self.fate == Fate.OSC:
+            return False
+        if self.fate[0] == Fate.BECOME:
+            return True
+        if self.fate[0] == Fate.OTHER:
+            return True
+
+    @cached_property
     def time_to_fate(self) -> int:
-        if self.fate[0] == Fate.OSC:
+        if self.fate == Fate.OSC:
             return 0
-        else:
+        if self.fate[0] == Fate.BECOME:
+            return self.fate[1]
+        if self.fate[0] == Fate.OTHER:
             return self.fate[1]
 
     # Or pattern dies
@@ -369,7 +524,7 @@ class Reagent:
         while split_duration < 2 and t < self.pattern.approximate_time_to_stable:
             p = p.advance(1)
             t += 1
-            if p.empty():
+            if p.population <= 6:
                 return t
             if len(p.components(halo)) != 1:
                 split_duration += 1
@@ -385,8 +540,21 @@ class Reagent:
         return min(self.pattern.approximate_time_to_stable, self.time_to_split-1)
 
     def __repr__(self):
-        d = {'name': self.name }
+        d = {'name': self.name, 'pattern': self.pattern, 'fate': self.fate }
         return "%s(%r)" % (self.__class__.__name__, d)
+
+    def __getstate__(self):
+        return {
+            'name': self.name,
+            'pattern_rle': self.pattern_rle,
+            'origin_age': self.origin_age,
+            'phases': self.phases,
+            'fate': self.fate,
+        }
+
+    def __setstate__(self, pickled):
+        self.__dict__ = pickled
+        self.pattern = lt.pattern(self.pattern_rle)
 
 class Cluster:
     REAGENT = 0
@@ -402,33 +570,56 @@ class Instance:
         self.reagent = reagent
 
         self.pattern = pattern
-        if pattern == None:
+        if not pattern:
             self.pattern = trans * reagent.pattern.advance(time)
 
         self.time = time
         self.trans = trans
 
-    def step(self) -> tuple[Instance, list[Event]]:
+    def step(self) -> tuple[Schematic, list[Event]]:
         new = Instance(self.reagent, self.time + 1, self.trans, self.pattern.advance(1))
 
-        if self.time + 1 == self.reagent.time_to_fate:
-            return new, [Event(self.time + 1, [(Cluster.REAGENT, self)], [self.reagent.fate])]
+        if self.time + 1 == self.reagent.time_to_fate and self.reagent.fate[0] == Fate.BECOME:
+            before = Schematic().add_instance(self)
+            after = self.trans * self.reagent.fate[2]
+            return after, [Event(before, after)]
         else:
-            return new, []
+            return Schematic().add_instance(new), []
 
     def reconstruct(self) -> Pattern:
         return self.trans * self.reagent.pattern.advance(self.time)
 
-    def touches(self, coords):
-        self.pattern.touches(coords)
+    def verify(self):
+        r = self.reconstruct()
+        if self.pattern != r:
+            print(f"instance    {self.pattern}")
+            print(f"erroneously {r}")
+            print(f"difference  {self.pattern ^ r}")
+
+    def touches(self, coords, margin=1):
+        self.pattern.touches(coords, margin)
 
     def __repr__(self):
         d = {'time': self.time, 'trans': self.trans}
         return "%s(%r, %r)" % (self.__class__.__name__, self.reagent.name, d)
 
+    def __getstate__(self):
+        return {
+            'reagent': self.reagent,
+            'time': self.time,
+            'trans': self.trans,
+        }
+
+    def __setstate__(self, pickled):
+        self.__dict__ = pickled
+        self.pattern = self.reconstruct()
+
 class FloodFill:
     def __init__(self):
         self.neighbours = {}
+
+    def add_node(self, n):
+        if n not in self.neighbours: self.neighbours[n] = []
 
     def add_neighbourhood(self, o):
         for i in o:
@@ -453,18 +644,21 @@ class FloodFill:
         return groups
 
 class Book:
+    reagents : dict[str, Reagent]
     table : dict[str, Instance]
 
     def __init__(self):
+        self.reagents = {}
         self.table = {}
 
     def add_reagent(self, reagent: Reagent):
         reagent.fate = reagent.determine_fate(self)
+        self.reagents[reagent.name] = reagent
         for s, t, tr in reagent.all_phases():
             if s not in self.table:
-                self.table[s] = Instance(reagent, t, tr)
+                self.table[s] = Instance(reagent, t, tr.inverse())
 
-    def __getitem__(self, pat) -> Instance:
+    def __getitem__(self, pat: Pattern) -> Instance:
         v = pat.first_on_coord
         return Transform.translate(v) * self.table[pat.unnormalised_wechsler]
 
@@ -475,18 +669,23 @@ class Book:
     def from_toml_object(cls, toml_dict):
         b = Book()
         for name, values in toml_dict.items():
+            print(f"Adding {name}")
             b.add_reagent(Reagent(name, values['rle']))
         return b
 
 class Event:
-    time: int
-    ins: list[tuple[int, Instance | Pattern]]
-    outs: list[tuple[int, Instance | Pattern]]
+    ins: Schematic
+    outs: Schematic
 
-    def __init__(self, time, ins, outs):
-        self.time = time
+    def __init__(self, ins, outs):
         self.ins = ins
         self.outs = outs
+
+    def __str__(self):
+        return "%s(%s --> %s)" % (self.__class__.__name__, self.ins, self.outs)
+
+    def __repr__(self):
+        return "%s(ins=%r, outs=%r)" % (self.__class__.__name__, self.ins, self.outs)
 
 class Schematic:
     pattern: Pattern
@@ -499,7 +698,7 @@ class Schematic:
         self.chaos = []
 
     @classmethod
-    def analyse(cls, book: Book, pattern: Pattern):
+    def analyse(cls, book: Book, pattern: Pattern) -> Schematic:
         schematic = Schematic()
         schematic.pattern = pattern
         remaining = pattern
@@ -509,11 +708,21 @@ class Schematic:
                 schematic.reagents.append(book[c])
             else:
                 schematic.chaos.append(c)
-            remaining -= c
+            remaining = remaining - c
         return schematic
 
     def reconstruct(self) -> Pattern:
         return sum([i.reconstruct() for i in self.reagents], lt.pattern()) + sum(self.chaos, lt.pattern())
+
+    def verify(self):
+        for r in self.reagents:
+            r.verify()
+
+        r = self.reconstruct()
+        if self.pattern != r:
+            print(f"pattern     {self.pattern}")
+            print(f"erroneously {r}")
+            print(f"difference  {self.pattern ^ r}")
 
     def __add__(self, other):
         s = Schematic()
@@ -522,8 +731,15 @@ class Schematic:
         s.chaos = self.chaos + other.chaos
         return s
 
-    def step_chaos(self, pattern) -> tuple[Schematic, list]:
-        pass
+    def add_instance(self, reagent):
+        self.reagents.append(reagent)
+        self.pattern += reagent.pattern
+        return self
+
+    def add_chaos(self, chaos):
+        self.chaos.append(chaos)
+        self.pattern += chaos
+        return self
 
     def step(self, book: Book) -> tuple[Schematic, list]:
         # Let's refer to each instance/chaos by its first coord in the
@@ -533,52 +749,115 @@ class Schematic:
 
         coordmap = {}
         for r in self.reagents:
-            coordmap[r.pattern.first_on_coord] = (Cluster.REAGENT, r)
+            rstep = r.step()
+            coordmap[r.pattern.first_on_coord] = (Cluster.REAGENT, r, rstep)
         for c in self.chaos:
-            coordmap[c.first_on_coord] = (Cluster.CHAOS, c)
+            cstep = c.advance(1)
+            coordmap[c.first_on_coord] = (Cluster.CHAOS, c, cstep)
 
         newpattern = self.pattern.advance(1)
 
-        diff = sum([r.pattern.advance(1) for r in self.reagents], lt.pattern()) + \
-               sum([c.advance(1) for c in self.chaos], lt.pattern()) ^ newpattern
+        diff = sum(map(lambda v : v[2][0].pattern if v[0] == Cluster.REAGENT else v[2], coordmap.values()), lt.pattern()) ^ newpattern
+
+        # if diff.empty():
+        #     result = Schematic()
+        #     result.pattern = newpattern
+        #     events = []
+        #     for tag, _, stepped in coordmap.values():
+        #         if tag == Cluster.REAGENT:
+        #             result += stepped[0]
+        #             events += stepped[1]
+        #         if tag == Cluster.CHAOS:
+        #             s = Schematic.analyse(book, stepped)
+        #             if len(s.chaos) > 0 and len(s.reagents) == 0:
+        #                 result.chaos.append(stepped)
+        #             else:
+        #                 events.append(Event(Schematic().add_chaos(stepped), s))
+        #                 result += s
+        #     result.pattern = newpattern
+        #     return result, events
 
         f = FloodFill()
-        for xy in diff.coords():
-            neighbours = [ i[1].pattern.first_on_coord for i in newinstances if i[2].pattern.touches(xy) ] + \
-                         [ c[1].first_on_coord for c in newchaos if newchaos[2].touches(xy) ]
+        for k in coordmap.keys():
+            f.add_node(k)
+        for xy in diff.coord_vecs():
+            neighbours = [ k for k, v in coordmap.items()
+                           if (v[0] == Cluster.REAGENT and v[1].pattern.touches(xy))
+                           or (v[0] == Cluster.CHAOS and v[1].touches(xy)) ] + \
+                         [ xy ]
 
             f.add_neighbourhood(neighbours)
+        # pairs = [(a, b) for a in coordmap.items() for b in coordmap.items()]
+        # for (coord1, c1), (coord2, c2) in pairs:
+        #     if coord1 == coord2: continue
+        #     if c1[0] == Cluster.REAGENT or c2[0] == Cluster.REAGENT: continue
+        #     if not c1[1].bb.inflate(1).overlaps(c2[1].bb.inflate(1)): continue
 
-
-        # newinstances = [ (REAGENT, r, r.step()) for r in self.reagents ]
-        # newchaos = [ (CHAOS, c, c.advance(1)) for c in self.chaos ]
+        #     if (c1[2].zoi() ^ c2[2].zoi()).nonempty():
+        #         f.add_neighbourhood([coord1, coord2])
 
         result = Schematic()
-        result.pattern = newpattern
+
         events = []
-        for g in f.groups():
-            if g.length == 1:
+        groups = f.groups()
+
+        for g in groups:
+            if len(g) == 1:
+                if not g[0] in coordmap: # a connecting pixel
+                    continue
                 o = coordmap[g[0]]
                 if o[0] == Cluster.REAGENT:
-                    r, es = o[1].step()
-                    # At the moment assuming every reagent resolves to
-                    # one thing. Could instead have it resolve a
-                    # constellation.
-                    result.reagents.append(r)
+                    r, es = o[2]
+                    result.reagents += r.reagents
+                    result.chaos += r.chaos
                     events += es
                 if o[0] == Cluster.CHAOS:
-                    r, es = self.step_chaos(o[1])
-                    result += r
-                    events += es
-            else:
-                # Multiple components have merged:
-                pass
+                    chaos = o[2]
+                    s = Schematic.analyse(book, chaos)
+                    if len(s.chaos) > 0 and len(s.reagents) == 0:
+                        result.chaos.append(o[2])
+                    else:
+                        events.append(Event(Schematic().add_chaos(chaos), s))
+                        result += s
 
+            else:
+                ins = Schematic()
+                for coord in g:
+                    if not coord in coordmap: # a connecting pixel
+                        continue
+                    o = coordmap[coord]
+                    if o[0] == Cluster.REAGENT:
+                        ins.add_instance(o[1])
+                    if o[0] == Cluster.CHAOS:
+                        ins.add_chaos(o[1])
+
+                outs = Schematic.analyse(book, ins.pattern.advance(1))
+                result += outs
+                events.append(Event(ins, outs))
+
+        result.pattern = newpattern
         return (result, events)
+
+    def __str__(self):
+        return ', '.join(
+            [f"{r.reagent.name}({r.trans.offset.x}, {r.trans.offset.y})" for r in self.reagents] + \
+            [f"CHAOS({c.first_on_coord.x}, {c.first_on_coord.y})" for c in self.chaos]
+            )
 
     def __repr__(self):
         d = {'reagents': self.reagents, 'chaos': self.chaos}
         return "%s(%r)" % (self.__class__.__name__, d)
+
+    def __getstate__(self):
+        return {
+            'reagents': self.reagents,
+            'chaos': [c.rle_string for c in self.chaos],
+        }
+
+    def __setstate__(self, pickled):
+        self.__dict__ = pickled
+        self.chaos = [ lt.pattern(c) for c in self.chaos]
+        self.pattern = self.reconstruct()
 
 class Timeline:
     reagents: list[tuple[Instance, int, int]]
@@ -591,25 +870,3 @@ class Timeline:
     @classmethod
     def analyse(cls, book: Book, pattern: Pattern):
         pass
-
-# block = Reagent("block", "2o$2o!")
-r = Reagent("r", "b2o$2ob$bo!")
-# b = Reagent("b", "ob2o$3ob$bo!")
-# century = Reagent("century", "2b2o$3ob$bo!")
-# pi = Reagent("pi", "3o$obo$obo!")
-# lwss = Reagent("lwss", "b2o$3o$2obo$b3o$2bo!")
-# diehard = Reagent("diehard", "6bob$2o6b$bo3b3o!")
-# flare = Reagent("flare", "b3o$o2bo$o2bo$2bo!")
-
-# book = Book()
-# book.add_reagent(flare)
-# book.add_reagent(b)
-# s = Schematic.analyse(book, lt.pattern("b2o$2ob$bo!").advance(30))
-# print(s)
-
-# block = lt.pattern("2o$2o!")
-# r = lt.pattern("b2o$2ob$bo!")
-
-# print(diehard.determine_fate(book))
-
-# print(Book.from_toml_object(toml.load("reagents/commonsmall.toml")))
