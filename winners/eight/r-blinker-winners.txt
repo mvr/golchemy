@@ -1,0 +1,41 @@
+[ 
+# facing in
+  (Vec(1, 18), 'b2o$2o$bo16$3o!', 2296, 1),
+# in the middle
+  (Vec(10, 29), 'b2o$2o$bo27$9b3o!', 1407, 1),
+# promising!
+(Vec(71, 63), 'b2o$2o$bo61$70b3o!', 2360, 4),
+# in the middle
+  (Vec(67, 76), 'b2o$2o$bo74$66b3o!', 3834, 1),
+# in the middle
+  (Vec(6, -42), '5b3o42$b2o$2o$bo!', 1607, 1),
+# in the middle
+  (Vec(40, 32), 'b2o$2o$bo30$39b3o!', 1243, 1),
+# facing in
+  (Vec(-6, 7), '8b2o$7b2o$8bo5$3o!', 1395, 1),
+# facing in
+  (Vec(28, 18), 'b2o$2o$bo16$27b3o!', 1529, 1),
+# good!
+  (Vec(48, -13), '47b3o13$b2o$2o$bo!', 1693, 1),
+# facing in
+  (Vec(-7, 46), '9b2o$8b2o$9bo44$3o!', 2625, 1),
+# too close
+  (Vec(42, 11), 'b2o$2o$bo9$41b3o!', 1368, 1),
+# facing in
+  (Vec(51, 17), 'b2o$2o$bo15$50b3o!', 1634, 1),
+# facing in
+  (Vec(-34, 22), '36b2o$35b2o$36bo20$3o!', 1124, 5),
+# facing in
+  (Vec(29, 27), 'b2o$2o$bo25$28b3o!', 1412, 1),
+# too close
+  (Vec(54, -8), '53b3o8$b2o$2o$bo!', 1104, 1),
+# facing in
+  (Vec(48, 31), 'b2o$2o$bo29$47b3o!', 1036, 1),
+# facing in
+  (Vec(24, -8), '23b3o8$b2o$2o$bo!', 563, 1),
+# too close
+  (Vec(7, 22), 'b2o$2o$bo20$6b3o!', 724, 1),
+  (Vec(32, 12), 'b2o$2o$bo10$31b3o!', 338, 2),
+  (Vec(32, 15), 'b2o$2o$bo13$31b3o!', 338, 2),
+  (Vec(24, 22), 'b2o$2o$bo20$23b3o!', 338, 1),
+  (Vec(32, 11), 'b2o$2o$bo9$31b3o!', 338, 2)]

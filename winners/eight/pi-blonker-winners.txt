@@ -1,0 +1,4 @@
+[ (Vec(11, 3), '3o$obo$obo8bo$11bo$11bo!', 2459, 1),
+  (Vec(-9, 3), '9b3o$9bobo$o8bobo$o$o!', 2459, 1),
+  (Vec(9, 0), '9bo$3o6bo$obo6bo$obo!', 564, 2),
+  (Vec(-7, 0), 'o$o6b3o$o6bobo$7bobo!', 564, 2)]

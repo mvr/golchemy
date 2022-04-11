@@ -1,0 +1,6 @@
+[ (Vec(-11, 8), '11b3o$11bobo$11bobo6$bo$obo$obo$bo!', 398, 1),
+  (Vec(11, 8), '3o$obo$obo6$12bo$11bobo$11bobo$12bo!', 398, 1),
+  (Vec(-10, 19), '10b3o$10bobo$10bobo17$bo$obo$obo$bo!', 1337, 1),
+  (Vec(10, 19), '3o$obo$obo17$11bo$10bobo$10bobo$11bo!', 1337, 1),
+  (Vec(-10, -14), 'bo$obo$obo$bo11$10b3o$10bobo$10bobo!', 275, 1),
+  (Vec(10, -14), '11bo$10bobo$10bobo$11bo11$3o$obo$obo!', 275, 1)]

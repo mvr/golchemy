@@ -1,0 +1,8 @@
+[ (Vec(18, -8), '19bo$19bo$18bobo6$3o$obo$obo!', 1335, 2),
+  (Vec(-18, -8), 'bo$bo$obo6$18b3o$18bobo$18bobo!', 1335, 2),
+  (Vec(9, -16), '10bo$10bo$9bobo14$3o$obo$obo!', 1977, 1),
+  (Vec(-9, -16), 'bo$bo$obo14$9b3o$9bobo$9bobo!', 1977, 1),
+  (Vec(-22, -3), 'bo$bo$obo$22b3o$22bobo$22bobo!', 789, 1),
+  (Vec(22, -3), '23bo$23bo$22bobo$3o$obo$obo!', 789, 1),
+  (Vec(18, 9), '3o$obo$obo7$19bo$19bo$18bobo!', 736, 1),
+  (Vec(-18, 9), '18b3o$18bobo$18bobo7$bo$bo$obo!', 736, 1)]

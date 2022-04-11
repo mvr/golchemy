@@ -1,0 +1,25 @@
+[ 
+# in the middle of the pattern
+  (Vec(18, -32), '18b2o$18b2o31$b2o$2o$bo!', 3678, 1),
+# facing in
+  (Vec(40, 45), 'b2o$2o$bo43$40b2o$40b2o!', 1116, 1),
+# dies instantly
+  (Vec(-15, 39), '16b2o$15b2o$16bo37$2o$2o!', 2343, 1),
+# facing in
+  (Vec(46, -12), '46b2o$46b2o11$b2o$2o$bo!', 1248, 1),
+# facing in  
+  (Vec(3, 50), 'b2o$2o$bo48$3b2o$3b2o!', 2915, 1),
+# facing in  
+  (Vec(14, 35), 'b2o$2o$bo33$14b2o$14b2o!', 2434, 1),
+# facing out but hits block fast
+  (Vec(-8, -8), '2o$2o7$9b2o$8b2o$9bo!', 1357, 1),
+# facing in  
+  (Vec(28, -24), '28b2o$28b2o23$b2o$2o$bo!', 1225, 1),
+# facing in  
+  (Vec(7, 30), 'b2o$2o$bo28$7b2o$7b2o!', 1401, 1),
+# parallel to ash
+  (Vec(-41, 10), '42b2o$41b2o$42bo8$2o$2o!', 801, 2),
+  (Vec(31, 15), 'b2o$2o$bo13$31b2o$31b2o!', 338, 2),
+  (Vec(31, 13), 'b2o$2o$bo11$31b2o$31b2o!', 338, 2),
+  (Vec(23, 21), 'b2o$2o$bo19$23b2o$23b2o!', 338, 1),
+]

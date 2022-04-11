@@ -1,0 +1,21 @@
+[
+# in the middle
+  (Vec(56, 53), 'b2o$2o$bo50$56bo$56bo$56bo!', 2449, 1),
+# in the middle
+  (Vec(-33, 8), '34b2o$33b2o$34bo5$o$o$o!', 2834, 1),
+# facing in
+  (Vec(34, -11), '34bo$34bo$34bo10$b2o$2o$bo!', 1750, 1),
+# facing in
+  (Vec(29, -14), '29bo$29bo$29bo13$b2o$2o$bo!', 1713, 2),
+# good! barely too close
+  (Vec(2, -22), '2bo$2bo$2bo21$b2o$2o$bo!', 2443, 1),
+# facing in
+  (Vec(38, -17), '38bo$38bo$38bo16$b2o$2o$bo!', 1500, 1),
+# facing in
+  (Vec(41, -8), '41bo$41bo$41bo7$b2o$2o$bo!', 1229, 2),
+# nearly at the edge
+  (Vec(6, 11), 'b2o$2o$bo8$6bo$6bo$6bo!', 1451, 1),
+# a miracle might work  
+  (Vec(8, 16), 'b2o$2o$bo13$8bo$8bo$8bo!', 332, 1),
+# facing in
+  (Vec(14, 22), 'b2o$2o$bo19$14bo$14bo$14bo!', 475, 1)]

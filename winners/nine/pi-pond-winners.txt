@@ -1,0 +1,6 @@
+[ (Vec(21, 1), '3o$obo19b2o$obo18bo2bo$21bo2bo$22b2o!', 863, 1),
+  (Vec(-22, 1), '22b3o$b2o19bobo$o2bo18bobo$o2bo$b2o!', 863, 1),
+  (Vec(-10, 0), 'b2o7b3o$o2bo6bobo$o2bo6bobo$b2o!', 313, 4),
+  (Vec(9, 0), '3o7b2o$obo6bo2bo$obo6bo2bo$10b2o!', 313, 4),
+  (Vec(7, 20), '3o$obo$obo18$8b2o$7bo2bo$7bo2bo$8b2o!', 160, 1),
+  (Vec(-8, 20), '8b3o$8bobo$8bobo18$b2o$o2bo$o2bo$b2o!', 160, 1)]
