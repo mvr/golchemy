@@ -78,9 +78,10 @@ predecessors = [
   "o$o3bo$bo$2b2o", "bo$o3bo$bo$2b2o", "o$5bo$b3o$3bo",
   "5bo$o3bo$2b2o$bo", "2o$o$2b2o$bo" 
 ]
+glidernovelty = 170
 
 [b]
-rle = "ob2o$3ob$bo!"
+rle = "2bo$b2o$2o$b2o!"
 predecessors = [
   "3o$o2bo$o", "b3o$bo2bo$o", "2b3o$2bo2bo$o", "3o$o2bo$4bo", "5o2$o",
   "o$bob3o$bo", "o$b2o$o2bo$4bo", "bo$2b2o$o2bo$4bo",
@@ -203,11 +204,11 @@ rle = "o2bo$bob2o$bo3b2o$4bo!"
 
 [herschel]
 rle = "o2b$3o$obo$2bo!"
-predecessors = ["o$obo$3b2o$2bo", "o$b2o$3b2o$2bo"]
+predecessors = ["o$obo$3b2o$2bo", "o$b2o$3b2o$2bo", "2bo$b5o$o$b2o$2b2o$4bo!"]
 messypredecessors = ["b2o$2o$bo"]
 
 [herschelprime]
-rle = "2o$o2b2o$bo2bo$b3o!"
+rle = "b2o$obo$o$2obo$2b2o!"
 predecessors = [
   "o$b2o$o2$b3o", "bo$bo$ob3o$bo", "3bo$3obo$4bo$6bo",
   "bo$5bo$ob3o2$o", "2o$o3$3o2$bo", "2o$bo3$3o2$bo", "o$2o3$3o2$bo",
@@ -278,7 +279,7 @@ rle = "2bo2bo$bo3bo$o4bo$o$b3o!"
 [flare]
 rle = "bo$2obo$bobo$2b2o!"
 
-[commonsmallunnamedobject2]
+[flop]
 rle = "b3o$o2bo$o2bo$obo!"
 
 [procrastinatorbeehive]
@@ -380,3 +381,18 @@ predecessors = [
   "o2$2o$2bo2$b2o", "bo2$2o$2bo2$b2o" 
 ]
 
+[queenbee]
+rle = "3bo3b$2bobo2b$bo3bob$2b3o2b$2o3b2o!"
+predecessors = ["o$b2obo$bobobo", "o$b2ob2o$bobo"]
+
+[thunderbird]
+rle = "3o2$bob$bob$bo!"
+
+[switchengine]
+rle = "bobo2b$o5b$bo2bob$3b3o!"
+
+[multuminparvo]
+rle = "3b3o$2bo2bo$bo4b$o!"
+
+[glidersbythedozen]
+rle = "2o2bo$o3bo$o2b2o!"

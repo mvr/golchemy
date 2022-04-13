@@ -56,7 +56,7 @@ predecessors = ["bo$2o$2bo"]
 
 [longboat]
 rle = "bo2b$obob$bobo$2b2o!"
-predecessors = [""]
+predecessors = []
 
 [toad]
 rle = "b3o$3o!"
@@ -91,7 +91,7 @@ predecessors = ["3o$3bo$4b2o", "3o$3bobo$4bo", "o2$b2o$3b2o2$5bo", "2o$2bo$bo$2b
 
 [half-bakery]
 rle = "4b2o$3bo2bo$3bobo$b2obo$o2bo$obo$bo!"
-predecessors = ["o$o$o$bo$2bo$3b3o"", ""o$bo$bo$2bo$3bo$4b2o$6bo"]
+predecessors = ["o$o$o$bo$2bo$3b3o", "o$bo$bo$2bo$3bo$4b2o$6bo"]
 
 [mango]
 rle = "bo$obo$o2bo$bobo$2bo!"
@@ -170,7 +170,7 @@ messypredecessors = [
   "6b3o31$obo$bo$bo$3bo", "7b3o31$bo$2b2o$o3bo", "7b3o31$2bo$2b3o$o",
   "49b3o18$3bo$3bo$3o", "49b3o18$2bo$3bo$b2o$o", "48b3o18$bo2$3o$o",
   "21b3o48$obo$2bo$3bo$bo", "21b3o47$o$2bo$2bo$bobo",
-  "21b3o48$o3bo$b2o$3bo", "21b3o48$4bo$3o$2bo"", ""2bo$2obo$2bo$4b3o"
+  "21b3o48$o3bo$b2o$3bo", "21b3o48$4bo$3o$2bo", "2bo$2obo$2bo$4b3o"
 ]
 
 [longship]
@@ -228,7 +228,7 @@ messypredecessors = [
 
 [snake]
 rle = "2o$o$bo$2o!"
-predecessors = [""]
+predecessors = []
 
 [big_S]
 rle = "3b2o$3bobo$5bo$b4o$o$obo$b2o!"
@@ -384,7 +384,7 @@ predecessors = [
 
 [blockondock]
 rle = "2o$obob2o$2bob2o$2bo$obo$2o!"
-predecessors = [""]
+predecessors = []
 
 [scorpion]
 rle = "bo$obob2o$obobobo$b2o3bo$3b3o$3bo!"

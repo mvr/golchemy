@@ -1,6 +1,6 @@
-[pspark]
-rle = "2o$2o$o!"
-predecessors = ["b3o$o", "2o$bo$2bo", "o$2o2$2bo", "bo$2o2$2bo"]
+# [pspark]
+# rle = "2o$2o$o!"
+# predecessors = ["b3o$o", "2o$bo$2bo", "o$2o2$2bo", "bo$2o2$2bo"]
 
 [ttetromino]
 rle = "3o$bo!"
