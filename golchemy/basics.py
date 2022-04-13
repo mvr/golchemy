@@ -53,6 +53,9 @@ class BB:
         self.w = w
         self.h = h
 
+    def __eq__(self, other):
+        return (self.x == other.x and self.y == other.y and self.w == other.w and self.h == other.h)
+
     def contains(self,vec):
         return not (vec.x < self.x or
                     vec.x > self.x + self.w or
@@ -91,6 +94,12 @@ class LinearTransform:
         self.x = x
         self.y = y
 
+    def __eq__(self, other):
+        return (self.x == other.x and self.y == other.y)
+
+    def __hash__(self):
+        return hash((self.x, self.y))
+
     @overload
     def __mul__(self, other: Vec) -> Vec: ...
     @overload
@@ -99,6 +108,8 @@ class LinearTransform:
     def __mul__(self, other: Transform) -> Transform: ...
     @overload
     def __mul__(self, other: Pattern) -> Pattern: ...
+    @overload
+    def __mul__(self, other: Instance) -> Instance: ...
 
     def __mul__(self, other):
         if isinstance(other, Vec):
@@ -113,7 +124,16 @@ class LinearTransform:
         if isinstance(other, Pattern):
             return other.transform(self.name)
 
+        if isinstance(other, Instance):
+            return Transform(self, Vec(0,0)) * other
+
         raise TypeError("Cannot apply LinearTransform to " + str(type(other)))
+
+    def __pow__(self, other):
+        if other == 0:
+            return Transform.id
+        # TODO
+        return self * (self ** (other-1))
 
     def inverse(self):
         if self.x == Vec(0, -1) and self.y == Vec(1, 0): return LinearTransform(Vec(0,1), Vec(-1,0))
@@ -163,6 +183,41 @@ class LinearTransform:
 
     @classmethod
     @property
+    def rot90(cls):
+        return LinearTransform(Vec(0, -1), Vec(1, 0))
+
+    @classmethod
+    @property
+    def rot180(cls):
+        return LinearTransform(Vec(-1, 0), Vec(0, -1))
+
+    @classmethod
+    @property
+    def rot270(cls):
+        return LinearTransform(Vec(0, 1), Vec(-1, 0))
+
+    @classmethod
+    @property
+    def flip_x(cls):
+        return LinearTransform(Vec(-1, 0), Vec(0, 1))
+
+    @classmethod
+    @property
+    def flip_y(cls):
+        return LinearTransform(Vec(1, 0), Vec(0, -1))
+
+    @classmethod
+    @property
+    def swap_xy(cls):
+        return LinearTransform(Vec(0, 1), Vec(1, 0))
+
+    @classmethod
+    @property
+    def swap_xy_flip(cls):
+        return LinearTransform(Vec(0, -1), Vec(-1, 0))
+
+    @classmethod
+    @property
     def all(cls):
         return [LinearTransform(Vec(1, 0), Vec(0, 1)),
                 LinearTransform(Vec(0, -1), Vec(1, 0)),
@@ -184,6 +239,11 @@ class Transform:
     def __init__(self, lin, offset):
         self.lin = lin
         self.offset = offset
+
+    def __eq__(self, other):
+        return (self.lin == other.lin and self.offset == other.offset)
+    def __hash__(self):
+        return hash((self.lin, self.offset))
 
     @overload
     def __mul__(self, other: Vec) -> Vec: ...
@@ -222,8 +282,22 @@ class Transform:
 
         raise TypeError("Cannot apply Transform to " + str(type(other)))
 
+    def __pow__(self, other):
+        if other == 0:
+            return Transform.id
+        # TODO
+        return self * (self ** (other-1))
+
+    @classmethod
+    @property
+    def id(cls):
+        return Transform(LinearTransform.id, Vec(0, 0))
+
     def inverse(self):
         return Transform(self.lin.inverse(), -(self.lin.inverse() * self.offset))
+
+    def __str__(self):
+        return f"({self.offset} + {self.lin.name})"
 
     def __repr__(self):
         return "%s(lin=%r, offset=%r)" % (self.__class__.__name__, self.lin, self.offset)
@@ -380,7 +454,7 @@ class PatternExt(Pattern):
         x,y,_,_ = self.getrect()
         logdiam = self.lifelib('GetDiameterOfPattern', self.ptr)
         if logdiam <= 7:
-            return f"Pattern(x={x}, y={y}, rle={self.rle_string_only})"
+            return f"Pattern(x={x}, y={y}, rle='{self.rle_string_only}')"
         else:
             return f"Pattern(x={x}, y={y}, logdiam={logdiam})"
 
@@ -391,6 +465,26 @@ class PatternExt(Pattern):
     def fast_match(self, live, corona):
         newptr = self.lifelib('MatchLiveAndDead', self.ptr, live.ptr, corona.ptr)
         return Pattern(self.session, newptr, self.owner)
+
+    @cached_property
+    def symmetries(self) -> set[LinearTransform]:
+        p, _ = self.normalise_origin()
+        return { t for t in LinearTransform.all if self.invariant_under(t)}
+
+    def invariant_under(self, trans):
+        return self == (trans*self).normalise_origin()[0]
+
+    @cached_property
+    def symmetry_classes(self):
+        # I am lazy
+        seen = []
+        result = set()
+        for t in LinearTransform.all:
+            tp = (t*self).normalise_origin()[0]
+            if not tp in seen:
+                result.add(t)
+            seen.append(tp)
+        return result
 
 # My kingdom for a sum type
 class Fate:
@@ -430,24 +524,19 @@ class Reagent:
         self.phases = None
         self.fate = None
 
-    def all_orientations(self, pat):
-        # r = []
-        # for l in LinearTransform.all:
-        #     n, tr = (l*pat).normalise_origin()
-        #     r.append((n.unnormalised_wechsler, l.inverse() * tr))
-        # return r
-
-        return [ (n.unnormalised_wechsler, l.inverse() * tr)
-                 for l in LinearTransform.all
-                 for (n, tr) in [(l*pat).normalise_origin()] ]
-
     def all_phases(self, endt = None) -> list[tuple[str, int, Transform]]:
+        def all_orientations(pat):
+            # TODO: handle symmetry
+            return [ (n.unnormalised_wechsler, l.inverse() * tr)
+                     for l in LinearTransform.all
+                     for (n, tr) in [(l*pat).normalise_origin()] ]
+
         if endt == None: endt = self.time_for_ident
 
         p = self.pattern
         result = []
         for t in range(0, endt+1):
-            result += [(w, t + self.origin_age, tr) for w, tr in self.all_orientations(p)]
+            result += [(w, t + self.origin_age, tr) for w, tr in all_orientations(p)]
             p = p.advance(1)
         return result
 
@@ -586,6 +675,9 @@ class Instance:
         else:
             return Schematic().add_instance(new), []
 
+    def naive_advance(self, step):
+        return Instance(self.reagent, self.time + step, self.trans, self.pattern.advance(step))
+
     def reconstruct(self) -> Pattern:
         return self.trans * self.reagent.pattern.advance(self.time)
 
@@ -598,6 +690,12 @@ class Instance:
 
     def touches(self, coords, margin=1):
         self.pattern.touches(coords, margin)
+
+    def collisions_with(self, other):
+        return [Transform.translate(v) for v in self.pattern.collisions_with(other.pattern)]
+
+    def all_orientation_collisions_with(self, other):
+        return { tr * t for t in other.reagent.pattern.symmetry_classes for tr in self.collisions_with(t * other) }
 
     def __repr__(self):
         d = {'time': self.time, 'trans': self.trans}
@@ -619,26 +717,26 @@ class FloodFill:
         self.neighbours = {}
 
     def add_node(self, n):
-        if n not in self.neighbours: self.neighbours[n] = []
+        if n not in self.neighbours: self.neighbours[n] = set()
 
     def add_neighbourhood(self, o):
         for i in o:
-            if i not in self.neighbours: self.neighbours[i] = []
-            self.neighbours[i] += o
+            if i not in self.neighbours: self.neighbours[i] = set()
+            self.neighbours[i].update(o)
 
     def groups(self):
-        done = []
+        done = set()
         groups = []
         for n in self.neighbours:
             if n in done: continue
             # explore:
-            group = []
+            group = set()
             stack = [n]
             while stack: # python why
                 m = stack.pop()
                 if m in done: continue
-                group.append(m)
-                done.append(m)
+                group.add(m)
+                done.add(m)
                 stack += self.neighbours[m]
             groups.append(group)
         return groups
@@ -803,9 +901,10 @@ class Schematic:
 
         for g in groups:
             if len(g) == 1:
-                if not g[0] in coordmap: # a connecting pixel
+                elem = list(g)[0]
+                if not elem in coordmap: # a connecting pixel
                     continue
-                o = coordmap[g[0]]
+                o = coordmap[elem]
                 if o[0] == Cluster.REAGENT:
                     r, es = o[2]
                     result.reagents += r.reagents
@@ -838,9 +937,16 @@ class Schematic:
         result.pattern = newpattern
         return (result, events)
 
+    def naive_advance(self, step):
+        s = Schematic()
+        s.pattern = self.pattern.advance(step)
+        s.reagents = [ r.naive_advance(step) for r in self.reagents ]
+        s.chaos    = [ c.advance(step) for c in self.chaos ]
+        return s
+
     def __str__(self):
         return ', '.join(
-            [f"{r.reagent.name}({r.trans.offset.x}, {r.trans.offset.y})" for r in self.reagents] + \
+            [f"{r.reagent.name}[{r.time}]({str(r.trans)})" for r in self.reagents] + \
             [f"CHAOS({c.first_on_coord.x}, {c.first_on_coord.y})" for c in self.chaos]
             )
 
