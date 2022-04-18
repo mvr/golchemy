@@ -22,6 +22,22 @@ predecessors = [
   "3o$o$2bo$o", "3o$2bo$o$o3o$2bo$o$o"
 ]
 
+[honeyfarmer]
+rle = "2b3o$bo3bo$o5bo$bo3bo$2b3o!"
+predecessors = [
+  "o2$b2o$2o$bo", "o2$b2o$2o$o", "bo$2b2o$bo2$2o", "2b3o$o$bo$o",
+  "2b3o$o$bo$bo", "3b3o$obo$o", "b2o2$bo$2o2$bo", "b2o2$bo$2o2$o",
+  "b2o2$bo$2o$o", "3b2o$bo$2o2bo", "3bo$bo2bo$2o2bo3bo$bo2bo$2o2bo",
+  "3b2o$o$2obo", "3bo$o$2ob2o", "3bo$o2bo$2o2bo", "3bo$2o2bo$o2bo",
+  "3b2o$2o$o2bo", "3bo$2o$o2b2o", "3b2o$2o$bo2bo", "3bo$2o2bo$bo2bo",
+  "o$2b4o$2bo", "3bo$b2ob2o$o", "3b2o$b2o2bo$o", "o$obo2$2b2o$4bo",
+  "bo$obo2$2b2o$4bo", "2bo$obo2$2b2o$4bo", "3o2$3b2o$2bo",
+  "o$3o$3b2o", "o$3obo$3bo", "3o3$bo$2o", "3o2$bo$2o", "2ob3o$o",
+  "2ob3o$bo", "o2b3o$2o", "bob3o$2o", "bo$b2o2$2o$o", "bo$b2o2$2o$bo",
+  "2o$o2$bo$b2o", "2o$bo2$bo$b2o", "2o$o2$2bo$b2o", "3o3$2o$o",
+  "3o3$2o$bo", "3o3$o$2o"
+]
+
 [r]
 rle = "b2o$2ob$bo!"
 predecessors = [
@@ -34,7 +50,7 @@ rle = "3o$obo$obo!"
 predecessors = ["3o$o2bo", "bo$3o2$bo"]
 
 [lom]
-rle = "2o2b$b2ob$2b2o2o2b$b2ob$2b2o!"
+rle = "2o2b$b2ob$2b2o!"
 predecessors = [
   "bo2$2ob2o2$2bo", "bo2$2obo$4bo$2bo", "bo2$2obo2$2bobo",
   "obo2$2b2o2$3bobo", "2bo$o$2b2o2$3bobo", "2bo2$ob2o2$3bobo",
@@ -80,15 +96,6 @@ predecessors = [
 ]
 glidernovelty = 170
 
-[b]
-rle = "2bo$b2o$2o$b2o!"
-predecessors = [
-  "3o$o2bo$o", "b3o$bo2bo$o", "2b3o$2bo2bo$o", "3o$o2bo$4bo", "5o2$o",
-  "o$bob3o$bo", "o$b2o$o2bo$4bo", "bo$2b2o$o2bo$4bo",
-  "bo$2b2o$o2bo$5bo", "o$b2o$bo2$2b2o", "o$b2o$bo2$bobo",
-  "bo$b3o$o$4bo" 
-]
-
 [wing]
 rle = "b2ob$o2bo$bobo$2b2o!"
 predecessors = [
@@ -113,7 +120,7 @@ predecessors = [
   "3bo2$2b2o$bo$o$bo"
 ]
 
-[2glideroctomino]
+[octomino]
 rle = "2b2o$2b2o$3o$bo!"
 predecessors = [
   "b5o$o", "2o$bo$3b2o$2bo", "2o$bo$2bo$3b2o", "2o$bo$2bobo$3bo",
@@ -202,11 +209,6 @@ predecessors = ["2b3o$bo$bo$o"]
 [piandloaf]
 rle = "o2bo$bob2o$bo3b2o$4bo!"
 
-[herschel]
-rle = "o2b$3o$obo$2bo!"
-predecessors = ["o$obo$3b2o$2bo", "o$b2o$3b2o$2bo", "2bo$b5o$o$b2o$2b2o$4bo!"]
-messypredecessors = ["b2o$2o$bo"]
-
 [herschelprime]
 rle = "b2o$obo$o$2obo$2b2o!"
 predecessors = [
@@ -218,6 +220,20 @@ predecessors = [
   "o$b2o$bo$4bo$2b2o", "o$b2o$o2bo$4bo$4bo", "o$b2o$o2bo$4bo$3bo" 
 ]
 messypredecessors = ["o2b$3o$obo$2bo"]
+
+[herschel]
+rle = "o2b$3o$obo$2bo!"
+predecessors = ["o$obo$3b2o$2bo", "o$b2o$3b2o$2bo", "2bo$b5o$o$b2o$2b2o$4bo!"]
+messypredecessors = ["b2o$2o$bo"]
+
+[b]
+rle = "2bo$b2o$2o$b2o!"
+predecessors = [
+  "3o$o2bo$o", "b3o$bo2bo$o", "2b3o$2bo2bo$o", "3o$o2bo$4bo", "5o2$o",
+  "o$bob3o$bo", "o$b2o$o2bo$4bo", "bo$2b2o$o2bo$4bo",
+  "bo$2b2o$o2bo$5bo", "o$b2o$bo2$2b2o", "o$b2o$bo2$bobo",
+  "bo$b3o$o$4bo" 
+]
 
 [butterfly]
 rle = "o3b$2o2b$obob$b3o!"
@@ -235,7 +251,7 @@ predecessors = [
 ]
 
 [trafficlighthitsblock2]
-rle = "2o5bo$o4bobo$7bo!2o5bo$o4bobo$7bo!"
+rle = "2o5bo$o4bobo$7bo!"
 
 [trafficlighthitsblock3]
 rle = "2o$2o$6bo$5b3o!"
@@ -264,13 +280,10 @@ rle = "4b3o$2o3bo$2o!"
 [biblocker]
 rle = "obo$2ob2o$2bo!"
 
-[trafficlighthitsblock6]
-rle = "6b2o$o5b2o$2o$o!"
-
 [lomhitsblock]
 rle = "2o4bo$2o2b2ob2o$7b2o!"
 
-[commonsmallunnamedobject1]
+[lifelinestable]
 rle = "3o$4bo$3b2o!"
 
 [beehiveedgeshooter]
@@ -282,8 +295,8 @@ rle = "bo$2obo$bobo$2b2o!"
 [flop]
 rle = "b3o$o2bo$o2bo$obo!"
 
-[procrastinatorbeehive]
-rle = "b2o$bobo$o2b2o!"
+# [procrastinatorbeehive]
+# rle = "b2o$bobo$o2b2o!"
 
 [cap]
 rle = "b2o$o2bo$4o!"
@@ -382,17 +395,24 @@ predecessors = [
 ]
 
 [queenbee]
-rle = "3bo3b$2bobo2b$bo3bob$2b3o2b$2o3b2o!"
+rle = "o$2o$b2o$b3o$b2o$2o$o!"
 predecessors = ["o$b2obo$bobobo", "o$b2ob2o$bobo"]
-
-[thunderbird]
-rle = "3o2$bob$bob$bo!"
 
 [switchengine]
 rle = "bobo2b$o5b$bo2bob$3b3o!"
+notable = true
 
-[multuminparvo]
-rle = "3b3o$2bo2bo$bo4b$o!"
+# [multuminparvo]
+# rle = "3b3o$2bo2bo$bo4b$o!"
 
 [glidersbythedozen]
 rle = "2o2bo$o3bo$o2b2o!"
+
+# [blockandglider]
+# rle = "2o$obo$2b2o!"
+
+[hook]
+rle = "2o$b2o$2bo$3o!"
+
+[k]
+rle = "2bo$2bo$2bo$2o$o!"

@@ -2,7 +2,7 @@
 # rle = "2o$2o$o!"
 # predecessors = ["b3o$o", "2o$bo$2bo", "o$2o2$2bo", "bo$2o2$2bo"]
 
-[ttetromino]
+[t]
 rle = "3o$bo!"
 predecessors = ["2o$obo$3b2o", "4b2o$4o"]
 
@@ -17,10 +17,10 @@ predecessors = [
   "2o$o2$2o$o", "2o$o2$2o$bo" 
 ]
 
-[twoloaves]
-rle = "b3o$o3bo$2o$2b3o!"
+# [twoloaves]
+# rle = "b3o$o3bo$2o$2b3o!"
 
-[twoloaves2]
+[twoloaves]
 rle = "2o$obo$obo$2b2o$b2o!"
 
 [tlg]

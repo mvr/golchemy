@@ -1,5 +1,7 @@
 [bpse]
 rle = "19$25bo$11bobo6bo2b4o$10bo9bob4o$11bo2bo6b3o3b2o$13b3o9bo2b2o$26bob2o$27bo8b2o$36b2o9$30b3o$30b2obo$16b2o11bo3bo$16b2o11b4o$30b2o6$24b2o$24b2o!"
+notable = true
 
 [gpse]
 rle = "8$9bo$6b4o2$23b3o2$9bobo12b2o$10bo13b2o$8b2o13bo2bo$8bo2bo11bo8b2o$7b2ob2o10b3o7b2o$22b2o$25b2o$24bo2bo2$22b2o$22bo2bo$23b3o3$39b2o$12b2o25bobo$12b2o26bo$31b2o$31b2o3$27b2o$27b2o$20b2o$20b2o3$56b2o$56b2o3$45bo$44bobo$31bo12b2o$30bobo$30b2o!"
+notable = true

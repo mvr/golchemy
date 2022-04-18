@@ -111,11 +111,12 @@ predecessors = [
 ]
 
 [lwss]
-rle = "b2o$3o$2obo$b3o$2bo!"
+rle = "o2bo$4bo$o3bo$b4o!"
 predecessors = [
   "4o$o3bo$o$bo", "3b4o$2bo4bo$bo$o", "bo$o3bo$o$4o",
   "3b4o$2bo$bo5bo$o", "5bo$bo$b2ob2o$o$3bo", "2bo$2obo$4bo$bo2bo$6bo"
 ]
+notable = true
 
 [longbarge]
 rle = "bo$obo$bobo$2bobo$3bo!"
@@ -139,9 +140,10 @@ predecessors = [
 [paperclip]
 rle = "b2o$ob3o$o4bo$b3obo$3b2o!"
 predecessors = ["o$2o2$b4o", "bo$2o2$b4o"]
+notable = true
 
 [mwss]
-rle = "b2o$2ob3o$b5o$2b3o!"
+rle = "2bo$o3bo$5bo$o4bo$b5o!"
 predecessors = [
   "5o$o4bo$o$bo", "3b5o$2bo5bo$bo$o", "2o2b2o$bob2o$o4bo",
   "b2o2b2o$obob2o$6bo", "b2o2b2o$2bob2o$o5bo", "2bo$bo$o2b2o$o2bo$2o",
@@ -172,6 +174,7 @@ messypredecessors = [
   "21b3o48$obo$2bo$3bo$bo", "21b3o47$o$2bo$2bo$bobo",
   "21b3o48$o3bo$b2o$3bo", "21b3o48$4bo$3o$2bo", "2bo$2obo$2bo$4b3o"
 ]
+notable = true
 
 [longship]
 rle = "2o$obo$bobo$2b2o!"
@@ -274,7 +277,7 @@ predecessors = [
 ]
 
 [hwss]
-rle = "b2o$2ob4o$b6o$2b4o!"
+rle = "2b2o$o4bo$6bo$o5bo$b6o!"
 predecessors = [
   "6o$o5bo$o$bo", "3b6o$2bo6bo$bo$o", "2bo2$b4o$o4bo$o5bo$bo",
   "bo2$b3obo$o3bo$o5bo$bo", "bo2$b3obo$o3bo$o4bo$bo",
@@ -305,6 +308,7 @@ messypredecessors = [
   "3o4$3bo$bo$2bo$2bobo", "3o5$bobo$2bo$2bo$4bo", "3o5$bo$2b2o$o3bo",
   "3o5$2bo$2b3o$o"
 ]
+notable = true
 
 [verylongboat]
 rle = "bo$obo$bobo$2bobo$3b2o!"
@@ -331,14 +335,17 @@ predecessors = [
   "4bo$bo$2o2b3o$2bo$bo$o", "4bo$bo$2o2b2o$2bo$bo4bo$o",
   "5bo$bo$2o2b2o$2bo$bo4bo$o", "2o$2b3o$bo2$2bo$obo$4bo"
 ]
+notable = true
 
 [deadsparkcoil]
 rle = "2o3b2o$obobobo$2bobo$obobobo$2o3b2o!"
 predecessors = ["o2bo$3o6$3o$o2bo", "bo2bo$b3o6$b3o$o2bo", "bo2$3o$bo4$bo$3o2$bo"]
+notable = true
 
 [canoe]
 rle = "2o$obo$3bo$4bo$3b2o!"
 predecessors = ["2o$o$2bo$2bo2bo$3b2o"]
+notable = true
 
 [beehiveondock]
 rle = "2o3bo$obobobo$2bobobo$2bo2bo$obo$2o!"
@@ -354,10 +361,12 @@ messypredecessors = [
   "5bo$3b2o$2bo3bo$bo2$obo$bo", "4bo$2b3o$6bo$bo2$obo$2bo",
   "5bo$3b2o$2bo3bo$bo2$obo$2bo"
 ]
+notable = true
 
 [mirroredbuns]
 rle = "b2ob2o$obobobo$obobobo$bo3bo!"
 predecessors = ["bo$2o$2bo2$2bo$2o$bo"]
+notable = true
 
 [mooseantlers]
 rle = "2o5b2o$o7bo$b3ob3o$3bobo$4bo!"
@@ -369,6 +378,7 @@ predecessors = [
   "5o2$3bo$2bo$2o", "5o2$3bo$o$b2o", "5o2$3bo$2o$2bo",
   "5o2$3bo$bo$obo"
 ]
+notable = true
 
 [blockontable]
 rle = "o2bo$4o2$2b2o$2b2o!"
@@ -381,14 +391,17 @@ predecessors = [
   "b2obo$bobo2$bo$2o$2bo", "b2o$bob2o2$bo$2o$2bo",
   "ob2o$bobo2$bo$2o$2bo"
 ]
+notable = true
 
 [blockondock]
 rle = "2o$obob2o$2bob2o$2bo$obo$2o!"
 predecessors = []
+notable = true
 
 [scorpion]
 rle = "bo$obob2o$obobobo$b2o3bo$3b3o$3bo!"
 predecessors = ["3b2o$o3bo$2o$4b2o$6bo", "3b2o$2o2bo$o$4b2o$6bo", "4bo$o2b2o$2o$5b2o$4bo", "4bo$2ob2o$o$5b2o$4bo"]
+notable = true
 
 [beehivewithtail]
 rle = "2o$bo$bob2o$2bo2bo$3b2o!"
@@ -402,14 +415,17 @@ predecessors = [
   "3bobo$4bo$b2o$o$obo2$bo", "3bobo$4bo$b2o$o$obo2$2bo",
   "3bobo$4bo$b2o$o$bo$2bo$o", "3bobo$4bo$b2o$o$bo$bo$3bo"
 ]
+notable = true
 
 [twinhat]
 rle = "4bo$2obobob2o$bobobobo$bobobobo$2bo3bo!"
 predecessors = ["3o3b3o3$3b3o$2bo2bo", "3o2$4bo$3b2obo$4bo2$3o"]
+notable = true
 
 [loop]
 rle = "bobo$ob2o$o$b3o$3bo!"
 predecessors = ["4bo$2b2o$2o$obobo$2bo", "2b3o$2o$obo$2bobo"]
+notable = true
 
 [longsnake]
 rle = "2o$o$bo$2bo$b2o!"
@@ -417,6 +433,7 @@ predecessors = [
   "2o$3bo$2bo$bo$o$2o", "o$2b2o$bo2$obo$2o", "obo$3bo$bo$2bo$o$2o",
   "o$bobo$2bo2$obo$2o", "bo$2bobo$3bo2$b2o$o$3bo"
 ]
+notable = true
 
 [fourteener]
 rle = "4b2ob$2o2bobo$o5bo$b5ob$3bo!"
@@ -427,9 +444,11 @@ predecessors = [
   "b3o$o$bo$2bo$bo$bo2$2b2o", "b3o$o$bo$2bo$bo$bo2$bobo",
   "b3o$o$bo$2bo$bo$bo2$obo"
 ]
+notable = true
 
 [pentadecathlon]
 rle = "bo2$3o5$3o2$bo!"
+notable = true
 
 [elevener]
 rle = "4b2o$3bobo$3bo2b$b3o2b$o5b$2o!"
@@ -437,13 +456,16 @@ predecessors = [
   "2o$obo2$2b2o$4bo$4b2o", "2o$obo2$2b2o$4bobo$4bo",
   "2o$obo2$2b2o$4bo$4bobo"
 ]
+notable = true
 
 [clock]
 rle = "2bo$2o$2b2o$bo"
+notable = true
 
 [brokensnake]
 rle = "b2o$2bo$bo$b2o$2bo$o$2o!"
 predecessors = ["2o2bo$o2b4o$bo3bo", "2o$o2b2obo$bobob2o"]
+notable = true
 
 [siameseeater]
 rle = "2o3b2o$bo4bo$bob3o$2b2o!"
@@ -462,6 +484,7 @@ predecessors = [
   "2bo2$2o2b3o$2bo$3bo$4bo$3bo", "2bo2$2o2b3o$2bo$3bo$4bo$4bo",
   "3ob3o2$3bo$2bobo$2bo"
 ]
+notable = true
 
 [blockoncover]
 rle = "2ob2o$bob2o$bo$2b3o$4bo!"
@@ -475,6 +498,7 @@ predecessors = [
   "bo2bo$2b3o2$o2$b3o$4bo", "2bo2bo$2b3o2$o2$b3o$4bo",
   "bo2bo$2b3o3$2o$2b2o$2bo", "2bo2bo$2b3o3$2o$2b2o$2bo"
 ]
+notable = true
 
 [cisboatondock]
 rle = "2o$obob2o$2bobobo$2bo2bo$obo$2o!"
@@ -487,6 +511,7 @@ predecessors = [
   "2bobo$3bo2$b2o$2bo2$obo$2bo", "2bobo$3bo2$b2o$bo2$obo$o",
   "2bobo$3bo2$b2o$bo2$obo$bo", "2bobo$3bo2$b2o$bo2$obo$2bo"
 ]
+notable = true
 
 [symmetricscorpion]
 rle = "b2ob2o$obobobo$o5bo$b5o$3bo!"
@@ -496,6 +521,7 @@ predecessors = [
   "o$b2o$bo2$o$b2obo$3bo", "o$b2o$bo2$o$ob2o$3bo",
   "o4bo$b2o$bo2b2o$6b2o"
 ]
+notable = true
 
 [beehat]
 rle = "2o2bo$o2bobo$b3obo$4bo$b3o$bo!"
@@ -504,6 +530,7 @@ predecessors = [
   "bo3bo$2o3bo$5bo$bo$b3o", "o4bo$2o3bo$5bo$bo$b3o",
   "bo3bo$2o3bo$5bo$o$b2o$3bo", "o4bo$2o3bo$5bo$o$b2o$3bo"
 ]
+notable = true
 
 [snorkelloop]
 rle = "4b2o$2obobo$bobo$bo2bo$2b2o!"
@@ -512,6 +539,7 @@ predecessors = [
   "bobo$2obobo2$3bo$2b2o", "o3bo$2obobo2$3bo$2b2o",
   "o4bo$2obobo2$3bo$2b2o"
 ]
+notable = true
 
 [longboattieship]
 rle = "5b2o$4bobo$4b2o$2b2o$bobo$obo$bo!"
@@ -520,22 +548,27 @@ predecessors = [
   "2o$bo$2b2o2$4bo$4b2o$7bo$7bo", "2o$bo2$2b2o$4bo$4b2o$7bo$7bo",
   "2o$bo$2b2o2$4bo$4b2obo2$7bo", "2o$bo2$2b2o$4bo$4b2obo2$7bo"
 ]
+notable = true
 
 [housesiameseshillelagh]
 rle = "2ob2o$o3bo$b3o$3bobo$4b2o!"
 predecessors = ["2bo$b2o$o$2b2o$2bo2bo$4b2o"]
+notable = true
 
 [cismirroredworm]
 rle = "b2o$obo$o4bo$b5o2$b5o$o4bo$obo$b2o!"
 predecessors = ["bo2$3o$bo27$3o$o2bo"]
+notable = true
 
 [krake]
 rle = "2o3b2o$obobobo$2bobo$2bobo$3bo!"
 predecessors = ["2o$bo2$2b3o2$bo$2o"]
+notable = true
 
 [transcerberus]
 rle = "2o2b2o$o2bobo$b3o$4bo$3b2o!"
 predecessors = ["2o$bo$5bo$2b2o$o2bo$2o"]
+notable = true
 
 [integralsiameseeater]
 rle = "2o$obo3b2o$2bo4bo$2bob3o$3b2o!"
@@ -545,4 +578,4 @@ predecessors = [
   "o$5bo2bo$b2o2b3o$2bo$bo$bo", "o4bo2bo$b2o2b3o$2bo$bo$2bo",
   "o$5bo2bo$b2o2b3o$2bo$bo$2bo", "bo$bo2bo$ob2o3$2o$bo$bo$o"
 ]
-
+notable = true
