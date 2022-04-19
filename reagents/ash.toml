@@ -4,17 +4,21 @@
 [block]
 rle = "2o$2o!"
 predecessors = ["2o$o"]
+verycommon = true
 
 [blinker]
 rle = "3o!"
+verycommon = true
 
 [beehive]
 rle = "b2ob$o2bo$b2o!"
 predecessors = ["b3o2$o", "4o", "2bo$2o2$o", "2bo$2o2$bo", "o$b2o$3bo", "o$2o2$o", "bo$2o2$o"]
+verycommon = true
 
 [glider]
 rle = "bob$2bo$3o!"
 predecessors = ["3o$o$2bo", "3o$o$3bo", "obo$bobo$bo", "2o$2b2o$bo", "3o$3bo$o"]
+verycommon = true
 
 [loaf]
 rle = "b2ob$o2bo$bobo$2bo!"
@@ -27,6 +31,7 @@ predecessors = [
   "b2o$2o2$bo", "o$3o2$3bo", "bobo$2o2$o", "bo$2obo2$o",
   "bo$2obo2$2bo" 
 ]
+verycommon = true
 
 [boat]
 rle = "2ob$obo$bo!"
@@ -35,6 +40,7 @@ predecessors = [
   "bobo$obo$o", "bo2$4o", "o2$3o$3bo", "o2$b2o$3b2o", "o2$b2obo$3bo",
   "2b2o$bo$2o", "2b2o2$bo$2o", "bobo2$bo$2o" 
 ]
+verycommon = true
 
 [ship]
 rle = "2ob$obo$b2o!"
@@ -45,18 +51,22 @@ predecessors = [
   "bo$ob2o$bo$bo", "2o$o2bo$2bo$bo", "o$2b2o$b2o$bo", "b2o$o2bo$o$bo",
   "bo$3bo$obo$2o"
 ]
+verycommon = true
 
 [tub]
 rle = "bo$obo$bo!"
 predecessors = ["3o$obo$3bo$2b2o!"]
+verycommon = true
 
 [pond]
 rle = "b2ob$o2bo$o2bo$b2o!"
 predecessors = ["bo$2o$2bo"]
+verycommon = true
 
 [longboat]
 rle = "bo2b$obob$bobo$2b2o!"
 predecessors = []
+verycommon = true
 
 [toad]
 rle = "b3o$3o!"

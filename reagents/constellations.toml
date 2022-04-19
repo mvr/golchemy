@@ -1,5 +1,46 @@
 [honeyfarm]
 rle = "6bo$5bobo$5bobo$6bo2$b2o7b2o$o2bo5bo2bo$b2o7b2o2$6bo$5bobo$5bobo$6bo!"
+verycommon = true
+
+[honeyfarmer]
+rle = "2b3o$bo3bo$o5bo$bo3bo$2b3o!"
+predecessors = [
+  "o2$b2o$2o$bo", "o2$b2o$2o$o", "bo$2b2o$bo2$2o", "2b3o$o$bo$o",
+  "2b3o$o$bo$bo", "3b3o$obo$o", "b2o2$bo$2o2$bo", "b2o2$bo$2o2$o",
+  "b2o2$bo$2o$o", "3b2o$bo$2o2bo", "3bo$bo2bo$2o2bo3bo$bo2bo$2o2bo",
+  "3b2o$o$2obo", "3bo$o$2ob2o", "3bo$o2bo$2o2bo", "3bo$2o2bo$o2bo",
+  "3b2o$2o$o2bo", "3bo$2o$o2b2o", "3b2o$2o$bo2bo", "3bo$2o2bo$bo2bo",
+  "o$2b4o$2bo", "3bo$b2ob2o$o", "3b2o$b2o2bo$o", "o$obo2$2b2o$4bo",
+  "bo$obo2$2b2o$4bo", "2bo$obo2$2b2o$4bo", "3o2$3b2o$2bo",
+  "o$3o$3b2o", "o$3obo$3bo", "3o3$bo$2o", "3o2$bo$2o", "2ob3o$o",
+  "2ob3o$bo", "o2b3o$2o", "bob3o$2o", "bo$b2o2$2o$o", "bo$b2o2$2o$bo",
+  "2o$o2$bo$b2o", "2o$bo2$bo$b2o", "2o$o2$2bo$b2o", "3o3$2o$o",
+  "3o3$2o$bo", "3o3$o$2o"
+]
+
+[bun]
+rle = "b2ob$o2bo$b3o!"
+predecessors = [
+  "2o2$o2$b2o$bo", "o$bo$o2$b2o$bo", "bo$o$o2$b2o$bo",
+  "bo$bo$o2$b2o$bo", "2o2$o2$b2o$2bo", "o$bo$o2$b2o$2bo",
+  "bo$o$o2$b2o$2bo", "3b3o$b2o$o", "2bo$b2o$o2bo$o",
+  "2b2o$bo2b2o$o,2b2obo$bo2bo$o", "4bo$o$b2obo$bo", "4bo$o3bo$b2o$bo",
+  "o$b2o$o$obo", "o$b2o$o$bo$2bo", "obo$bo$o$b2o", "3bo2$4o$o",
+  "obo2$bo$2o$o", "b2o2$o$2o$bo", "obo2$o$2o$bo", "obo2$bo$2o2$o",
+  "b2o2$o$2o2$o", "obo2$o$2o2$o", "obo2$bo$2o2$bo", "b2o2$o$2o2$bo",
+  "obo2$o$2o2$bo", "2bo2$2o$bo2$2o", "2bo2$2o$o2$2o", "2bo$2o$o2$2o",
+  "o$2bobo$bobobo", "o$bobobo$2bobo", "o$2b2o$bo2b2o",
+  "o$3b2o$b2o2bo", "o$3bo$b2ob2o", "o$2bob2o$bobo", "o$bobo$2bob2o",
+  "o$bob2o$obo", "o$2b2obo$bo2bo", "o$3bobo$b2obo", "ob2o$bo2bo$o",
+  "o$o2b3o$2bo", "o$3b3o$obo", "o2b3o$2bo$o", "b3o$obo2$o",
+  "b3o$obo2$bo", "b3o$obo2$2bo", "b3o$2bo$o$o", "b3o$2bo$o$bo",
+  "b3o$2bo$o$2bo", "o$b3o$bo$2bo", "o$b3o$bo$3bo", "o$b3o$bo$4bo",
+  "bo2$b2o2$o$2o", "2bo2$b2o2$o$2o", "2b3o$bo$o4bo", "bobo$obo$bo2bo",
+  "2bo2$2o$o$b2o", "2bo$2o$o$b2o", "b2o$2b2o$2o", "b2o$2bo$2o2bo",
+  "bobo$obo$o3bo", "o$b2o$b2o2$o", "bo2$2b2o$obo$bo",
+  "2o$4bo$b2o$2bo", "3bo$o$2b3o$bo", "3bo$o$b3o$o", "3o$o$bo$2bo",
+  "3o$o$2bo$o", "3o$2bo$o$o3o$2bo$o$o"
+]
 
 [bakery]
 rle = "4b2o4b$3bo2bo3b$3bobo4b$b2obo3bob$o2bo3bobo$obo3bo2bo$bo3bob2ob$4bobo3b$3bo2bo3b$4b2o!"
@@ -7,6 +48,7 @@ predecessors = [
   "b3o2$3o$bo", "b3o2$2obo$bo", "2b3o2$ob2o$2bo", "o$2o2$o$b2o2$3bo",
   "bo$2o2$o$b2o2$3bo"
 ]
+verycommon = true
 
 [fleet]
 rle = "4b2o4b$3bobo4b$3b2o5b$b2o7b$obo5b2o$2o5bobo$7b2ob$5b2o3b$4bobo3b$4b2o!"
@@ -26,20 +68,30 @@ predecessors = [
 ]
 messypredecessors = ["2b3o$2o$2o"]
 
+[fleeter]
+rle = "3o$o2bo$o2bo$b3o!"
+
 [landoflakes]
 rle = "8b2o$7bo2bo$7bo2bo$8b2ob2o$10bo2bo$10bo2bo$11b2o$b2o$o2bo$o2bo$b2ob2o$3bo2bo$3bo2bo$4b2o!"
+
+[landoflakeser]
+rle = "3o$o2bo$2obo$b3o!"
+
 
 [foureaters]
 rle = "3bo7bo$b3o7b3o$o13bo$2o11b2o8$2o11b2o$o13bo$b3o7b3o$3bo7bo!"
 
 [trafficlight]
 rle = "2b3o2b2$o5bo$o5bo$o5bo2$2b3o!"
+verycommon = true
 
 [threequartertraffic]
 rle = "2b3o2$o$o$o2$2b3o!"
+verycommon = true
 
 [halftraffic]
 rle = "o$o$o2$2b3o!"
+verycommon = true
 
 [interchange]
 rle = "2b3o4b3o2$o12bo$o12bo$o12bo2$2b3o4b3o!"
@@ -52,3 +104,12 @@ predecessors = [
 [beethoven]
 rle = "bo5bo$obo3bobo$obo3bobo$bo5bo2$3b3o!"
 predecessors = ["3ob3o$3bo", "b3o$o3bo$o3bo$o3bo"]
+
+[beethovener]
+rle = "3o$3bo$3bo$3bo$3o!"
+
+[biblock]
+rle= "2ob2o$2ob2o!"
+
+[biblocker]
+rle = "obo$2ob2o$2bo!"
