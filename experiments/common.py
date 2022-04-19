@@ -1,4 +1,4 @@
-from basics import *
+from golchemy.basics import *
 
 # nakedse = lt.pattern("bobo2b$o5b$bo2bob$3b3o!")
 
@@ -122,13 +122,3 @@ halo = lt.pattern("5o$5o$5o$5o$5o!").shift(-2,-2)
 #     'glidernec': glidernec,
 #     'gliderned': gliderned,
 # }
-
-def find_ray(rays, coltime, col, pop):
-    for candcoltime, origin, direction, period, raypop, _ in rays:
-        if (coltime - candcoltime) % period != 0:
-            continue
-        raydist = (coltime - candcoltime) // period
-        if raydist > 0 and pop == raypop and (direction ** raydist).inverse() * origin == col:
-            return (candcoltime, origin, direction, raypop)
-
-    return None

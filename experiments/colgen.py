@@ -1,23 +1,8 @@
 import sys
-import os.path
-from os import path
-import pickle
 
-from basics import *
-from common import *
+from golchemy.lab import *
 
 import pprint
-
-if path.isfile("book.txt"):
-    with open(f"book.txt", 'rb') as f:
-        book = Book()
-        book.reagents, book.table = pickle.load(f)
-
-else:
-    reagentfiles = ["reagents/ash.toml", "reagents/constellations.toml", "reagents/commonsmall.toml", "reagents/commonactive.toml", ]
-    book = Book.from_toml_object(toml.load(reagentfiles))
-    with open(f"book.txt", 'wb') as f:
-         pickle.dump((book.reagents,book.table), f)
 
 activename = sys.argv[1]
 active = Instance(book.reagents[activename], 0, Transform.id)
@@ -47,7 +32,14 @@ done = set()
 pops = {}
 candidates = []
 
-done.update(activeseq.pattern.convolve((LinearTransform.flip * target).pattern.zoi()).coord_vecs())
+def overlaps(a, b):
+    result = []
+    for t in LinearTransform.all:
+        translations = a.convolve((LinearTransform.flip * (t * b)).zoi()).coord_vecs()
+        result += [Transform.translate(tr) * t for tr in translations]
+    return result
+
+done.update(overlaps(activeseq.pattern, target.pattern))
 for t in range(0, endt):
     print(f"{activename}-{originalname}-{phase} gen {t}")
     newcols = activeseq.all_orientation_collisions_with(target) - done
@@ -73,6 +65,7 @@ for t in range(0, endt):
             (Vec(-1,-1), 4),
 
             # perpendicular glider+glider collision
+            # also *wss+still collision
             (Vec(2, 0), 4),
             (Vec(-2, 0), 4),
             (Vec(0, 2), 4),
@@ -89,6 +82,16 @@ for t in range(0, endt):
             (Vec(-2, 2), 4),
             (Vec(2, -2), 4),
             (Vec(-2, -2), 4),
+
+            # head on glider+*wss collision
+            (Vec(1, 3), 4),
+            (Vec(-1, 3), 4),
+            (Vec(1, -3), 4),
+            (Vec(-1, -3), 4),
+            (Vec(3, 1), 4),
+            (Vec(-3, 1), 4),
+            (Vec(3, -1), 4),
+            (Vec(-3, -1), 4),
         ]
         for prev in prevs:
             tr = Transform.translate(-prev[0])
@@ -110,8 +113,7 @@ for t in range(0, endt):
 
 
     done.update(newcols)
-    done.update(activeseq.pattern.convolve((LinearTransform.flip * target).pattern.zoi()).coord_vecs())
-    # done.update(activeseq.pattern.coord_vecs())
+    done.update(overlaps(activeseq.pattern, target.pattern))
     activeseq = activeseq.step()[0].reagents[0]
     target = target.step()[0].reagents[0]
 

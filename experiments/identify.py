@@ -10,12 +10,13 @@ from basics import *
 if path.isfile("book.txt"):
     with open(f"book.txt", 'rb') as f:
         book = Book()
-        book.table = pickle.load(f)
+        book.reagents, book.table = pickle.load(f)
 
 else:
-    book = Book.from_toml_object(toml.load("reagents/commonactive.toml"))
+    reagentfiles = ["reagents/ash.toml", "reagents/constellations.toml", "reagents/commonsmall.toml", "reagents/commonactive.toml", "reagents/notabledebris.toml", "reagents/pseudostill.toml"]
+    book = Book.from_toml_object(toml.load(reagentfiles))
     with open(f"book.txt", 'wb') as f:
-         pickle.dump(book.table, f)
+         pickle.dump((book.reagents,book.table), f)
 
 rle = sys.argv[1]
 p = lt.pattern(rle)

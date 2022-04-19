@@ -1,24 +1,11 @@
 import sys
-import os.path
-from os import path
 import atexit
 
-from basics import *
-from common import *
+from golchemy.lab import *
 
-import pickle
 import pprint
 
-if path.isfile("book.txt"):
-    with open(f"book.txt", 'rb') as f:
-        book = Book()
-        book.reagents, book.table = pickle.load(f)
-
-else:
-    reagentfiles = ["reagents/ash.toml", "reagents/constellations.toml", "reagents/commonsmall.toml", "reagents/commonactive.toml", ]
-    book = Book.from_toml_object(toml.load(reagentfiles))
-    with open(f"book.txt", 'wb') as f:
-         pickle.dump((book.reagents,book.table), f)
+# import cProfile
 
 activename = sys.argv[1]
 active = book.reagents[activename].pattern
@@ -43,61 +30,95 @@ result = []
 # exit()
 
 def is_reoccur(schematic):
-    if any([r.reagent.name == activename and r.time > 50 and r.trans.lin.name in ['id', 'flip_x', 'flip_y', 'swap_xy'] for r in schematic.reagents]): return True
+    if any([r.reagent.name == activename and r.time > 50 and r.trans.lin.name not in ['rot90', 'rot180', 'rot270'] for r in schematic.reagents]): return True
     return False
 
 def is_interesting(schematic):
-    gliders = len([r for r in schematic.reagents if r.reagent.name == 'glider'])
+    gliders      = len([r for r in schematic.reagents if r.reagent.name == 'glider'])
+    shortactives = len([r for r in schematic.reagents if r.reagent.is_active and r.time > 5])
+    longactives  = len([r for r in schematic.reagents if r.reagent.is_active and r.time > 50])
 
     if (len(schematic.chaos) == 0 and
-        len(schematic.reagents) - gliders <= 2
-        and any([r.reagent.is_active and r.time > 5 for r in schematic.reagents])): return True
-    if (len(schematic.chaos) == 0
-        and len(schematic.reagents) - gliders <= 4
-        and any([r.reagent.is_active and r.time > 25 for r in schematic.reagents])): return True
+        len(schematic.reagents) - gliders <= 1): return True
+
+    if (gliders >= 3 and
+        len(schematic.chaos) == 0 and
+        len(schematic.reagents) - gliders - longactives <= 1): return True
+
+    if (len(schematic.chaos) == 0 and
+        len(schematic.reagents) - gliders <= 3 and
+        shortactives >= 1): return True
+    if (len(schematic.chaos) == 0 and
+        len(schematic.reagents) - gliders <= 4 and
+        longactives >= 1): return True
     # if (len(schematic.reagents) - gliders <= 4
     #     and any([r.reagent.is_active and r.time > 100 for r in schematic.reagents])): return True
 
     return False
 
+# print(book.reagents['r'])
+# print(book.reagents['r'].time_for_ident)
+# exit()
+def check_chaos(s):
+    for c in s.chaos:
+        o = c.oscar(eventual_oscillator=False, verbose=False, allow_guns=False)
+        if 'period' in o:
+            print(f"Oops: thought {c.rle_string_only} was chaos" )
 
 def investigate(coltime, stopt, col, pat):
-    s = Schematic.analyse(book, pat.advance(coltime-1))
+    if coltime > 0:
+        s = Schematic.analyse(book, pat.advance(coltime-1))
+    else:
+        s = Schematic.analyse(book, pat)
     interesting = True
-    reoccur = False
+    #reoccur = False
+    startings = s
 
-    for i in range(coltime, stopt):
+    for i in range(coltime, stopt+1):
         s, es = s.step(book)
-        gliders = len([r for r in s.reagents if r.reagent.name == 'glider'])
-        if len(s.reagents) - gliders > 10: break
+        if s == startings.naive_advance(i):
+            continue
 
-        if interesting and len(es) > 0:
+        gliders = len([r for r in s.reagents if r.reagent.name == 'glider'])
+        if len(s.reagents) - gliders > 10:
+#            check_chaos(s)
+
+            return interesting
+
+        if interesting and len(es) > 0: # len(es) > 0:
             interesting = False
         if not interesting and is_interesting(s):
             interesting = True
             print(f"Success for {col} at time {i}: {s}")
             result.append((pat.rle_string_only, col, coltime, i, s))
 
-        if reoccur and not any([r.reagent.name == activename for r in s.reagents]):
-            reoccur = False
-        if not reoccur and is_reoccur(s):
-            reoccur = True
-            print(f"Reoccur for {col} at time {i}: {s}")
-            result.append((pat.rle_string_only, col, coltime, i, s))
+        # if reoccur and not any([r.reagent.name == activename for r in s.reagents]):
+        #     reoccur = False
+        # if not reoccur and is_reoccur(s):
+        #     reoccur = True
+        #     print(f"Reoccur for {col} at time {i}: {s}")
+        #     result.append((pat.rle_string_only, col, coltime, i, s))
 
-        if len(s.reagents) == 1 and len(s.chaos) == 0:
-            break
+        if len(s.reagents) <= 1 and len(s.chaos) == 0:
+            return interesting
 
-        if len(es) > 0 and len(s.chaos) == 0:
-            naive = s.naive_advance(1024)
-            if naive.pattern == naive.reconstruct():
-                if not interesting and is_interesting(naive):
-                    print(f"Success for {col} at time {i}: {s}")
-                    result.append((pat.rle_string_only, col, coltime, i, s))
-                print(f"Bailing at time {i}: {s}")
-                break
+        # if len(s.chaos) == 0 and es > 0: # len(es) > 0:
+        #     naive = s.naive_advance(1024)
+        #     if naive.pattern == naive.reconstruct():
+        #         if not interesting and is_interesting(naive):
+        #             print(f"Success for {col} at time {i}: {s}")
+        #             result.append((pat.rle_string_only, col, coltime, i, s))
+        #         print(f"Bailing at time {i}: {s}")
+                # break
+#    check_chaos(s)
+    return interesting
+
 
 # investigate(54, 300,Vec(8, 15),lt.pattern('2b2o$3o$bo13$8b2o$8b2o!'))
+# exit()
+
+
+# print(book.reagents['iwona'].time_for_ident)
 # exit()
 
 activeseq = active
@@ -138,23 +159,27 @@ def printresults():
     #     f.write(f"{seenoctos}")
     with open(reactionoutname, 'w') as f:
         f.write(f"{pp.pformat(result)}")
-    humanresult = [ (rle, interestingtime, str(sch)) for rle, _, _, interestingtime, sch in result]
+    humanresult = [ (rle, interestingtime, sch.to_list()) for rle, _, _, interestingtime, sch in result]
     with open(reactionoutname+'human', 'w') as f:
         f.write(f"{pp.pformat(humanresult)}")
     print("wrote reactions")
 
 atexit.register(printresults)
 
+
 seenash = set()
 
+activeash = active.advance(16384)
+originalash = original.advance(16384)
 for maxt, col, coltime, rle in filecols:
+    if maxt == None: continue
     if maxt < skipt: continue
-    if coltime == 0: continue
+    # if coltime == 0: continue
 
     startingpat = active + col * original
-    ash = startingpat[16384]
+    ash = startingpat.advance(16384)
 
-    if ash == (active.advance(16384) + col * original.advance(16384)):
+    if ash == (activeash + col * originalash):
         print(f"No collision for {col} col {coltime}: {startingpat.rle_string_only}")
         continue
 
@@ -162,7 +187,7 @@ for maxt, col, coltime, rle in filecols:
     if (col.lin, d) in seenash:
         print(f"Skipping {col} col {coltime} lifetime {maxt}, seems ash already: {startingpat.rle_string_only}")
         continue
-    seenash.add((col.lin, d))
+
 
     # if maxt == 1104:
     #     activeash = active[maxt+100]
@@ -178,4 +203,16 @@ for maxt, col, coltime, rle in filecols:
     #stopt = min(maxt, 1000+coltime)
     stopt = maxt
     print(f"Running {col} col {coltime} lifetime {maxt} to {stopt}: {startingpat.rle_string_only}")
-    investigate(coltime, stopt, col, startingpat)
+    wasinteresting = investigate(coltime, stopt, col, startingpat)
+
+    if not wasinteresting:
+        seenash.add((col.lin, d))
+
+# cProfile.run("go()", "profileout")
+
+# import pstats
+
+# with open("profileout.txt", "w") as f:
+#     ps = pstats.Stats("profileout", stream=f)
+#     ps.sort_stats('time')
+#     ps.print_stats()
