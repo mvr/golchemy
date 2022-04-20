@@ -18,7 +18,6 @@ phase = 0
 if len(sys.argv) > 4:
     phase = int(sys.argv[4])
 
-## Generating collisions
 result = []
 activeseq = active
 for i in range(0,phase):
@@ -27,7 +26,6 @@ target = original
 
 done = set()
 
-# TODO: put seenash back in
 
 pops = {}
 candidates = []
@@ -53,7 +51,7 @@ for t in range(0, endt):
             result.append((None, col, t, pat.rle_string_only))
             continue
 
-        finalpop = final[1024].population # just in case
+        finalpop = pat[16384].population # just in case
         pops[(t, col)] = finalpop
         result.append((maxt, col, t, pat.rle_string_only))
 

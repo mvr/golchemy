@@ -131,11 +131,11 @@ reactionoutname = ""
 if phase == 0:
     outname = f"cols/{activename}-{originalname}.txt"
     rayoutname = f"cols/{activename}-{originalname}-rays.txt"
-    reactionoutname = f"{activename}-{originalname}-reactions.txt"
+    reactionoutname = f"results/{activename}-{originalname}-reactions.txt"
 else:
     outname = f"cols/{activename}-{originalname}-phase-{phase}.txt"
     rayoutname = f"cols/{activename}-{originalname}-rays-phase-{phase}.txt"
-    reactionoutname = f"{activename}-{originalname}-reactions-phase-{phase}.txt"
+    reactionoutname = f"results/{activename}-{originalname}-reactions-phase-{phase}.txt"
 
 filecols = []
 with open(outname, 'r') as f:
@@ -178,6 +178,11 @@ for maxt, col, coltime, rle in filecols:
 
     startingpat = active + col * original
     ash = startingpat.advance(16384)
+
+
+    # if col.offset.x < 0:
+    #     print(f"Skipping {col} col {coltime} by symmetry: {startingpat.rle_string_only}")
+    #     continue
 
     if ash == (activeash + col * originalash):
         print(f"No collision for {col} col {coltime}: {startingpat.rle_string_only}")

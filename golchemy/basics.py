@@ -71,6 +71,9 @@ class BB:
                     self.y > other.y + other.h or
                     self.y + self.h < other.y)
 
+    def __hash__(self):
+        return hash((self.x, self.y, self.w, self.h))
+
 class LinearTransform:
     x : Vec
     y : Vec
@@ -295,7 +298,7 @@ class Transform:
         return Transform(self.lin.inverse(), -(self.lin.inverse() * self.offset))
 
     def __str__(self):
-        return f"({self.offset} + {self.lin.name})"
+        return f"({self.lin.name}, {self.offset})"
 
     def __repr__(self):
         return "%s(lin=%r, offset=%r)" % (self.__class__.__name__, self.lin, self.offset)
@@ -336,7 +339,8 @@ class PatternExt(Pattern):
 
     @cached_property
     def first_on_coord(self):
-        x,y = self.firstcell
+#        return self.top_left
+        x, y = self.firstcell
         return Vec(x, y)
 
     @property
@@ -362,8 +366,8 @@ class PatternExt(Pattern):
 
 
     def first_cluster(self, halo = halo2):
-        return self.component_containing(self.first_on_coord.as_tuple(), halo)
-        # return self.component_containing(halo = halo)
+        # return self.component_containing(self.first_on_coord.as_tuple(), halo)
+        return self.component_containing(halo = halo)
 
     # ripped from apgmera/includes/stabilise.h
     def overadvance_to_stable(self, security = 15) -> tuple[Pattern, int | None, int]:
@@ -406,7 +410,7 @@ class PatternExt(Pattern):
         return (p, None, t)
 
     @cached_property
-    def over_time_to_stable(self) -> int:
+    def over_time_to_stable(self) -> int | None:
         _, period, t = self.overadvance_to_stable()
         if period == None:
             return None
@@ -441,8 +445,7 @@ class PatternExt(Pattern):
         return self.convolve(PatternExt.halo1)
 
     # Until I have proper gencols
-    # Should be done using convolve
-    def collisions_with(self, other):
+    def translation_collisions_with(self, other):
         hits = self.zoi().convolve((LinearTransform.flip * other).zoi())
         overlaps = self.convolve(LinearTransform.flip * other)
         diff = hits - overlaps

@@ -237,11 +237,11 @@ class Instance:
     def touches(self, coords, margin=1):
         self.pattern.touches(coords, margin)
 
-    def collisions_with(self, other):
-        return [Transform.translate(v) for v in self.pattern.collisions_with(other.pattern)]
+    def translation_collisions_with(self, other):
+        return [Transform.translate(v) for v in self.pattern.translation_collisions_with(other.pattern)]
 
     def all_orientation_collisions_with(self, other):
-        return { tr * t for t in other.reagent.pattern.symmetry_classes for tr in self.collisions_with(t * other) }
+        return { tr * t for t in other.reagent.pattern.symmetry_classes for tr in self.translation_collisions_with(t * other) }
 
     def __repr__(self):
         d = {'time': self.time, 'trans': self.trans}
@@ -531,10 +531,11 @@ class Schematic:
         return s
 
     def to_list(self):
-        return [f"{str(r.trans)}*{r.reagent.name}[{r.time}]" for r in self.reagents] + [f"CHAOS({c.first_on_coord.x}, {c.first_on_coord.y})" for c in self.chaos]
+        return [f"{r.reagent.name}[{r.time}].transform{str(r.trans)}" for r in self.reagents] \
+             + [f"CHAOS({c.first_on_coord.x}, {c.first_on_coord.y})" for c in self.chaos]
 
     def __str__(self):
-        return 'Instance(' + (', '.join(self.to_list())) + ')'
+        return 'Schematic(' + (', '.join(self.to_list())) + ')'
 
     def __repr__(self):
         d = {'reagents': self.reagents, 'chaos': self.chaos}
