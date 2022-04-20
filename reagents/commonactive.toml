@@ -142,7 +142,7 @@ rle = "b3o$b3o$obo$2o!"
 predecessors = ["o$o$o2$2o$2bo"]
 
 [rturner]
-rle = "2b2o$4bo$o2bo$3o!"
+rle = "bo$obo$o2bo$3bo$2b2o!"
 predecessors = [
   "2bo$b3o$o$bo$bo", "2bo$b3o$o$bo$o", "2b2o$b2o$o$o$bo",
   "2bobo$b2o$o$o$bo", "2bo$b2obo$o$o$bo", "2b2o$bo$o3bo$2o",
