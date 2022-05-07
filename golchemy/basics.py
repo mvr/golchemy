@@ -12,6 +12,7 @@ class Vec:
     x : int
     y : int
 
+    __slots__ = ['x', 'y']
     def __init__(self, x: int, y: int):
         self.x = x
         self.y = y
@@ -40,12 +41,17 @@ class Vec:
     def __hash__(self):
         return hash((self.x, self.y))
 
+    @property
+    def taxicab_length(self):
+        return abs(self.x) + abs(self.y)
+
 class BB:
     x : int
     y : int
     w : int
     h : int
 
+    __slots__ = ['x', 'y', 'w', 'h']
     def __init__(self, x, y, w, h):
         self.x = x
         self.y = y
@@ -92,6 +98,7 @@ class LinearTransform:
     SWAPXY     = 216 # 0b11011000
     SWAPXYFLIP = 39  # 0b00100111
 
+    __slots__ = ['x', 'y']
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -184,63 +191,24 @@ class LinearTransform:
     def __repr__(self):
         return "%s(x=%r, y=%r)" % (self.__class__.__name__, self.x, self.y)
 
-    @classmethod
-    @property
-    def id(cls):
-        return LinearTransform(Vec(1, 0), Vec(0, 1))
-
-    @classmethod
-    @property
-    def flip(cls):
-        return LinearTransform(Vec(-1, 0), Vec(0, -1))
-
-    @classmethod
-    @property
-    def rot90(cls):
-        return LinearTransform(Vec(0, -1), Vec(1, 0))
-
-    @classmethod
-    @property
-    def rot180(cls):
-        return LinearTransform(Vec(-1, 0), Vec(0, -1))
-
-    @classmethod
-    @property
-    def rot270(cls):
-        return LinearTransform(Vec(0, 1), Vec(-1, 0))
-
-    @classmethod
-    @property
-    def flip_x(cls):
-        return LinearTransform(Vec(-1, 0), Vec(0, 1))
-
-    @classmethod
-    @property
-    def flip_y(cls):
-        return LinearTransform(Vec(1, 0), Vec(0, -1))
-
-    @classmethod
-    @property
-    def swap_xy(cls):
-        return LinearTransform(Vec(0, 1), Vec(1, 0))
-
-    @classmethod
-    @property
-    def swap_xy_flip(cls):
-        return LinearTransform(Vec(0, -1), Vec(-1, 0))
-
-    @classmethod
-    @property
-    def all(cls):
-        return [LinearTransform(Vec(1, 0), Vec(0, 1)),
-                LinearTransform(Vec(0, -1), Vec(1, 0)),
-                LinearTransform(Vec(-1, 0), Vec(0, -1)),
-                LinearTransform(Vec(0, 1), Vec(-1, 0)),
-                LinearTransform(Vec(-1, 0), Vec(0, 1)),
-                LinearTransform(Vec(1, 0), Vec(0, -1)),
-                LinearTransform(Vec(0, 1), Vec(1, 0)),
-                LinearTransform(Vec(0, -1), Vec(-1, 0)),
-                ]
+LinearTransform.id = LinearTransform(Vec(1, 0), Vec(0, 1))
+LinearTransform.flip = LinearTransform(Vec(-1, 0), Vec(0, -1))
+LinearTransform.rot90 = LinearTransform(Vec(0, -1), Vec(1, 0))
+LinearTransform.rot180 = LinearTransform(Vec(-1, 0), Vec(0, -1))
+LinearTransform.rot270 = LinearTransform(Vec(0, 1), Vec(-1, 0))
+LinearTransform.flip_x = LinearTransform(Vec(-1, 0), Vec(0, 1))
+LinearTransform.flip_y = LinearTransform(Vec(1, 0), Vec(0, -1))
+LinearTransform.swap_xy = LinearTransform(Vec(0, 1), Vec(1, 0))
+LinearTransform.swap_xy_flip = LinearTransform(Vec(0, -1), Vec(-1, 0))
+LinearTransform.all = [LinearTransform(Vec(1, 0), Vec(0, 1)),
+                       LinearTransform(Vec(0, -1), Vec(1, 0)),
+                       LinearTransform(Vec(-1, 0), Vec(0, -1)),
+                       LinearTransform(Vec(0, 1), Vec(-1, 0)),
+                       LinearTransform(Vec(-1, 0), Vec(0, 1)),
+                       LinearTransform(Vec(1, 0), Vec(0, -1)),
+                       LinearTransform(Vec(0, 1), Vec(1, 0)),
+                       LinearTransform(Vec(0, -1), Vec(-1, 0)),
+                       ]
 
 class Transform:
     lin: LinearTransform
@@ -249,6 +217,7 @@ class Transform:
     # The linear transformation is applied first, and then the
     # translation, so (0, 0) is sent to (offset.x, offset.y)
 
+    __slots__ = ['lin', 'offset']
     def __init__(self, lin, offset):
         self.lin = lin
         self.offset = offset
@@ -289,11 +258,6 @@ class Transform:
         # TODO
         return self * (self ** (other-1))
 
-    @classmethod
-    @property
-    def id(cls):
-        return Transform(LinearTransform.id, Vec(0, 0))
-
     def inverse(self):
         return Transform(self.lin.inverse(), -(self.lin.inverse() * self.offset))
 
@@ -303,9 +267,18 @@ class Transform:
     def __repr__(self):
         return "%s(lin=%r, offset=%r)" % (self.__class__.__name__, self.lin, self.offset)
 
-    @classmethod
-    def translate(cls, v):
+    @staticmethod
+    def translate(v):
         return Transform(LinearTransform.id, v)
+
+    def __getstate__(self):
+        return (self.lin.x.x, self.lin.x.y, self.lin.y.x, self.lin.y.y, self.offset.x, self.offset.y)
+
+    def __setstate__(self, pickled):
+        self.lin = LinearTransform(Vec(pickled[0], pickled[1]), Vec(pickled[2], pickled[3]))
+        self.offset = Vec(pickled[4], pickled[5])
+
+Transform.id = Transform(LinearTransform.id, Vec(0, 0))
 
 # Monkey patching, sue me
 def monkey_patch(cls):
@@ -366,7 +339,7 @@ class PatternExt(Pattern):
 
 
     def first_cluster(self, halo = halo2):
-        # return self.component_containing(self.first_on_coord.as_tuple(), halo)
+        return self.component_containing(self.first_on_coord.as_tuple(), halo)
         return self.component_containing(halo = halo)
 
     # ripped from apgmera/includes/stabilise.h
@@ -450,7 +423,10 @@ class PatternExt(Pattern):
         overlaps = self.convolve(LinearTransform.flip * other)
         diff = hits - overlaps
 
-        return set(diff.coord_vecs())
+        return { Transform.translate(v) for v in diff.coord_vecs() }
+
+    def all_orientation_collisions_with(self, other):
+        return { tr * t for t in other.symmetry_classes for tr in self.translation_collisions_with(t * other) }
 
     def __repr__(self):
         if self.empty():

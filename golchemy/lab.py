@@ -8,14 +8,13 @@ from golchemy.schematic import *
 
 if path.isfile("book.pickle"):
     with open(f"book.pickle", 'rb') as f:
-        book = Book()
-        book.reagents, book.table = pickle.load(f)
+        book = pickle.load(f)
 
 else:
-    reagentfiles = ["reagents/ash.toml", "reagents/constellations.toml", "reagents/commonsmall.toml", "reagents/commonactive.toml", "reagents/notabledebris.toml",]
+    reagentfiles = ["reagents/ash.toml", "reagents/constellations.toml", "reagents/commonsmall.toml", "reagents/commonactive.toml", "reagents/notabledebris.toml", "reagents/sevencell.toml",  "reagents/catalysts.toml", "reagents/smallcensus.toml",]
     book = Book.from_toml_object(toml.load(reagentfiles))
     with open(f"book.pickle", 'wb') as f:
-         pickle.dump((book.reagents,book.table), f)
+         pickle.dump(book, f)
 
 class Collision:
     left: Reagent

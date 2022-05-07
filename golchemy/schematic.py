@@ -32,23 +32,29 @@ class Fate:
 class Reagent:
     name: str
     pattern_rle: str
-    pattern: Pattern
     origin_age: int
-    phases: list | None
+    notable: bool
     # TODO track symmetry?
 
-    def __init__(self, name, pattern, origin_age = 0):
+    def __init__(self, name, pattern, origin_age = 0, notable = False):
         self.name = name
         self.pattern_rle = pattern
-        self.pattern = lt.pattern(pattern)
+        # self.pattern = lt.pattern(pattern)
         self.origin_age = origin_age
-        self.phases = None
+        self.notable = notable
         self.fate = None
+
+    @cached_property
+    def pattern(self):
+        return lt.pattern(self.pattern_rle)
 
     def __eq__(self, other):
         return self.name == other.name
 
-    def all_phases(self, endt = None) -> list[tuple[str, int, Transform]]:
+    def __hash__(self):
+        return hash(self.name)
+
+    def identifiable_phases(self, endt = None) -> Generator[list[tuple[str, int, Transform]]]:
         def all_orientations(pat):
             # TODO: handle symmetry
             return [ (n.digest(), l.inverse() * tr)
@@ -58,11 +64,16 @@ class Reagent:
         if endt == None: endt = self.time_for_ident
 
         p = self.pattern
-        result = []
+        hasgrown = False
         for t in range(0, endt+1):
-            result += [(w, t + self.origin_age, tr) for w, tr in all_orientations(p)]
+            if p.population > 10:
+                hasgrown = True
+            if hasgrown and p.population <= 6:
+                break
+            if len(p.components(halo=Pattern.halo2)) == 1:
+                for w, tr in all_orientations(p):
+                    yield (w, t + self.origin_age, tr)
             p = p.advance(1)
-        return result
 
     def sanity_check(self, pat, age, trans):
         assert(trans * self.pattern.advance(age) == pat)
@@ -79,21 +90,32 @@ class Reagent:
             return Fate.OSC
 
         p = self.pattern
-        p = p.advance(1)
+        # s = Schematic.analyse(book, p)
 
-        endt = self.pattern.approximate_time_to_stable
-        for t in range(1, endt+1):
-            # s = Schematic.analyse(book, p)
+        endt = min(500, self.pattern.approximate_time_to_stable)
+        # hasjoined = False
+        for t in range(0, endt):
+            # if (len(s.chaos) == 1 and len(s.reagents) == 0) or \
+            #    (len(s.chaos) == 0 and len(s.reagents) == 1):
+            #     hasjoined = True
             if p.population == 0:
                 return (Fate.BECOME, t, Schematic())
             if p in book:
                 return (Fate.BECOME, t, Schematic().add_instance(book[p]))
             # TODO: come back to this if we add something like "subinstances"
-            # if len(s.chaos) == 0 and len(s.reagents) <= 2:
+            # if hasjoined and len(s.chaos) == 0:
             #     return (Fate.BECOME, t, s)
+            # s, _ = s.step(book)
             p = p.advance(1)
 
-        return (Fate.OTHER, endt)
+        # if not hasjoined:
+        #     # We probably started as multiple identifiable islands:
+        #     s = Schematic.analyse(book, p)
+        #     if len(s.chaos) == 0:
+        #         return (Fate.BECOME, 0, s)
+
+        return (Fate.OTHER, self.pattern.approximate_time_to_stable)
+
         # if self.oscillation:
         #     return (Fate.OSC,) + self.oscillation
 
@@ -121,6 +143,10 @@ class Reagent:
         return True
 
     @cached_property
+    def is_still(self) -> bool:
+        return self.fate == Fate.OSC and self.oscillation[0] == 1
+
+    @cached_property
     def time_to_fate(self) -> int:
         if self.fate == Fate.OSC:
             return 0
@@ -133,8 +159,6 @@ class Reagent:
     @cached_property
     def time_to_split(self) -> int:
         p = self.pattern
-        # halo = "7o$7o$7o$7o$7o$7o$7o!"
-        halo = "5o$5o$5o$5o$5o!"
         t = 0
         # while len(p.components(halo)) == 1:
         #     p = p.advance(1)
@@ -146,7 +170,7 @@ class Reagent:
         while split_duration < 2 and t < self.pattern.approximate_time_to_stable:
             p = p.advance(1)
             t += 1
-            components = len(p.components(halo))
+            components = len(p.components(Pattern.halo2))
             if components == 1:
                 hasconnected = True
             if p.population > 10:
@@ -164,24 +188,27 @@ class Reagent:
         if self.oscillation:
             return self.oscillation[0] - 1
 
-        return min(self.pattern.approximate_time_to_stable, self.time_to_split-1)
+        # TODO: better idea: interval before stable where there is at
+        # least one CHAOS
+        return min(self.pattern.approximate_time_to_stable, 500)
 
     def __repr__(self):
         d = {'name': self.name, 'pattern': self.pattern, 'fate': self.fate }
         return "%s(%r)" % (self.__class__.__name__, d)
 
     def __getstate__(self):
-        return {
-            'name': self.name,
-            'pattern_rle': self.pattern_rle,
-            'origin_age': self.origin_age,
-            'phases': self.phases,
-            'fate': self.fate,
-        }
+        return (self.name,
+                self.pattern_rle,
+                self.origin_age,
+                self.fate,
+                self.is_active,
+                self.oscillation,
+                self.time_for_ident,
+                self.notable)
 
     def __setstate__(self, pickled):
-        self.__dict__ = pickled
-        self.pattern = lt.pattern(self.pattern_rle)
+        attrs = ['name', 'pattern_rle', 'origin_age', 'fate', 'is_active', 'oscillation', 'time_for_ident', 'notable']
+        self.__dict__.update(zip(attrs,pickled))
 
 class Cluster:
     REAGENT = 0
@@ -189,22 +216,27 @@ class Cluster:
 
 class Instance:
     reagent : Reagent
-    pattern : Pattern
     time : int
     trans : Transform
 
     def __init__(self, reagent, time, trans, pattern = None):
         self.reagent = reagent
 
-        self.pattern = pattern
-        if not pattern:
-            self.pattern = trans * reagent.pattern.advance(time)
-
         self.time = time
         self.trans = trans
 
+    def reconstruct(self) -> Pattern:
+        return self.trans * self.reagent.pattern.advance(self.time)
+
+    @cached_property
+    def pattern(self):
+        return self.reconstruct()
+
     def __eq__(self, other):
         return self.reagent == other.reagent and self.time == other.time and self.trans == other.trans
+
+    def __hash__(self):
+        return hash((self.reagent, self.time, self.trans))
 
     def __rmul__(self, other):
         return Instance(self.reagent, self.time, other * self.trans, other * self.pattern)
@@ -224,9 +256,6 @@ class Instance:
     def naive_advance(self, step):
         return Instance(self.reagent, self.time + step, self.trans, self.pattern.advance(step))
 
-    def reconstruct(self) -> Pattern:
-        return self.trans * self.reagent.pattern.advance(self.time)
-
     def verify(self):
         r = self.reconstruct()
         if self.pattern != r:
@@ -238,10 +267,21 @@ class Instance:
         self.pattern.touches(coords, margin)
 
     def translation_collisions_with(self, other):
-        return [Transform.translate(v) for v in self.pattern.translation_collisions_with(other.pattern)]
+        return self.pattern.translation_collisions_with(other.pattern)
+
 
     def all_orientation_collisions_with(self, other):
-        return { tr * t for t in other.reagent.pattern.symmetry_classes for tr in self.translation_collisions_with(t * other) }
+        return self.pattern.all_orientation_collisions_with(other.pattern)
+
+    def normalise(self):
+        # TODO: do oscillators
+        if self.reagent.is_still:
+            self.time = 0
+
+        # TODO: do orientation!!
+
+    def __str__(self):
+        return f"{self.reagent.name}[{self.time}].transform{str(self.trans)}"
 
     def __repr__(self):
         d = {'time': self.time, 'trans': self.trans}
@@ -256,7 +296,6 @@ class Instance:
 
     def __setstate__(self, pickled):
         self.__dict__ = pickled
-        self.pattern = self.reconstruct()
 
 class FloodFill:
     def __init__(self):
@@ -289,7 +328,7 @@ class FloodFill:
 
 class Book:
     reagents : dict[str, Reagent]
-    table : dict[str, Instance]
+    table : dict[str, tuple[str, int, Transform]]
 
     def __init__(self):
         self.reagents = {}
@@ -298,13 +337,14 @@ class Book:
     def add_reagent(self, reagent: Reagent):
         reagent.fate = reagent.determine_fate(self)
         self.reagents[reagent.name] = reagent
-        for s, t, tr in reagent.all_phases():
+        for s, t, tr in reagent.identifiable_phases():
             if s not in self.table:
-                self.table[s] = Instance(reagent, t, tr.inverse())
+                self.table[s] = (reagent.name, t, tr.inverse())
 
     def __getitem__(self, pat: Pattern) -> Instance:
         v = pat.first_on_coord
-        return Transform.translate(v) * self.table[pat.digest()]
+        name, time, tr = self.table[pat.digest()]
+        return Transform.translate(v) * Instance(self.reagents[name], time, tr)
 
     def __contains__(self, pat):
         return pat.digest() in self.table
@@ -314,8 +354,19 @@ class Book:
         b = Book()
         for name, values in toml_dict.items():
             print(f"Adding {name}")
-            b.add_reagent(Reagent(name, values['rle']))
+            notable = 'notable' in values and values['notable']
+            r = Reagent(name, values['rle'], notable = notable)
+            b.add_reagent(r)
         return b
+
+    def __getstate__(self):
+        return {
+            'reagents': self.reagents,
+            'table': self.table
+        }
+
+    def __setstate__(self, pickled):
+        self.__dict__ = pickled
 
 class Event:
     ins: Schematic
@@ -332,14 +383,17 @@ class Event:
         return "%s(ins=%r, outs=%r)" % (self.__class__.__name__, self.ins, self.outs)
 
 class Schematic:
-    pattern: Pattern
+#     pattern: Pattern
     reagents: list[Instance]
     chaos: list[Pattern]
 
     def __init__(self):
-        self.pattern = lt.pattern()
         self.reagents = []
         self.chaos = []
+
+    @cached_property
+    def pattern(self):
+        return self.reconstruct()
 
     @classmethod
     def analyse(cls, book: Book, pattern: Pattern) -> Schematic:
@@ -355,6 +409,9 @@ class Schematic:
             remaining = remaining - c
         return schematic
 
+    # Need to separate blinkers/still lifes that are close
+    # orthogonally/diagonally. a proper version of fullsep would be
+    # better.
     @classmethod
     def analyse_chaos(cls, book: Book, pattern: Pattern) -> Schematic:
         justchaos = Schematic()
@@ -377,6 +434,9 @@ class Schematic:
 
             remaining = remaining - c
 
+        if not 'period' in pattern.oscar(eventual_oscillator=False, verbose=False, allow_guns=False):
+            return justchaos
+
         nonactive = Schematic()
         nonactive.pattern = pattern
         nonactive.reagents = nonactive_islands
@@ -384,6 +444,10 @@ class Schematic:
 
     def reconstruct(self) -> Pattern:
         return sum([i.reconstruct() for i in self.reagents], lt.pattern()) + sum(self.chaos, lt.pattern())
+
+    def normalise(self):
+        for i in self.reagents:
+            i.normalise()
 
     def verify(self):
         for r in self.reagents:
@@ -412,6 +476,9 @@ class Schematic:
         s.chaos = [ other * c for c in self.chaos ]
         return s
 
+    def contains(self, other):
+        return all(i in self.reagents for i in other.reagents)
+
     def add_instance(self, reagent):
         self.reagents.append(reagent)
         self.pattern += reagent.pattern
@@ -421,6 +488,17 @@ class Schematic:
         self.chaos.append(chaos)
         self.pattern += chaos
         return self
+
+    def without_instance(self, reagent):
+        s = self.copy()
+        s.reagents.remove(reagent)
+        return s
+
+    def copy(self):
+        s = Schematic()
+        s.reagents = self.reagents.copy()
+        s.chaos = self.chaos.copy()
+        return s
 
     def step(self, book: Book) -> tuple[Schematic, list]:
         # Let's refer to each instance/chaos by its first coord in the
@@ -530,6 +608,11 @@ class Schematic:
         s.chaos    = [ c.advance(step) for c in self.chaos ]
         return s
 
+    def noninteracting(self):
+        if len(self.chaos) > 0 or len(self.reagents) == 1:
+            return False
+        return self.pattern.advance(1024) == self.naive_advance(1024).reconstruct()
+
     def to_list(self):
         return [f"{r.reagent.name}[{r.time}].transform{str(r.trans)}" for r in self.reagents] \
              + [f"CHAOS({c.first_on_coord.x}, {c.first_on_coord.y})" for c in self.chaos]
@@ -550,7 +633,6 @@ class Schematic:
     def __setstate__(self, pickled):
         self.__dict__ = pickled
         self.chaos = [ lt.pattern(c) for c in self.chaos]
-        self.pattern = self.reconstruct()
 
 class Timeline:
     reagents: list[tuple[Instance, int, int]]
