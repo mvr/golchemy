@@ -4,11 +4,20 @@ from golchemy.lab import *
 
 import pprint
 
-activename = sys.argv[1]
-active = Instance(book.reagents[activename], 0, Transform.id)
+import cProfile
 
-originalname = sys.argv[2]
-original = Instance(book.reagents[originalname], 0, Transform.id)
+activename = sys.argv[1]
+activeoriginal = book.reagents[activename].pattern
+
+targetname = sys.argv[2]
+targetoriginal = None
+if len(targetname.split("_")) == 3:
+    name, x, y = targetname.split("_")
+    name = name[:-1]
+    single = book.reagents[name].pattern
+    targetoriginal = single + single.shift(int(x),int(y))
+else:
+    targetoriginal = book.reagents[targetname].pattern
 
 endt = 1150
 if len(sys.argv) > 3:
@@ -18,11 +27,16 @@ phase = 0
 if len(sys.argv) > 4:
     phase = int(sys.argv[4])
 
-result = []
-activeseq = active
-for i in range(0,phase):
-    original = original.step()[0].reagents[0]
-target = original
+if phase < 0:
+    for i in range(0,-phase):
+        activeoriginal = activeoriginal.advance(1)
+if phase > 0:
+    for i in range(0,phase):
+        targetoriginal = targetoriginal.advance(1)
+
+active = activeoriginal
+target = targetoriginal
+
 
 done = set()
 
@@ -37,23 +51,25 @@ def overlaps(a, b):
         result += [Transform.translate(tr) * t for tr in translations]
     return result
 
-done.update(overlaps(activeseq.pattern, target.pattern))
+result = []
+done.update(overlaps(active, target))
 for t in range(0, endt):
-    print(f"{activename}-{originalname}-{phase} gen {t}")
-    newcols = activeseq.all_orientation_collisions_with(target) - done
+    print(f"{activename}-{targetname}-{phase} gen {t}")
+    newcols = active.all_orientation_collisions_with(target) - done
     print(len(newcols))
     for col in newcols:
-        pat = active.pattern + (col * original).pattern
-        final, period, maxt = pat[t].overadvance_to_stable(security=50)
+        pat = activeoriginal + (col * targetoriginal)
+        final, period, maxt = pat[t].overadvance_to_stable()
         maxt += t
 
         if period == None:
             result.append((None, col, t, pat.rle_string_only))
             continue
 
+        result.append((maxt, col, t, pat.rle_string_only))
+
         finalpop = pat[16384].population # just in case
         pops[(t, col)] = finalpop
-        result.append((maxt, col, t, pat.rle_string_only))
 
         prevs = [
             # glider+still collision
@@ -111,20 +127,27 @@ for t in range(0, endt):
 
 
     done.update(newcols)
-    done.update(overlaps(activeseq.pattern, target.pattern))
-    activeseq = activeseq.step()[0].reagents[0]
-    target = target.step()[0].reagents[0]
+    done.update(overlaps(active, target))
+    active = active.advance(1)
+    target = target.advance(1)
 
 result = sorted(result, key=lambda x: -(x[0] or 1000000))
 
 outname = ""
 rayoutname = ""
+# if phase == 0:
+#     outname = f"cols/{activename}-{targetname}-over.txt"
+#     rayoutname = f"cols/{activename}-{targetname}-over-rays.txt"
+# else:
+#     outname = f"cols/{activename}-{targetname}-over-phase-{phase}.txt"
+#     rayoutname = f"cols/{activename}-{targetname}-over-rays-phase-{phase}.txt"
+
 if phase == 0:
-    outname = f"cols/{activename}-{originalname}.txt"
-    rayoutname = f"cols/{activename}-{originalname}-rays.txt"
+    outname = f"cols/{activename}-{targetname}.txt"
+    rayoutname = f"cols/{activename}-{targetname}-rays.txt"
 else:
-    outname = f"cols/{activename}-{originalname}-phase-{phase}.txt"
-    rayoutname = f"cols/{activename}-{originalname}-rays-phase-{phase}.txt"
+    outname = f"cols/{activename}-{targetname}-phase-{phase}.txt"
+    rayoutname = f"cols/{activename}-{targetname}-rays-phase-{phase}.txt"
 
 with open(outname, 'w') as f:
     pp = pprint.PrettyPrinter(indent=2)
@@ -146,3 +169,12 @@ counted = list(filter(lambda x: x[5] > 5, sorted(counted, key=lambda x: -x[5])))
 with open(rayoutname, 'w') as f:
     pp = pprint.PrettyPrinter(indent=2)
     f.write(f"{pp.pformat(counted)}")
+
+# cProfile.run("go()", "profileout")
+
+# import pstats
+
+# with open("profileout.txt", "w") as f:
+#     ps = pstats.Stats("profileout", stream=f)
+#     ps.sort_stats('time')
+#     ps.print_stats()

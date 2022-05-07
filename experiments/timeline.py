@@ -8,10 +8,16 @@ import pprint
 # import cProfile
 
 activename = sys.argv[1]
-active = book.reagents[activename].pattern
+activeoriginal = book.reagents[activename].pattern
 
-originalname = sys.argv[2]
-original = book.reagents[originalname].pattern
+targetname = sys.argv[2]
+if len(targetname.split("_")) == 3:
+    name, x, y = targetname.split("_")
+    name = name[:-1]
+    single = book.reagents[name].pattern
+    targetoriginal = single + single.shift(int(x),int(y))
+else:
+    targetoriginal = book.reagents[targetname].pattern
 
 skipt = 0
 if len(sys.argv) > 3:
@@ -20,10 +26,14 @@ if len(sys.argv) > 3:
 phase = 0
 if len(sys.argv) > 4:
     phase = int(sys.argv[4])
-original = original[phase]
 
-result = []
+if phase > 0:
+    targetoriginal = targetoriginal[phase]
+if phase < 0:
+    activeoriginal = activeoriginal[-phase]
 
+active = activeoriginal
+target = targetoriginal
 
 # test = lt.pattern('5b2o$2bobo$o2bobobo$7bo$6b2o$2bo3bo$obo!')
 # print(test.first_cluster())
@@ -33,7 +43,16 @@ def is_reoccur(schematic):
     if any([r.reagent.name == activename and r.time > 50 and r.trans.lin.name not in ['rot90', 'rot180', 'rot270'] for r in schematic.reagents]): return True
     return False
 
+interestingthing = True
 def is_interesting(schematic):
+    global interestingthing
+    if any([r.reagent.notable for r in schematic.reagents]):
+        if not interestingthing:
+            interestingthing = True
+            return True
+    else:
+        interestingthing = False
+
     gliders      = len([r for r in schematic.reagents if r.reagent.name == 'glider'])
     shortactives = len([r for r in schematic.reagents if r.reagent.is_active and r.time > 5])
     longactives  = len([r for r in schematic.reagents if r.reagent.is_active and r.time > 50])
@@ -49,7 +68,7 @@ def is_interesting(schematic):
         len(schematic.reagents) - gliders <= 3 and
         shortactives >= 1): return True
     if (len(schematic.chaos) == 0 and
-        len(schematic.reagents) - gliders <= 4 and
+        len(schematic.reagents) - gliders <= 5 and
         longactives >= 1): return True
     # if (len(schematic.reagents) - gliders <= 4
     #     and any([r.reagent.is_active and r.time > 100 for r in schematic.reagents])): return True
@@ -64,6 +83,8 @@ def check_chaos(s):
         o = c.oscar(eventual_oscillator=False, verbose=False, allow_guns=False)
         if 'period' in o:
             print(f"Oops: thought {c.rle_string_only} was chaos" )
+
+result = []
 
 def investigate(coltime, stopt, col, pat):
     if coltime > 0:
@@ -121,21 +142,20 @@ def investigate(coltime, stopt, col, pat):
 # print(book.reagents['iwona'].time_for_ident)
 # exit()
 
-activeseq = active
-target = original
+
 done = set()
 
 outname = ""
 rayoutname = ""
 reactionoutname = ""
 if phase == 0:
-    outname = f"cols/{activename}-{originalname}.txt"
-    rayoutname = f"cols/{activename}-{originalname}-rays.txt"
-    reactionoutname = f"results/{activename}-{originalname}-reactions.txt"
+    outname = f"cols/{activename}-{targetname}.txt"
+    rayoutname = f"cols/{activename}-{targetname}-rays.txt"
+    reactionoutname = f"results/{activename}-{targetname}-reactions.txt"
 else:
-    outname = f"cols/{activename}-{originalname}-phase-{phase}.txt"
-    rayoutname = f"cols/{activename}-{originalname}-rays-phase-{phase}.txt"
-    reactionoutname = f"results/{activename}-{originalname}-reactions-phase-{phase}.txt"
+    outname = f"cols/{activename}-{targetname}-phase-{phase}.txt"
+    rayoutname = f"cols/{activename}-{targetname}-rays-phase-{phase}.txt"
+    reactionoutname = f"results/{activename}-{targetname}-reactions-phase-{phase}.txt"
 
 filecols = []
 with open(outname, 'r') as f:
@@ -169,14 +189,15 @@ atexit.register(printresults)
 
 seenash = set()
 
-activeash = active.advance(16384)
-originalash = original.advance(16384)
+
+activeash = activeoriginal.advance(16384)
+targetash = targetoriginal.advance(16384)
 for maxt, col, coltime, rle in filecols:
     if maxt == None: continue
     if maxt < skipt: continue
     # if coltime == 0: continue
 
-    startingpat = active + col * original
+    startingpat = activeoriginal + col * targetoriginal
     ash = startingpat.advance(16384)
 
 
@@ -184,7 +205,7 @@ for maxt, col, coltime, rle in filecols:
     #     print(f"Skipping {col} col {coltime} by symmetry: {startingpat.rle_string_only}")
     #     continue
 
-    if ash == (activeash + col * originalash):
+    if ash == (activeash + col * targetash):
         print(f"No collision for {col} col {coltime}: {startingpat.rle_string_only}")
         continue
 

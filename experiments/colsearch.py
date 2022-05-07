@@ -1,13 +1,13 @@
 import sys
 
-from basics import *
-from common import *
+from golchemy.lab import *
 
 import atexit
 import pprint
 
 # nakedse = lt.pattern("2o$obo$b2o!") # actually a boat
 
+nakedse = lt.pattern("bobo2b$o5b$bo2bob$3b3o!")
 nakedsefive = nakedse[5] # magic generation with a convenient blurred pattern to search for
 magicpattern = lt.pattern("3o$obo$3o!")
 magicpatterndead = lt.pattern("o").shift(1,1)
@@ -18,6 +18,7 @@ for orientation in LinearTransform.all:
     live = orientation * nakedsefive
     blur = live ^ live[2]
 
+    halo = lt.pattern("5o$5o$5o$5o$5o!").shift(-2,-2)
     dead = blur.convolve(halo)
     corona = dead - blur
     coronaorigin = corona.top_left
@@ -27,12 +28,40 @@ for orientation in LinearTransform.all:
     # blurdigests.add(blur.digest())
 
 activename = sys.argv[1]
-active = patternmap[activename]
+activeoriginal = book.reagents[activename].pattern
 
-# original = pond
-# originalname = 'pond'
-originalname = sys.argv[2]
-original = patternmap[originalname]
+targetname = sys.argv[2]
+targetoriginal = None
+if len(targetname.split("_")) == 3:
+    name, x, y = targetname.split("_")
+    name = name[:-1]
+    single = book.reagents[name].pattern
+    targetoriginal = single + single.shift(int(x),int(y))
+else:
+    targetoriginal = book.reagents[targetname].pattern
+
+endt = 1150
+if len(sys.argv) > 3:
+    endt = int(sys.argv[3])
+
+phase = 0
+if len(sys.argv) > 4:
+    phase = int(sys.argv[4])
+
+if phase < 0:
+    for i in range(0,-phase):
+        activeoriginal = activeoriginal.advance(1)
+if phase > 0:
+    for i in range(0,phase):
+        targetoriginal = targetoriginal.advance(1)
+
+active = activeoriginal
+target = targetoriginal
+
+# activename = sys.argv[1]
+# active = patternmap[activename]
+# originalname = sys.argv[2]
+# original = patternmap[originalname]
 
 startmaxt = 1000000
 if len(sys.argv) > 3:
@@ -107,24 +136,24 @@ def printresults():
     #     f.write(f"{seenash}")
     # with open("seenoctos.txt", 'w') as f:
     #     f.write(f"{seenoctos}")
-    with open(f"{activename}-{originalname}-winners.txt", 'w') as f:
+    with open(f"{activename}-{targetname}-winners.txt", 'w') as f:
         f.write(f"{pp.pformat(winners)}")
     print("wrote winners")
 
 atexit.register(printresults)
 
 filecols = []
-with open(f"cols/{activename}-{originalname}.txt", 'r') as f:
+with open(f"cols/{activename}-{targetname}.txt", 'r') as f:
     filecols = eval(f.read())
 # filecols.reverse()
 
-with open(f"cols/{activename}-{originalname}-rays.txt", 'r') as f:
+with open(f"cols/{activename}-{targetname}-rays.txt", 'r') as f:
     rays = eval(f.read())
 
 seenash = set()
 
 for maxt, vec, coltime, rle in filecols:
-    startingpat = original.translate(vec) + active
+    startingpat = active + target.translate(vec)
 
     if maxt == None:
         print(f"Success {vec} col {coltime}, did not stabilise: {rle}")

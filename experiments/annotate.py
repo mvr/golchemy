@@ -1,28 +1,6 @@
 import sys
-import os.path
-from os import path
-import atexit
 
-from basics import *
-from common import *
-
-import pickle
-import pprint
-
-# import cProfile
-
-
-if path.isfile("book.txt"):
-    with open(f"book.txt", 'rb') as f:
-        book = Book()
-        book.reagents, book.table = pickle.load(f)
-
-else:
-    reagentfiles = ["reagents/ash.toml", "reagents/constellations.toml", "reagents/commonsmall.toml", "reagents/commonactive.toml", "reagents/notabledebris.toml", "reagents/pseudostill.toml"]
-    book = Book.from_toml_object(toml.load(reagentfiles))
-    with open(f"book.txt", 'wb') as f:
-         pickle.dump((book.reagents,book.table), f)
-
+from golchemy.lab import *
 
 creations = {}
 deaths = {}
@@ -35,12 +13,6 @@ def collect_events(pat, stopt):
             print(f"gen {t}", file=sys.stderr)
         s, es = s.step(book)
 
-        # Need to deliberately not recognise the starting pattern
-        if len(s.chaos) == 0 and len(s.reagents) == 1:
-            s.chaos = [s.reagents[0].pattern]
-            s.reagents = []
-            continue
-
         for e in es:
             for r in e.outs.reagents:
                 if r.reagent.is_active:
@@ -49,7 +21,14 @@ def collect_events(pat, stopt):
                 if r.reagent.is_active:
                     deaths[(r.reagent.name, r.trans)] = t
 
+        # Need to deliberately not recognise the starting pattern
+        if len(s.chaos) == 0 and len(s.reagents) == 1:
+            s.chaos = [s.reagents[0].pattern]
+            s.reagents = []
+            continue
+
 # orig = book.reagents['r'].pattern
+# endt = 1104
 orig = lt.pattern('o3b3o$3o2bo$bo!')
 endt = 17331
 collect_events(orig, endt)
