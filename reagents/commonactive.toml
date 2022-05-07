@@ -5,10 +5,12 @@ predecessors = [
   "3bo$o$b2o$o", "o3bo$2b2o$bo", "2bo$3o$4bo"
 ]
 searchrange = 200
+conduitable = true
 
 [pi]
 rle = "3o$obo$obo!"
 predecessors = ["3o$o2bo", "bo$3o2$bo"]
+conduitable = true
 
 [lom]
 rle = "2o2b$b2ob$2b2o!"
@@ -57,14 +59,16 @@ predecessors = [
   "5bo$o3bo$2b2o$bo", "2o$o$2b2o$bo" 
 ]
 searchrange = 110
+conduitable = true
 
 [wing]
-rle = "b2ob$o2bo$bobo$2b2o!"
+rle = "b2o$2bo$2o$o!"
 predecessors = [
   "3o$3bo$4bo$5bo", "3bo$b2o$o$o$bo", "o2$2o$3bo$2b2o",
   "bo2$2o$3bo$2b2o", "2o$bob2o$2bo", "2o$bobo$2bobo", "2o$o$2b2o$4bo",
   "bobo$2bo$o$2o"
 ]
+conduitable = true
 
 [teardrop]
 rle = "b3o$o2bo$o2bo$b2o!"
@@ -89,8 +93,39 @@ predecessors = [
   "2bo$2b2o$2o2$o", "2bo$2b2o$2o2$bo"
 ]
 
-[objecthassledinjasonsp33]
-rle = "bobo$o2b2o$o2bo!"
+[longbun]
+rle = "4o$o3bo$b3o!"
+predecessors = [
+  "obo$o3b3o$3bo", "obo3bo$o3b2o$4bo", "6bo$obo$o3b2o$4bo",
+  "b2o3bo$o3b2o$4bo", "6bo$b2o$o3b2o$4bo", "obo3bo$bo2b2o$4bo",
+  "6bo$obo$bo2b2o$4bo", "o$4bo$b2o2b2o$2bo", "o3bo$b2o2b2o$2bo",
+  "o$obo2$b2o$2o", "o$obo2$2o$b2o", "o$obo2$2o$bobo",
+  "bo$obo2$2o$bobo", "2bo$obo2$2o$bobo", "2obo2$bo$bo$2o",
+  "2obo2$bo$bo$b2o", "b3o2$obo$2b2o", "3o2$2o$bobo",
+  "obo$2bo2$bobo$2o", "2o$2bo2$bobo$2o", "obo$bo2$bobo$2o",
+  "3bo$b2o2$ob2o$2bo", "2bo$2o2$2obo$bo", "o$4o$o$2bo", "o$4o$o$3bo",
+  "bo$o2b3o$2bo$2bo", "o$bob3o$2bo$2bo", "o$b2ob2o$3bo$2bo",
+  "o$b2obo$3bobo$2bo", "o$ob2o$3b2o$bo", "o$ob2o$3bobo$bo",
+  "o$ob2obo$3bo$bo", "o$4o$4bo$o", "o$3o$3b2o$o", "o$3obo$3bo$o",
+  "bo$obob2o$3bo$o", "bo$obobo$3bobo$o", "bo$obo2bo$3b2o$o",
+  "o2$b2ob2o$bobo", "o2$b2obo$bobobo", "o2$b2o2bo$bob2o",
+  "o2$ob2o$bob2o", "o2$ob2obo$bobo", "o2$ob2o$bobobo",
+  "bo2$b3o$o2b2o", "bo2$b3obo$o2bo", "bo2$b3o$o2bobo", "bo2$4o$o3bo",
+  "o2$3o$o2b2o", "o2$3obo$o2bo", "2bo2$b4o$o2bo", "o2$ob3o$bobo",
+  "2bo2$b3o$o2b2o", "2bo2$b3obo$o2bo", "2bo2$b3o$o2bobo",
+  "o2$4o$o3bo", "bo2$3o$o2b2o", "bo2$3obo$o2bo", "bo2$b4o$o2bo",
+  "bo2$5o$3bo", "ob4o$o$bo", "2bo$bo$b2o2$2o$2bo",
+  "3bo$bo$b2o2$2o$2bo", "bobo$b2o2$2o$2bo", "b3o$o5bo$4b2o",
+  "b3o$o4b2o$4bo", "b3o$o4bo$4bobo", "o$bo$2bo$o$3o", "o$o$2bo$o$3o",
+  "bo$o$2bo$o$3o", "2bo$o$2bo$o$3o", "b2o2bo$bobo$o2bo",
+  "2b2o2bo$2bobo$o3bo", "obo2bo$bobo$o2bo", "bobo2bo$2bobo$o3bo",
+  "2b2o$2bob2o$o2bo", "bobo$2bob2o$o2bo", "b2o2$o$2o$b2o",
+  "obo2$o$2o$b2o", "2b2o$2obo$5bo$2bo", "3bo$o3bo$b2obo$o",
+  "o2b2o$2o$obo", "o2bo$2o2bo$obo", "o2bo$2o$obobo", "3bo2$2b3o$o$2o",
+  "2o$ob2o$o$4bo",
+
+  "bobo$o2b2o$o2bo!",
+]
 
 [procrastinator]
 rle = "o$3o$3bo$b3o!"
@@ -138,8 +173,9 @@ predecessors = [
 rle = "ob3o$2o!"
 
 [uturner]
-rle = "b3o$b3o$obo$2o!"
+rle = "b3o2$4bo$o$b3o!"
 predecessors = ["o$o$o2$2o$2bo"]
+conduitable = true
 
 [rturner]
 rle = "bo$obo$o2bo$3bo$2b2o!"
@@ -167,6 +203,7 @@ rle = "2o$2o4bo$5b3o!"
 [dove]
 rle = "2b2o$bo2bo$o2bo$3o!"
 predecessors = ["2b3o$bo$bo$o"]
+conduitable = true
 
 [piandloaf]
 rle = "o2bo$bob2o$bo3b2o$4bo!"
@@ -187,6 +224,7 @@ messypredecessors = ["o2b$3o$obo$2bo"]
 rle = "o2b$3o$obo$2bo!"
 predecessors = ["o$obo$3b2o$2bo", "o$b2o$3b2o$2bo", "2bo$b5o$o$b2o$2b2o$4bo!"]
 messypredecessors = ["b2o$2o$bo"]
+conduitable = true
 
 [b]
 rle = "2bo$b2o$2o$b2o!"
@@ -263,38 +301,6 @@ rle = "b2o$o2bo$4o!"
 [eight]
 rle = "8o!"
 
-[longbun]
-rle = "4o$o3bo$b3o!"
-predecessors = [
-  "obo$o3b3o$3bo", "obo3bo$o3b2o$4bo", "6bo$obo$o3b2o$4bo",
-  "b2o3bo$o3b2o$4bo", "6bo$b2o$o3b2o$4bo", "obo3bo$bo2b2o$4bo",
-  "6bo$obo$bo2b2o$4bo", "o$4bo$b2o2b2o$2bo", "o3bo$b2o2b2o$2bo",
-  "o$obo2$b2o$2o", "o$obo2$2o$b2o", "o$obo2$2o$bobo",
-  "bo$obo2$2o$bobo", "2bo$obo2$2o$bobo", "2obo2$bo$bo$2o",
-  "2obo2$bo$bo$b2o", "b3o2$obo$2b2o", "3o2$2o$bobo",
-  "obo$2bo2$bobo$2o", "2o$2bo2$bobo$2o", "obo$bo2$bobo$2o",
-  "3bo$b2o2$ob2o$2bo", "2bo$2o2$2obo$bo", "o$4o$o$2bo", "o$4o$o$3bo",
-  "bo$o2b3o$2bo$2bo", "o$bob3o$2bo$2bo", "o$b2ob2o$3bo$2bo",
-  "o$b2obo$3bobo$2bo", "o$ob2o$3b2o$bo", "o$ob2o$3bobo$bo",
-  "o$ob2obo$3bo$bo", "o$4o$4bo$o", "o$3o$3b2o$o", "o$3obo$3bo$o",
-  "bo$obob2o$3bo$o", "bo$obobo$3bobo$o", "bo$obo2bo$3b2o$o",
-  "o2$b2ob2o$bobo", "o2$b2obo$bobobo", "o2$b2o2bo$bob2o",
-  "o2$ob2o$bob2o", "o2$ob2obo$bobo", "o2$ob2o$bobobo",
-  "bo2$b3o$o2b2o", "bo2$b3obo$o2bo", "bo2$b3o$o2bobo", "bo2$4o$o3bo",
-  "o2$3o$o2b2o", "o2$3obo$o2bo", "2bo2$b4o$o2bo", "o2$ob3o$bobo",
-  "2bo2$b3o$o2b2o", "2bo2$b3obo$o2bo", "2bo2$b3o$o2bobo",
-  "o2$4o$o3bo", "bo2$3o$o2b2o", "bo2$3obo$o2bo", "bo2$b4o$o2bo",
-  "bo2$5o$3bo", "ob4o$o$bo", "2bo$bo$b2o2$2o$2bo",
-  "3bo$bo$b2o2$2o$2bo", "bobo$b2o2$2o$2bo", "b3o$o5bo$4b2o",
-  "b3o$o4b2o$4bo", "b3o$o4bo$4bobo", "o$bo$2bo$o$3o", "o$o$2bo$o$3o",
-  "bo$o$2bo$o$3o", "2bo$o$2bo$o$3o", "b2o2bo$bobo$o2bo",
-  "2b2o2bo$2bobo$o3bo", "obo2bo$bobo$o2bo", "bobo2bo$2bobo$o3bo",
-  "2b2o$2bob2o$o2bo", "bobo$2bob2o$o2bo", "b2o2$o$2o$b2o",
-  "obo2$o$2o$b2o", "2b2o$2obo$5bo$2bo", "3bo$o3bo$b2obo$o",
-  "o2b2o$2o$obo", "o2bo$2o2bo$obo", "o2bo$2o$obobo", "3bo2$2b3o$o$2o",
-  "2o$ob2o$o$4bo"
-]
-
 [toast]
 rle = "2bo$4o$3o!"
 
@@ -336,7 +342,7 @@ rle = "2b3o$bo$2o!"
 
 [grate]
 rle = "2b2o$bo2b2o$o$6bo$b2o2bo$3b2o!"
-predecessors = ["3b4o2$b2o$o", "3o$bo$2bo$2bo$4bo"]
+predecessors = ["3b4o2$b2o$o", "3o$bo$2bo$2bo$4bo", "3o$o2bo$bo$2b2o!"]
 
 [loaferfoot]
 rle = "2bo$bobo$2obo$3b2o!"
@@ -356,22 +362,30 @@ predecessors = [
 [queenbee]
 rle = "o$2o$b2o$b3o$b2o$2o$o!"
 predecessors = ["o$b2obo$bobobo", "o$b2ob2o$bobo"]
+conduitable = true
 
 [switchengine]
 rle = "bobo2b$o5b$bo2bob$3b3o!"
 notable = true
 
-# [multuminparvo]
-# rle = "3b3o$2bo2bo$bo4b$o!"
+[multuminparvo]
+rle = "3b3o$2bo2bo$bo4b$o!"
 
 [glidersbythedozen]
 rle = "2o2bo$o3bo$o2b2o!"
 
-# [blockandglider]
-# rle = "2o$obo$2b2o!"
+[acorn]
+rle = "bo5b$3bo3b$2o2b3o!"
+predecessors = ["b3o3$b2o$bo$o!"]
+
+[rabbits]
+rle = "o3b3o$3o2bob$bo!"
+
+[jaydot]
+rle = "b2o$3o2$bo$b2o$o!"
 
 [hook]
 rle = "2o$b2o$2bo$3o!"
+predecessors = ["bo$bo$2bo2$2o$bo$bo!"]
 
-[k]
-rle = "2bo$2bo$2bo$2o$o!"
+

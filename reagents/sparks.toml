@@ -1,0 +1,19 @@
+[dot]
+rle = "o"
+spark = true
+
+[domino]
+rle = "oo"
+spark = true
+
+[duoplet]
+rle = "o$bo!"
+spark = true
+
+[banana]
+rle = "2o$2bo!"
+spark = true
+
+[obo]
+rle = "obo"
+spark = true

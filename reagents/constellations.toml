@@ -39,7 +39,9 @@ predecessors = [
   "2bo2$2o$o$b2o", "2bo$2o$o$b2o", "b2o$2b2o$2o", "b2o$2bo$2o2bo",
   "bobo$obo$o3bo", "o$b2o$b2o2$o", "bo2$2b2o$obo$bo",
   "2o$4bo$b2o$2bo", "3bo$o$2b3o$bo", "3bo$o$b3o$o", "3o$o$bo$2bo",
-  "3o$o$2bo$o", "3o$2bo$o$o3o$2bo$o$o"
+  "3o$o$2bo$o", "3o$2bo$o$o3o$2bo$o$o",
+
+  "2o$o2bo$obo!"
 ]
 
 [bakery]
@@ -77,7 +79,6 @@ rle = "8b2o$7bo2bo$7bo2bo$8b2ob2o$10bo2bo$10bo2bo$11b2o$b2o$o2bo$o2bo$b2ob2o$3bo
 [landoflakeser]
 rle = "3o$o2bo$2obo$b3o!"
 
-
 [foureaters]
 rle = "3bo7bo$b3o7b3o$o13bo$2o11b2o8$2o11b2o$o13bo$b3o7b3o$3bo7bo!"
 
@@ -113,3 +114,6 @@ rle= "2ob2o$2ob2o!"
 
 [biblocker]
 rle = "obo$2ob2o$2bo!"
+
+[prepulsar]
+rle = "3o2$bo2$3o"

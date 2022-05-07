@@ -6,6 +6,10 @@
 rle = "3o$bo!"
 predecessors = ["2o$obo$3b2o", "4b2o$4o"]
 
+[slowtraffic]
+rle = "2bo$bobo$o$o$b2o!"
+predecessors = ["bo$bo$bo$bo$o$bo!", "2bo$2bo$2bo$bo$obo!", "2bo$2bo$2bo$bo$2bo$o!", "o$o$bo$bo$bo$bo!"]
+
 [phispark]
 rle = "b3o$o3bo$o3bo$b3o!"
 predecessors = [
@@ -16,12 +20,6 @@ predecessors = [
   "bo$ob2o$o$3bo", "o2b3o$2bo$2bo", "obo$2obo$o", "2bo2$4o$o",
   "2o$o2$2o$o", "2o$o2$2o$bo" 
 ]
-
-# [twoloaves]
-# rle = "b3o$o3bo$2o$2b3o!"
-
-[twoloaves]
-rle = "2o$obo$obo$2b2o$b2o!"
 
 [tlg]
 rle = "2b2o$bobo$2obo$3o!"

@@ -126,7 +126,7 @@ predecessors = [
   "4o$o3bo$o$bo", "3b4o$2bo4bo$bo$o", "bo$o3bo$o$4o",
   "3b4o$2bo$bo5bo$o", "5bo$bo$b2ob2o$o$3bo", "2bo$2obo$4bo$bo2bo$6bo"
 ]
-notable = true
+# notable = true # too many
 
 [longbarge]
 rle = "bo$obo$bobo$2bobo$3bo!"
@@ -150,7 +150,6 @@ predecessors = [
 [paperclip]
 rle = "b2o$ob3o$o4bo$b3obo$3b2o!"
 predecessors = ["o$2o2$b4o", "bo$2o2$b4o"]
-notable = true
 
 [mwss]
 rle = "2bo$o3bo$5bo$o4bo$b5o!"

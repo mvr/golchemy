@@ -1,0 +1,77 @@
+[integralwithtwotubs]
+rle = "5bo$4bobo$3bobo$3bo$bobo$obo$bo!"
+
+[cis-rotated_long_hook]
+rle = "5b2o$b2obobo$2bobo$2bobo$obob2o$2o!"
+
+[bigcatalyst1]
+rle = "2obo$bob3o$o5bo$b3obo$3bob2o!"
+
+[bigcatalyst2]
+rle = "2bo$bobo$bobo$2ob2o2$2ob2o$2obo$5bo$4b2o!"
+
+[bigcatalyst3]
+rle = "b2ob2o$obobo$2o2bo$4bob2o$5o2bo$o4bo4bo$3bo2b5o$3b2obo$6bo2b2o$6bobobo$5b2ob2o!"
+
+[bigcatalyst4]
+rle = "5bo$4bobo$3bobo2bo$b3o2b2obo$o3b2o3bo$b3o2b3o$3bobo$4bobo$5bo!"
+
+[bigcatalyst5]
+rle = "3bo$obobo$2o2bo$4b2o$2o$bo2b2o$bobobo$2bo!"
+
+[bigcatalyst6]
+rle = "6bo$3bobobo$b3ob2obo$o7bo$ob2ob3o$bobobo$2bo!"
+
+[bigcatalyst7]
+rle = "2o$obob2o$2bobo$2bobo$2o2b2o$bobo$bobo$2obobo$4b2o!"
+
+[bigcatalyst8]
+rle = "3b2o$3bobo$bobob3o$ob2o4bo$o4b2obo$b3obobo$3bobo$4b2o!"
+
+[bigcatalyst9]
+rle = "2o$obo$2bo$bo$2b3o$5bo$4bo$4bobo$5b2o!"
+
+[bigcatalyst10]
+rle = "2$3b2obo$3b2ob3o$9bo$3b2ob2obo$4bob2ob2o$4bo$5b3ob2o$7bob2o!"
+
+[bigcatalyst11]
+rle = "7bo$6bobo$6bobo$5b2ob2o2$5b2ob2o$5b2obo$10bo$2bo6b2o$bobo$o2bo2b2o$b2o3b2o!"
+
+[bigcatalyst12]
+rle = "3bo2bo$3b4o$o8bo$10o2$10o$o8bo$3b4o$3bo2bo!"
+
+[bigcatalyst13]
+rle = "3bob2o$b3ob2o$o$ob2ob4o$bobobo2bo!"
+
+[bigcatalyst14]
+rle = "2b2obo$3bob3o$bobo4bo$ob2ob2obo$o4bobo$b3obo$3bob2o!"
+
+[bigcatalyst15]
+rle = "3b2o$2bo2bob2o$3bobobo$4obo3bo$o3bob4o$2bobobo$b2obo2bo$5b2o!"
+
+[bigcatalyst16]
+rle = "o2bobo2bo$4ob4o$4bo$2bo3b3o$2b4o2bo$6bo$2b4ob4o$2bo2bobo2bo!"
+
+[bigcatalyst17]
+rle = "10b2o$2b2ob2o2bo2bo$bobobo4bobo$b2o2bo5bo$5bob2o$b5o2bo$bo4bo4bo$4bo2b5o$4b2obo$bo5bo2b2o$obo4bobobo$o2bo2b2ob2o$b2o!"
+
+[bigcatalyst18]
+rle = "10b2o$5b2obo2bo$4bobob3o$4bobo$2b3ob5o$bo3bo4bo$b4o2bo$4bob2o$b2obo$2bobo$obob2o$2o!"
+
+[bigcatalyst19]
+rle = "9b2o$10bo$10bob2o$9b2o2bo$6bo4b2o$6b5o$4b2o4bo$5bo2b2o$5bobo$o2bobobo$4ob2o$4bo$2bobo$2b2o!"
+
+[bigcatalyst20]
+rle = "11b2o$6b2obo2bo$5bobob3o$2o3bobo$o2bobob3o$b4obo3bo$6bo2b2o$3bobo$3b2o!"
+
+[bigcatalyst21]
+rle = "5bo$4bobo$3bobo2bo$b3o2b2obo$o3b2o3bo2b2o$b3o2b3o3b2o$3bobo$4bobo$5bo!"
+
+[bigcatalyst22]
+rle = "4b2ob2o$5bobo$5bobo$2b2obob2o$o2bobo2bo$2obob2o$bobo$bobo$2ob2o!"
+
+[bigcatalyst23]
+rle = "5b2obo4b2o$2bobobob3obobo$bob2obo4b2o$bo3b2ob2o3bo$2b2o4bob2obo$obob3obobobo$2o4bob2o!"
+
+[bigcatalyst24]
+rle = "2o6bo$bo3bobobo2bo$bob3obob4o$2bo4b2o$4b2o4bo$4obob3obo$o2bobobo3bo$4bo6b2o!"

@@ -19,6 +19,24 @@ rle = "8b2o$4b2o2b2o$4b2o18$4b2o$2o2b2o$2o!"
 [biblock]
 rle = "2ob2o$2ob2o!"
 
+[centurydebris]
+rle = "2o$2o5$2o$2o4$2o$2o$15b3o!"
+
+[pidebris]
+rle = "21b3o2$5b2o31b2o$5b2o31b2o$9b2o23b2o$9b2o23b2o8$o43bo$o43bo$o43bo2$2b3o35b3o9$6b2o29b2o$5bo2bo8b2o7b2o8bo2bo$5bo2bo8b2o7b2o8bo2bo$6b2o29b2o!"
+
+[longbundebris]
+rle = "2o$2o2$8b2o$8b2o2$8b2o$8b2o!"
+
+[iwonadebris]
+rle = "11b2o$10bo2bo$2o9b2o$2o20$27bo$8b3o15bobo$27b2o$6bo$6bo$6bo$19b2o$8b3o8b2o!"
+
+[uturnerdebris]
+rle = "9b2o$o8b2o$o$o9$6bo$6bo$6bo2$2b3o3b3o!"
+
+[octominoiidebris]
+rle = "8b3o4$5b2o$4bobo$4b2o4b2o$10b2o$o$o$o5b2o$6b2o!"
+
 [blocks_4_0]
 rle = "2o2b2o$2o2b2o!"
 
