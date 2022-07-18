@@ -77,6 +77,10 @@ class BB:
                     self.y > other.y + other.h or
                     self.y + self.h < other.y)
 
+    @property
+    def centre(self):
+        return Vec(self.x + self.w//2, self.y + self.h//2)
+
     def __hash__(self):
         return hash((self.x, self.y, self.w, self.h))
 
