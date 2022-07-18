@@ -316,7 +316,7 @@ class PatternExt(Pattern):
         x, y = self.firstcell
         return Vec(x, y)
 
-    @property
+    @cached_property
     def bb(self):
         if self.empty(): return BB(0,0,0,0)
         x,y,w,h = self.getrect()
