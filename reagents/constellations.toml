@@ -3,7 +3,7 @@ rle = "6bo$5bobo$5bobo$6bo2$b2o7b2o$o2bo5bo2bo$b2o7b2o2$6bo$5bobo$5bobo$6bo!"
 verycommon = true
 
 [honeyfarmer]
-rle = "2b3o$bo3bo$o5bo$bo3bo$2b3o!"
+rle = "2bo$b3o$o3bo$b3o$2bo!"
 predecessors = [
   "o2$b2o$2o$bo", "o2$b2o$2o$o", "bo$2b2o$bo2$2o", "2b3o$o$bo$o",
   "2b3o$o$bo$bo", "3b3o$obo$o", "b2o2$bo$2o2$bo", "b2o2$bo$2o2$o",
@@ -17,6 +17,10 @@ predecessors = [
   "2o$o2$bo$b2o", "2o$bo2$bo$b2o", "2o$o2$2bo$b2o", "3o3$2o$o",
   "3o3$2o$bo", "3o3$o$2o"
 ]
+
+[honeystar]
+rle = "3bo$2b3o$b2ob2o$2o3b2o$b2ob2o$2b3o$3bo!"
+
 
 [bun]
 rle = "b2ob$o2bo$b3o!"

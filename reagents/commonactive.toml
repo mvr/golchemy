@@ -173,8 +173,8 @@ predecessors = [
 rle = "ob3o$2o!"
 
 [uturner]
-rle = "b3o2$4bo$o$b3o!"
-predecessors = ["o$o$o2$2o$2bo"]
+rle = "2o$3o$2obo$2b2o!"
+predecessors = ["o$o$o2$2o$2bo", "b3o2$4bo$o$b3o!"]
 conduitable = true
 
 [rturner]
