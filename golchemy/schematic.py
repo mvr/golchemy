@@ -389,17 +389,18 @@ class Event:
         return "%s(ins=%r, outs=%r)" % (self.__class__.__name__, self.ins, self.outs)
 
 class Schematic:
-#     pattern: Pattern
+    pattern: Pattern
     reagents: list[Instance]
     chaos: list[Pattern]
 
     def __init__(self):
+        self.pattern = lt.pattern()
         self.reagents = []
         self.chaos = []
 
-    @cached_property
-    def pattern(self):
-        return self.reconstruct()
+    # @cached_property
+    # def pattern(self):
+    #     return self.reconstruct()
 
     @classmethod
     def analyse(cls, book: Book, pattern: Pattern) -> Schematic:
@@ -498,12 +499,14 @@ class Schematic:
     def without_instance(self, reagent):
         s = self.copy()
         s.reagents.remove(reagent)
+        s.pattern -= reagent.pattern
         return s
 
     def copy(self):
         s = Schematic()
-        s.reagents = self.reagents.copy()
-        s.chaos = self.chaos.copy()
+        s.reagents = [r.__copy__() for r in self.reagents]
+        s.chaos = [c.__copy__() for c in self.chaos]
+        s.pattern = self.pattern.__copy__()
         return s
 
     def step(self, book: Book) -> tuple[Schematic, list]:
@@ -639,6 +642,7 @@ class Schematic:
     def __setstate__(self, pickled):
         self.__dict__ = pickled
         self.chaos = [ lt.pattern(c) for c in self.chaos]
+        self.pattern = self.reconstruct()
 
 class Timeline:
     reagents: list[tuple[Instance, int, int]]
