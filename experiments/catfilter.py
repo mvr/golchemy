@@ -8,6 +8,7 @@ import pprint
 # foreground = lt.pattern("x = 40, y = 34, rule = B3/S23\n31$37b2o$36bo2bo$37b3o!")
 background = lt.pattern()
 foreground = lt.pattern()
+correctiontransform = "identity"
 
 maxtime = 150
 
@@ -46,27 +47,39 @@ def line_to_pat(line):
     line = line.replace("!", "$")
     return lt.pattern(line)
 
-# def get_patterns():
-#     for l in open(ptbfile).readlines():
-#         yield line_to_pat(l)
+def get_patterns(filename):
+    giant = lt.pattern(open(filename).read())
+    if not giant:
+        return
 
-
-
-def get_patterns():
-    giant = lt.pattern(open(ptbfile).read())
-    cats = giant.getrect()[3] // 100
-    columns = giant.getrect()[2] // 100
+    cats = 1 + giant.getrect()[3] // 100
     print(f"{cats} rows total")
+
+    donedigests = set()
     for i in range(0,cats):
+        if (i % 50) == 0:
+            pass
+        print(f"Doing cat {i}")
+        y = range(0 + i * 100, 100 + i * 100)
+        row = giant[(range(0,100*1000),y)]
+        columns = 1 + row.getrect()[2] // 100
         for j in range(0,columns):
+            if j > 0 and (j % 200) == 0:
+                pass
             x = range(0 + j * 100, 100 + j * 100)
-            y = range(0 + i * 100, 100 + i * 100)
             p = giant[(x,y)].shift(-j*100,-i*100)
+            digest = p.digest()
+            if digest in donedigests:
+                print(f"Skipping entry {j}, already done")
+                continue
+            donedigests.add(digest)
+            print(f"Doing entry {j}: {p.rle_string_only}")
             if (background - p).population > 0:
                 print(p)
                 print("did not match background")
             if p.population > 0:
-                yield (p - background) + foreground
+                p2 = (p - background) + foreground
+                yield p2.transform(correctiontransform)
 
 def interpret_pattern(p):
     s = Schematic.analyse(book, p, generous=True)
