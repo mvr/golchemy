@@ -225,6 +225,9 @@ class Instance:
         self.time = time
         self.trans = trans
 
+        if not pattern is None:
+            self.pattern = pattern
+
     def reconstruct(self) -> Pattern:
         return self.trans * self.reagent.pattern.advance(self.time)
 
