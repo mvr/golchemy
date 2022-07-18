@@ -244,6 +244,9 @@ class Instance:
     def __rmul__(self, other):
         return Instance(self.reagent, self.time, other * self.trans, other * self.pattern)
 
+    def __copy__(self):
+        return Instance(self.reagent, self.time, self.trans, self.pattern.__copy__());
+
     def step(self) -> tuple[Schematic, list[Event]]:
         new = Instance(self.reagent, self.time + 1, self.trans, self.pattern.advance(1))
 
