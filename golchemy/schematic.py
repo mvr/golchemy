@@ -355,6 +355,19 @@ class Book:
     def __contains__(self, pat):
         return pat.digest() in self.table
 
+    def invent_still(self, pat):
+        pat2, tr = pat.normalise_origin()
+        o = pat2.oscar(eventual_oscillator=False, verbose=False, allow_guns=False)
+        if not 'period' in o or o['period'] != 1:
+            return None
+        digest = pat2.digest()
+        code = str(digest)
+        r = Reagent(code, pat2.rle_string())
+        r.fate = r.determine_fate(self)
+        self.reagents[code] = r
+        self.table[digest] = (code, 0, tr)
+        return Instance(r, 0, tr)
+
     @classmethod
     def from_toml_object(cls, toml_dict):
         b = Book()
@@ -403,16 +416,30 @@ class Schematic:
     #     return self.reconstruct()
 
     @classmethod
-    def analyse(cls, book: Book, pattern: Pattern) -> Schematic:
+    def analyse(cls, book: Book, pattern: Pattern, generous = False) -> Schematic:
         schematic = Schematic()
         schematic.pattern = pattern
         remaining = pattern
+
         while remaining.nonempty():
             c = remaining.first_cluster()
             if c in book:
                 schematic.reagents.append(book[c])
-            else:
-                schematic += Schematic.analyse_chaos(book, c)
+                remaining = remaining - c
+                continue
+            if generous:
+                c2 = remaining.first_cluster(halo=Pattern.halostill)
+                if c2 in book:
+                    schematic.reagents.append(book[c2])
+                    remaining = remaining - c2
+                    continue
+                cstill = book.invent_still(c)
+                if not cstill is None:
+                    schematic.reagents.append(book[c])
+                    remaining = remaining - c
+                    continue
+
+            schematic += Schematic.analyse_chaos(book, c)
             remaining = remaining - c
         return schematic
 

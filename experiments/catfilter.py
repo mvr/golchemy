@@ -69,13 +69,16 @@ def get_patterns():
                 yield (p - background) + foreground
 
 def interpret_pattern(p):
-    s = Schematic.analyse(book, p)
-    active = next(filter(lambda i: i.reagent.is_active , s.reagents), None)
-    if not active:
+    s = Schematic.analyse(book, p, generous=True)
+    actives = list(filter(lambda i: i.reagent.is_active , s.reagents))
+    if len(s.chaos) > 0:
         print(f"could not comprehend {p}")
         return s, None
-    tr = active.trans
-    catalysts = s.without_instance(active)
+    tr = actives[0].trans
+    catalysts = s.copy()
+    for a in actives:
+        catalysts.reagents.remove(a)
+        catalysts.pattern -= a.pattern
     return tr.inverse() * s, tr.inverse()*catalysts
 
 def is_interesting(s, catalysts):
