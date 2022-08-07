@@ -363,10 +363,8 @@ class Book:
         digest = pat2.digest()
         code = str(digest)
         r = Reagent(code, pat2.rle_string())
-        r.fate = r.determine_fate(self)
-        self.reagents[code] = r
-        self.table[digest] = (code, 0, tr)
-        return Instance(r, 0, tr)
+        self.add_reagent(r)
+        return self[pat]
 
     @classmethod
     def from_toml_object(cls, toml_dict):
@@ -433,10 +431,10 @@ class Schematic:
                     schematic.reagents.append(book[c2])
                     remaining = remaining - c2
                     continue
-                cstill = book.invent_still(c)
+                cstill = book.invent_still(c2)
                 if not cstill is None:
-                    schematic.reagents.append(book[c])
-                    remaining = remaining - c
+                    schematic.reagents.append(book[c2])
+                    remaining = remaining - c2
                     continue
 
             schematic += Schematic.analyse_chaos(book, c)
