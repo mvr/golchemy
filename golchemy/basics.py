@@ -491,6 +491,19 @@ class PatternExt(Pattern):
         newptr = self.lifelib('MatchLiveAndDead', self.ptr, live.ptr, corona.ptr)
         return Pattern(self.session, newptr, self.owner)
 
+
+    def transformation_to(self, other, orientations=None):
+        if orientations is None:
+            orientations = LinearTransform.all
+
+        for o in orientations:
+            matches = other.match(o * self, halo=Pattern.halo1)
+            if not matches.empty():
+                coord = matches.first_on_coord
+                return Transform(o, coord)
+
+        return None
+
     @cached_property
     def symmetries(self) -> set[LinearTransform]:
         p, _ = self.normalise_origin()
@@ -509,6 +522,14 @@ class PatternExt(Pattern):
             if not tp in seen:
                 result.add(t)
             seen.append(tp)
+        return result
+
+    def remove_gliders(self):
+        result = self
+        glider = lt.life("bo$2bo$3o!")
+        glider1 = lt.life("obo$b2o$bo!")
+        result = result.replace(glider, "", dead = glider.zoi()-glider, orientations='rotate4reflect')
+        result = result.replace(glider1, "", dead = glider1.zoi()-glider1, orientations='rotate4reflect')
         return result
 
     def squash(self):
