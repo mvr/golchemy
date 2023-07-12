@@ -88,6 +88,10 @@ class BB:
                     self.y + self.h < other.y)
 
     @property
+    def top_left(self):
+        return Vec(self.x, self.y)
+
+    @property
     def centre(self):
         return Vec(self.x + self.w//2, self.y + self.h//2)
 
