@@ -1,4 +1,5 @@
 from __future__ import annotations
+from enum import Enum
 from typing import overload
 from functools import cached_property
 
@@ -93,6 +94,7 @@ class BB:
     def __hash__(self):
         return hash((self.x, self.y, self.w, self.h))
 
+# TODO: make this an Enum
 class LinearTransform:
     x : Vec
     y : Vec
@@ -292,6 +294,34 @@ class Transform:
         self.offset = Vec(pickled[4], pickled[5])
 
 Transform.id = Transform(LinearTransform.id, Vec(0, 0))
+
+class StaticSymmetry(Enum):
+  C1 = 0
+  D2AcrossX = 1
+  D2AcrossXEven = 2
+  D2AcrossY = 3
+  D2AcrossYEven = 4
+  D2negdiagodd = 5
+  D2diagodd = 6
+  C2 = 7
+  C2even = 8
+  C2verticaleven = 9
+  C2horizontaleven = 10
+  C4 = 11
+  C4even = 12
+  D4 = 13
+  D4even = 14
+  D4verticaleven = 15
+  D4horizontaleven = 16
+  D4diag = 17
+  D4diageven = 18
+  D8 = 19
+  D8even = 20
+
+  # TODO:
+  @property
+  def catforce_char(self):
+      return "*"
 
 # Monkey patching, sue me
 def monkey_patch(cls):
