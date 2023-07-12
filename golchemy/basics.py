@@ -4,9 +4,18 @@ from functools import cached_property
 
 import lifelib
 from lifelib.pythlib.pattern import Pattern
+from lifelib.pythlib.session import Lifetree
 
 sess = lifelib.load_rules("b3s23")
 lt = sess.lifetree(n_layers=1)
+lt4 = sess.lifetree(n_layers=4)
+
+def life_(self, rle=""):
+    return self.pattern(rle, rule='b3s23')
+Lifetree.life = life_
+def history_(self, rle=""):
+    return self.pattern(rle, rule='LifeHistory')
+Lifetree.history = history_
 
 class Vec:
     x : int
@@ -471,3 +480,32 @@ class PatternExt(Pattern):
                 result.add(t)
             seen.append(tp)
         return result
+
+    def squash(self):
+        result = lt.life()
+        for l in self.layers():
+            result |= l
+        return result
+
+    def as_state(self, state):
+        result = lt4.history()
+        h = lt4.history() + self
+        i = 0
+        while state != 0:
+            if state % 2 == 1:
+                result += (h << i)
+            state >>= 1
+            i += 1
+        return result
+
+    def only_state(self, state):
+        result = self.squash()
+        for i, l in enumerate(self.layers()):
+            if state & (1 << i):
+                result &= l
+            else:
+                result -= l
+        return result.as_state(state)
+
+    def to_standard(self):
+        return lt.life() + self.layers()[0]
