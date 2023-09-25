@@ -70,21 +70,45 @@ class Catalyst:
         self.check_reaction = check_reaction
         self.sacrificial = sacrificial
 
+    @property
+    def centre(self):
+        return self.locus.bb.centre
+
+    def is_suspect(self):
+        return len((self.zoi - self.required).components(Pattern.halo2)) > 1 and (self.zoi - self.required).population < 10
+
     # Needs the patterns to be identical
     def merge(self, other):
+        assert self.pattern == other.pattern
         recovery_time = max(self.recovery_time, other.recovery_time)
         required = self.required & other.required
         locus = self.locus | other.locus
         contact = self.contact | other.contact
-        return Catalyst(self.pattern, recovery_time=recovery_time, required=required, locus=locus, contact=contact)
+
+        same_active_cells = (self.zoi - self.required) == (other.zoi - other.required)
+        check_reaction = self.check_reaction and other.check_reaction and same_active_cells
+
+        return Catalyst(self.pattern, recovery_time=recovery_time, required=required, locus=locus, contact=contact, check_reaction = check_reaction)
         # TODO: copy the attributes
 
-    def disjoint_interaction(self, other):
-        return ((self.zoi - self.required) & (other.zoi - other.required)).empty()
+    def increasing_interaction(self, other):
+        selfactive = self.zoi - self.required
+        otheractive = other.zoi - other.required
+        for c in selfactive.components():
+            if len((c & otheractive).components()) > 1:
+                return False
+            if (c & otheractive).empty():
+                return False
+        for c in otheractive.components():
+            if (c & selfactive).empty():
+                return False
+        return True
 
-    # Ignores the right if the requireds are disjoint
     def merge_maybe(self, other):
-        if self.disjoint_interaction(other):
+        # if not self.increasing_interaction(other):
+        #     return self
+        same_active_cells = (self.zoi - self.required) == (other.zoi - other.required)
+        if not same_active_cells:
             return self
         return self.merge(other)
 
@@ -132,21 +156,22 @@ class Catalyst:
 
         for n in range(maxtime):
             catPresent = (currentSoup & catHalo).empty() and alwaysPresent <= currentSoup
-            if not catPresent:
-                required = required - (currentSoup ^ currentCat)
+            required = required - (currentSoup ^ currentCat)
+            if not catPresent and recoveredFor > 0:
+                recoveredFor = 0
+                absentFor += 1
 
-                if activatedTime == -1:
-                    # First activation
-                    locus += (currentSoup & catHalo).zoi() & currentCat
-                    contact += currentSoup & catHalo
-                    activatedTime = n
-                elif recoveredFor > 0:
-                    recoveredFor = 0
-                    absentFor += 1
+            if hasInteracted and activatedTime == -1:
+                # First activation
+                locus += (currentSoup & catHalo).zoi() & currentCat
+                contact += currentSoup ^ (soupAlone + currentCat)
+                activatedTime = n
+
             if catPresent and hasInteracted: # present and has been activated.
                 if recoveredFor == 0:
                     recoveredTime = n
                 recoveredFor += 1
+
             if recoveredFor >= stabletime:
                 recovered = True
                 break
@@ -190,13 +215,9 @@ class Catalyst:
                 result = result.merge_maybe(newcat)
         return result
 
-    @property
-    def centre(self):
-        return self.locus.bb.centre
-
     @classmethod
     def from_history(cls, pat):
-        pass
+        pass # TODO
 
     def to_history(self):
         return (self.pattern - self.locus).as_state(1) + self.required.as_state(4) + (self.pattern & self.locus).as_state(9) + self.contact.as_state(2)
