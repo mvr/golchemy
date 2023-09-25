@@ -339,9 +339,10 @@ def monkey_patch(cls):
 # Only general purpose things
 @monkey_patch(Pattern)
 class PatternExt(Pattern):
-    halo1 = lt.pattern("3o$3o$3o!").shift(-1,-1)
-    halo2 = lt.pattern("5o$5o$5o$5o$5o!").shift(-2,-2)
-    halostill = lt.pattern("2bo$b3o$5o$b3o$2bo!").shift(-2,-2)
+    halo1 = lt.life("3o$3o$3o!").shift(-1,-1)
+    halo2 = lt.life("5o$5o$5o$5o$5o!").shift(-2,-2)
+    halostill = lt.life("2bo$b3o$5o$b3o$2bo!").shift(-2,-2)
+    halobigzoi = lt.life("b3o$5o$5o$5o$b3o!").shift(-2,-2)
 
     def translate(self, vec):
         return Transform.translate(vec) * self

@@ -39,14 +39,14 @@ class Reagent:
     def __init__(self, name, pattern, origin_age = 0, notable = False):
         self.name = name
         self.pattern_rle = pattern
-        # self.pattern = lt.pattern(pattern)
+        # self.pattern = lt.life(pattern)
         self.origin_age = origin_age
         self.notable = notable
         self.fate = None
 
     @cached_property
     def pattern(self):
-        return lt.pattern(self.pattern_rle)
+        return lt.life(self.pattern_rle)
 
     def __eq__(self, other):
         return self.name == other.name
@@ -405,7 +405,7 @@ class Schematic:
     chaos: list[Pattern]
 
     def __init__(self):
-        self.pattern = lt.pattern()
+        self.pattern = lt.life()
         self.reagents = []
         self.chaos = []
 
@@ -475,7 +475,7 @@ class Schematic:
         return nonactive
 
     def reconstruct(self) -> Pattern:
-        return sum([i.reconstruct() for i in self.reagents], lt.pattern()) + sum(self.chaos, lt.pattern())
+        return sum([i.reconstruct() for i in self.reagents], lt.life()) + sum(self.chaos, lt.life())
 
     def normalise(self):
         for i in self.reagents:
@@ -550,7 +550,7 @@ class Schematic:
 
         newpattern = self.pattern.advance(1)
 
-        diff = sum(map(lambda v : v[2][0].pattern if v[0] == Cluster.REAGENT else v[2], coordmap.values()), lt.pattern()) ^ newpattern
+        diff = sum(map(lambda v : v[2][0].pattern if v[0] == Cluster.REAGENT else v[2], coordmap.values()), lt.life()) ^ newpattern
 
         # if diff.empty():
         #     result = Schematic()
@@ -666,7 +666,7 @@ class Schematic:
 
     def __setstate__(self, pickled):
         self.__dict__ = pickled
-        self.chaos = [ lt.pattern(c) for c in self.chaos]
+        self.chaos = [ lt.life(c) for c in self.chaos]
         self.pattern = self.reconstruct()
 
 class Timeline:
