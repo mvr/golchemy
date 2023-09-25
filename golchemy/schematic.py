@@ -3,7 +3,6 @@ from typing import overload
 from functools import cached_property
 
 from lifelib.pythlib.pattern import Pattern
-import toml
 
 from golchemy.basics import *
 

@@ -5,13 +5,10 @@ from golchemy.lab import *
 
 import pprint
 
-# background = lt.pattern("x = 58, y = 63, rule = B3/S23\n21$22b2o$22b2o9$37bo$36bob2o$37b2o28$55b2o$55bobo!")
-# foreground = lt.pattern("x = 40, y = 34, rule = B3/S23\n31$37b2o$36bo2bo$37b3o!")
-background = lt.pattern()
-foreground = lt.pattern()
-correctiontransform = "identity"
+replace_before = lt.life("4bo$4bobo$4b3o$6bo3$2o$2o!")
+replace_after = lt.life("4bo$4bobo$4b3o$6bo!")
 
-maxtime = 150
+maxtime = 200
 
 standard_reagents = [
     'r',
@@ -43,18 +40,8 @@ book.reagents['lwss'].notable = True
 
 ptbfile = sys.argv[1]
 
-def line_to_pat(line):
-    line, _ = line.split(" ")
-    line = line.replace("*", "o")
-    line = line.replace("z", "o")
-    line = line.replace("a", "o")
-    line = line.replace("b", "o")
-    line = line.replace(".", "b")
-    line = line.replace("!", "$")
-    return lt.pattern(line)
-
 def get_patterns(filename):
-    giant = lt.pattern(open(filename).read())
+    giant = lt.life(open(filename).read())
     if not giant:
         return
 
@@ -70,8 +57,6 @@ def get_patterns(filename):
         row = giant[(range(0,100*1000),y)]
         columns = 1 + row.getrect()[2] // 100
         for j in range(0,columns):
-            if j > 0 and (j % 200) == 0:
-                pass
             x = range(0 + j * 100, 100 + j * 100)
             p = giant[(x,y)].shift(-j*100,-i*100)
             digest = p.digest()
@@ -80,12 +65,13 @@ def get_patterns(filename):
                 continue
             donedigests.add(digest)
             print(f"Doing entry {j}: {p.rle_string_only}")
-            if (background - p).population > 0:
-                print(p)
-                print("did not match background")
+
+            replace_before = lt.life("4bo$4bobo$4b3o$6bo3$2o$2o!")
+            replace_after = lt.life("4bo$4bobo$4b3o$6bo!")
+            p = p.replace(replace_before, replace_after)
+
             if p.population > 0:
-                p2 = (p - background) + foreground
-                yield p2.transform(correctiontransform)
+                yield p
 
 def interpret_pattern(p):
     s = Schematic.analyse(book, p, generous=True)
@@ -93,12 +79,14 @@ def interpret_pattern(p):
     if len(s.chaos) > 0:
         print(f"could not comprehend {p}")
         return s, None
-    tr = actives[0].trans
+
     catalysts = s.copy()
     for a in actives:
         catalysts.reagents.remove(a)
         catalysts.pattern -= a.pattern
-    return tr.inverse() * s, tr.inverse()*catalysts
+    return s, catalysts
+    # tr = actives[0].trans
+    # return tr.inverse() * s, tr.inverse()*catalysts
 
 
 class Reason(Enum):
@@ -213,7 +201,7 @@ def go():
 
                 activedigest = (s.pattern - catalysts.pattern).digest()
                 if isinteresting == Reason.TRANSPARENT:
-                    destroyedpat = lt.pattern()
+                    destroyedpat = lt.life()
                     destroyedpat[-200,-200] = 1 # stupid hack to stop lifelib from shifting everything to the origin
                     for c in destroyedrs:
                         destroyedpat += c.pattern
@@ -248,7 +236,7 @@ with open(ptbfile+'filtered', 'w') as f:
     f.write(f"{pp.pformat(result)}")
 
 print("writing groups")
-total = lt.pattern()
+total = lt.life()
 j = 0
 for s in seen:
     i = 0
