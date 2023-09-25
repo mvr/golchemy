@@ -7,26 +7,33 @@ import lifelib
 sess = lifelib.load_rules("b3s23")
 lt = sess.lifetree(n_layers=1)
 
+spacing = 100
+if len(sys.argv) >= 3:
+    spacing = int(sys.argv[2])
+resultheight = 100
+if len(sys.argv) >= 4:
+    spacing = int(sys.argv[3])
+
 def get_patterns(filename):
     donedigests = set()
     giant = lt.pattern(open(filename).read())
     if not giant:
         return
-    cats = 1 + giant.getrect()[3] // 100
+    cats = 1 + giant.getrect()[3] // spacing
     for i in range(0,cats):
-        y = range(0 + i * 100, 100 + i * 100)
-        row = giant[(range(0,100*1000),y)].shift(0,-i*100)
-        columns = 1 + row.getrect()[2] // 100
+        y = range(0 + i * spacing, resultheight + i * spacing)
+        row = giant[(range(0,spacing*1000),y)].shift(0,-i*spacing)
+        columns = 1 + row.getrect()[2] // spacing
 #         columns = min(columns, 10)
         for j in range(0,columns):
-            x = range(0 + j * 100, 100 + j * 100)
-            p = row[x, range(0,100)]
+            x = range(0 + j * spacing, spacing + j * spacing)
+            p = row[x, range(0,spacing)]
             digest = p.digest()
             if digest in donedigests:
                 continue
             donedigests.add(digest)
             if p.population > 0:
-                yield p.shift(-j*100,0)
+                yield p.shift(-j*spacing,0)
 
 bigZOI = lt.pattern()
 bigZOI[-3:4, -3:4] = 1
