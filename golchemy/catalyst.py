@@ -22,8 +22,9 @@ class Catalyst:
     check_reaction: bool
     sacrificial: bool
     can_smother: bool
+    can_rock: bool
 
-    def __init__(self, pat, recovery_time, period=None, zoi=None, required=None, locus = None, contact = None, mustInclude = False, checkRecovery = False, sacrificial = False):
+    def __init__(self, pat, recovery_time, period=None, zoi=None, required=None, locus = None, contact = None, must_include = False, check_recovery = False, check_reaction = False, sacrificial = False):
         self.pattern = pat
         if period is None:
             self.period = pat.period
@@ -64,8 +65,9 @@ class Catalyst:
         for c in pat.components(Pattern.halostill):
             self.transparent_component |= (c & required).empty()
 
-        self.mustInclude = mustInclude
-        self.checkRecovery = checkRecovery
+        self.must_include = must_include
+        self.check_recovery = check_recovery
+        self.check_reaction = check_reaction
         self.sacrificial = sacrificial
 
     # Needs the patterns to be identical
@@ -163,7 +165,14 @@ class Catalyst:
             return None
 
         absence = recoveredTime - activatedTime + 1
-        return Catalyst(cat, period=period, recovery_time=absence, zoi=zoi, required=required, locus=locus, contact=contact)
+        return Catalyst(cat,
+                        period=period,
+                        recovery_time=absence,
+                        zoi=zoi,
+                        required=required,
+                        locus=locus,
+                        contact=contact,
+                        check_reaction=True)
 
     # mconcat
     @classmethod
@@ -296,6 +305,10 @@ class Catalyst:
             result += f" check-recovery"
         if self.check_reaction:
             result += f" check-reaction"
+        if self.can_smother:
+            result += f" can-smother"
+        if self.can_rock:
+            result += f" can-rock"
         return result
 
     @classmethod
@@ -306,6 +319,7 @@ class Catalyst:
         c.name = name
         c.transparent = toml_dict.get("transparent", False)
         c.can_smother = toml_dict.get("can-smother", False)
+        c.can_rock = toml_dict.get("can-rock", False)
         c.check_reaction = toml_dict.get("check-reaction", False)
         c.symmetry_char = toml_dict.get("symmetry-char", "*")
         return c
