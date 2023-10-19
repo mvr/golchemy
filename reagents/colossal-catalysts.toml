@@ -7497,3 +7497,5 @@ frequency = 0.0025
 rle = "3b2o$3bobo$o4bo$6obob2o2b2o$6b2obobo2bo$2b3o3bo2b3o$2bo2b2obobo$5bob2ob2o!"
 soups = [ "32$34b2obo2bo$33b3o5b2o$33bob2obobobo$33bo2bo5b2o$33bo3b2ob3o$33b2o2bo3b3o$33b3ob5obo$42b2o$32bo6bobobo$33bo4b2o$32bo2bo2bo2bobo$32bob3obob4o12$36b2o$35bobo$35bo4bo$26b2o2b2obob6o$26bo2bobob2o$27b3o2bo3b3o$30bobob2o2bo$29b2ob2obo2$",]
 frequency = 0.0025
+x = 10, y = 11, rule = B3/S23
+4b2o$bo2bo$obobo$obob2o$b2o4b2o$3b4obo$3bo2bo$4bobo$3b2ob3o$9bo$8b2o!

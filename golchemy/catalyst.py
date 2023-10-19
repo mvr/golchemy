@@ -7,7 +7,6 @@ class Catalyst:
     pattern: Pattern
     recovery_time: int
     symmetry: StaticSymmetry
-    symmetry_char: str
     period: int
 
     zoi: Pattern;
@@ -74,6 +73,7 @@ class Catalyst:
     def centre(self):
         return self.locus.bb.centre
 
+    # Probably a bad/boring catalyst
     def is_suspect(self):
         return len((self.zoi - self.required).components(Pattern.halo2)) > 1 and (self.zoi - self.required).population < 10
 
@@ -111,6 +111,39 @@ class Catalyst:
         if not same_active_cells:
             return self
         return self.merge(other)
+
+    def enforce_symmetry(self):
+        if self.symmetry == StaticSymmetry.C1: return
+        for t in self.pattern.stabilisers(transforms = self.symmetry.transforms):
+            self.required &= t * self.required
+            self.locus |= t * self.locus
+            self.contact |= t * self.contact
+
+    # TODO: This could be better, e.g. checking that the glider can actually come from infinity
+    def determine_forbidden(self):
+        glider = lt.life("bo$2bo$3o!")
+        glider1 = lt.life("obo$b2o$bo!")
+        gliders = [t * glider for t in LinearTransform.all] + [t * glider1 for t in LinearTransform.all]
+        for g in gliders:
+            hits = self.pattern.bigzoi().convolve(LinearTransform.flip * g)
+            overlaps = self.pattern.zoi().convolve(LinearTransform.flip * g)
+            diff = hits - overlaps
+            for v in diff.coord_vecs():
+                together = self.pattern + g.translate(v)
+                advanced = together
+
+                skip = False
+                for _ in range(0, 20):
+                    advanced = advanced.advance(1)
+                    if not ((advanced ^ self.pattern) & self.required).empty():
+                        skip = True
+                        break
+                if skip: continue
+
+                remnants = advanced ^ self.pattern
+                boatbit = remnants.advance(1) == remnants and remnants.population == 5
+                if self.pattern == advanced or boatbit:
+                    self.forbidden.append(together)
 
     @classmethod
     def from_soup(cls, cat, soup, maxtime=200, stabletime=2):
@@ -204,6 +237,9 @@ class Catalyst:
     def from_soups(cls, cat, soups, merge_always=True):
         result = None
         while result is None:
+            if len(soups) == 0:
+                # Error!
+                print(cat.rle_string_only)
             result = cls.from_soup(cat, soups.pop(0))
         for s in soups:
             newcat = cls.from_soup(cat, s)
@@ -222,15 +258,6 @@ class Catalyst:
     def to_history(self):
         return (self.pattern - self.locus).as_state(1) + self.required.as_state(4) + (self.pattern & self.locus).as_state(9) + self.contact.as_state(2)
 
-    def translation_placements_with(self, other):
-        hits = self.reactmask.convolve(other)
-        # overlaps = self.avoidmask.convolve(other)
-        # diff = hits - overlaps
-        return { Transform.translate(v) for v in hits.coord_vecs() }
-
-    def all_orientation_placements_with(self, other):
-        return { t * tr for t in self.pattern.symmetry_classes for tr in self.translation_placements_with(t.inverse() * other) }
-
     # TODO: out of date
     @classmethod
     def from_catforce(cls, s):
@@ -247,7 +274,7 @@ class Catalyst:
 
         pat = lt.pattern(rle).shift(x, y)
         result = Catalyst(pat, recovery_time)
-        result.symchar = sym
+        # result.symchar = sym
 
         pos = 6
         while pos < len(chunks):
@@ -308,7 +335,7 @@ class Catalyst:
         result = ""
         if self.name is not None:
             result += f"# {self.name}\n"
-        result += f"cat {self.pattern.rle_string_only} {self.recovery_time} {pattern_position.x} {pattern_position.y} {self.symmetry_char}"
+        result += f"cat {self.pattern.rle_string_only} {self.recovery_time} {pattern_position.x} {pattern_position.y} {self.symmetry.catforce_char}"
         if self.period != 1:
             result += f" period {self.period}"
         if not self.required.empty():
@@ -330,6 +357,9 @@ class Catalyst:
             result += f" can-smother"
         if self.can_rock:
             result += f" can-rock"
+        for f in self.forbidden:
+            forbidden_position = f.bb.top_left - self.centre
+            result += f" forbidden {f.rle_string_only} {forbidden_position.x} {forbidden_position.y}"
         return result
 
     @classmethod
@@ -342,11 +372,14 @@ class Catalyst:
         c.can_smother = toml_dict.get("can-smother", False)
         c.can_rock = toml_dict.get("can-rock", False)
         c.check_reaction = toml_dict.get("check-reaction", False)
-        c.symmetry_char = toml_dict.get("symmetry-char", "*")
-        return c
 
-# required: green
-# reactive: teal
-# locus: yellow
-# transient: blue
-# antirequired: red
+        symmetry = toml_dict.get("symmetry", None)
+        if symmetry is None:
+            c.symmetry = c.pattern.symmetry
+        else:
+            c.symmetry = StaticSymmetry.from_str(symmetry)
+
+        c.enforce_symmetry()
+        c.determine_forbidden()
+
+        return c

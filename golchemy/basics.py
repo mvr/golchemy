@@ -98,8 +98,17 @@ class BB:
     def __hash__(self):
         return hash((self.x, self.y, self.w, self.h))
 
-# TODO: make this an Enum
-class LinearTransform:
+# TODO: make an Enum
+class LinearTransform():
+    # Identity
+    # ReflectAcrossX
+    # ReflectAcrossY
+    # Rotate90
+    # Rotate270
+    # Rotate180
+    # ReflectAcrossYeqX
+    # ReflectAcrossYeqNegX
+
     x : Vec
     y : Vec
     # lifelib applies these transformations such that the (0,0) cell
@@ -229,6 +238,16 @@ LinearTransform.all = [LinearTransform(Vec(1, 0), Vec(0, 1)),
                        LinearTransform(Vec(0, -1), Vec(-1, 0)),
                        ]
 
+# Catforce-ish names
+LinearTransform.Identity = LinearTransform.id
+LinearTransform.ReflectAcrossX = LinearTransform.flip_y
+LinearTransform.ReflectAcrossY = LinearTransform.flip_x
+LinearTransform.Rotate90 = LinearTransform.rot90
+LinearTransform.Rotate270 = LinearTransform.rot270
+LinearTransform.Rotate180 = LinearTransform.rot180
+LinearTransform.ReflectAcrossYeqX = LinearTransform.swap_xy
+LinearTransform.ReflectAcrossYeqNegX = LinearTransform.swap_xy_flip
+
 class Transform:
     lin: LinearTransform
     offset: Vec
@@ -298,34 +317,150 @@ class Transform:
         self.offset = Vec(pickled[4], pickled[5])
 
 Transform.id = Transform(LinearTransform.id, Vec(0, 0))
+# CatForce names:
+Transform.Identity                = Transform.id
+Transform.ReflectAcrossXEven      = Transform(LinearTransform.ReflectAcrossX       , Vec(0, -1))
+Transform.ReflectAcrossX          = Transform(LinearTransform.ReflectAcrossX       , Vec(0, 0))
+Transform.ReflectAcrossYEven      = Transform(LinearTransform.ReflectAcrossY       , Vec(-1, 0))
+Transform.ReflectAcrossY          = Transform(LinearTransform.ReflectAcrossY       , Vec(0, 0))
+Transform.Rotate90Even            = Transform(LinearTransform.Rotate90             , Vec(0, -1))
+Transform.Rotate90                = Transform(LinearTransform.Rotate90             , Vec(0, 0))
+Transform.Rotate270Even           = Transform(LinearTransform.Rotate270            , Vec(-1, 0))
+Transform.Rotate270               = Transform(LinearTransform.Rotate270            , Vec(0, 0))
+Transform.Rotate180               = Transform(LinearTransform.Rotate180            , Vec(0, 0))
+Transform.Rotate180EvenHorizontal = Transform(LinearTransform.Rotate180            , Vec(-1, 0))
+Transform.Rotate180EvenVertical   = Transform(LinearTransform.Rotate180            , Vec(0, -1))
+Transform.Rotate180EvenBoth       = Transform(LinearTransform.Rotate180            , Vec(-1, -1))
+Transform.ReflectAcrossYeqX       = Transform(LinearTransform.ReflectAcrossYeqX    , Vec(0, 0))
+Transform.ReflectAcrossYeqNegX    = Transform(LinearTransform.ReflectAcrossYeqNegX , Vec(-1, -1))
+Transform.ReflectAcrossYeqNegXP1  = Transform(LinearTransform.ReflectAcrossYeqNegX , Vec(0, 0))
 
 class StaticSymmetry(Enum):
-  C1 = 0
-  D2AcrossX = 1
-  D2AcrossXEven = 2
-  D2AcrossY = 3
-  D2AcrossYEven = 4
-  D2negdiagodd = 5
-  D2diagodd = 6
-  C2 = 7
-  C2even = 8
-  C2verticaleven = 9
-  C2horizontaleven = 10
-  C4 = 11
-  C4even = 12
-  D4 = 13
-  D4even = 14
-  D4verticaleven = 15
-  D4horizontaleven = 16
-  D4diag = 17
-  D4diageven = 18
-  D8 = 19
-  D8even = 20
+    C1               = 0
+    D2AcrossX        = 1
+    D2AcrossXEven    = 2
+    D2AcrossY        = 3
+    D2AcrossYEven    = 4
+    D2AcrossNegDiag  = 5
+    D2AcrossDiag     = 6
+    C2               = 7
+    C2Even           = 8
+    C2VerticalEven   = 9
+    C2HorizontalEven = 10
+    C4               = 11
+    C4Even           = 12
+    D4               = 13
+    D4Even           = 14
+    D4VerticalEven   = 15
+    D4HorizontalEven = 16
+    D4Diag           = 17
+    D4DiagEven       = 18
+    D8               = 19
+    D8Even           = 20
 
-  # TODO:
-  @property
-  def catforce_char(self):
-      return "*"
+    # The catforce symmetry character that gives you all the orbits
+    @property
+    def catforce_char(self):
+        if self == StaticSymmetry.C1:
+            return "*"
+        if self == StaticSymmetry.D2AcrossX or self == StaticSymmetry.D2AcrossXEven: # E.g. If you are symmetric across X, you need a flip across Y to get the other orbit
+            return "@"
+        if self == StaticSymmetry.D2AcrossY or self == StaticSymmetry.D2AcrossYEven:
+            return "@"
+        if self == StaticSymmetry.D2AcrossNegDiag:
+            return "+"
+        if self == StaticSymmetry.D2AcrossDiag:
+            return "+"
+        if self == StaticSymmetry.C2 or self == StaticSymmetry.C2Even or self == StaticSymmetry.C2VerticalEven or self == StaticSymmetry.C2HorizontalEven:
+            return "x"
+        if self == StaticSymmetry.D4 or self == StaticSymmetry.D4Even or self == StaticSymmetry.D4VerticalEven or self == StaticSymmetry.D4HorizontalEven:
+            return "/"
+        if self == StaticSymmetry.D4Diag or self == StaticSymmetry.D4DiagEven:
+            return "|"
+        if self == StaticSymmetry.D8 or self == StaticSymmetry.D8Even:
+            return "."
+        print("unknown symmetry")
+        exit(1)
+
+    @staticmethod
+    def from_str(s):
+        return StaticSymmetry[s]
+        # if s == "C1": return StaticSymmetry.C1
+        # if s == "D2AcrossX": return StaticSymmetry.D2AcrossX
+        # if s == "D2AcrossXEven": return StaticSymmetry.D2AcrossXEven
+        # if s == "D2AcrossY": return StaticSymmetry.D2AcrossY
+        # if s == "D2AcrossYEven": return StaticSymmetry.D2AcrossYEven
+        # if s == "D2AcrossNegDiag": return StaticSymmetry.D2AcrossNegDiag
+        # if s == "D2AcrossDiag": return StaticSymmetry.D2AcrossDiag
+        # if s == "C2": return StaticSymmetry.C2
+        # if s == "C2Even": return StaticSymmetry.C2Even
+        # if s == "C2VerticalEven": return StaticSymmetry.C2VerticalEven
+        # if s == "C2HorizontalEven": return StaticSymmetry.C2HorizontalEven
+        # if s == "C4": return StaticSymmetry.C4
+        # if s == "C4Even": return StaticSymmetry.C4Even
+        # if s == "D4": return StaticSymmetry.D4
+        # if s == "D4Even": return StaticSymmetry.D4Even
+        # if s == "D4VerticalEven": return StaticSymmetry.D4VerticalEven
+        # if s == "D4HorizontalEven": return StaticSymmetry.D4HorizontalEven
+        # if s == "D4Diag": return StaticSymmetry.D4Diag
+        # if s == "D4DiagEven": return StaticSymmetry.D4DiagEven
+        # if s == "D8": return StaticSymmetry.D8
+        # if s == "D8Even": return StaticSymmetry.D8Even
+
+    @property
+    def transforms(self):
+        if self == StaticSymmetry.C1:
+            return [Transform.Identity]
+        if self == StaticSymmetry.D2AcrossX:
+            return [Transform.Identity, Transform.ReflectAcrossX]
+        if self == StaticSymmetry.D2AcrossXEven:
+            return [Transform.Identity, Transform.ReflectAcrossXEven]
+        if self == StaticSymmetry.D2AcrossY:
+            return [Transform.Identity, Transform.ReflectAcrossY]
+        if self == StaticSymmetry.D2AcrossYEven:
+            return [Transform.Identity, Transform.ReflectAcrossYEven]
+        if self == StaticSymmetry.D2AcrossDiag:
+            return [Transform.Identity, Transform.ReflectAcrossYeqX]
+        if self == StaticSymmetry.D2AcrossNegDiag:
+            return [Transform.Identity, Transform.ReflectAcrossYeqNegXP1]
+        if self == StaticSymmetry.C2:
+            return [Transform.Identity, Transform.Rotate180]
+        if self == StaticSymmetry.C2Even:
+            return [Transform.Identity, Transform.Rotate180EvenBoth]
+        if self == StaticSymmetry.C2HorizontalEven:
+            return [Transform.Identity, Transform.Rotate180EvenHorizontal]
+        if self == StaticSymmetry.C2VerticalEven:
+            return [Transform.Identity, Transform.Rotate180EvenVertical]
+        if self == StaticSymmetry.C4:
+            return [Transform.Identity, Transform.Rotate90, Transform.Rotate180, Transform.Rotate270]
+        if self == StaticSymmetry.C4Even:
+            return [Transform.Identity, Transform.Rotate90Even, Transform.Rotate180EvenBoth, Transform.Rotate270Even]
+        if self == StaticSymmetry.D4:
+            return [Transform.Identity, Transform.ReflectAcrossX, Transform.Rotate180, Transform.ReflectAcrossY]
+        if self == StaticSymmetry.D4Even:
+            return [Transform.Identity, Transform.ReflectAcrossXEven, Transform.Rotate180EvenBoth,
+                    Transform.ReflectAcrossYEven]
+        if self == StaticSymmetry.D4HorizontalEven:
+            return [Transform.Identity, Transform.ReflectAcrossYEven, Transform.Rotate180EvenHorizontal,
+                    Transform.ReflectAcrossX]
+        if self == StaticSymmetry.D4VerticalEven:
+            return [Transform.Identity, Transform.ReflectAcrossXEven, Transform.Rotate180EvenVertical,
+                    Transform.ReflectAcrossY]
+        if self == StaticSymmetry.D4Diag:
+            return [Transform.Identity, Transform.ReflectAcrossYeqX, Transform.Rotate180,
+                    Transform.ReflectAcrossYeqNegXP1]
+        if self == StaticSymmetry.D4DiagEven:
+            return [Transform.Identity, Transform.ReflectAcrossYeqX, Transform.Rotate180EvenBoth,
+                    Transform.ReflectAcrossYeqNegX]
+        if self == StaticSymmetry.D8:
+          return [Transform.Identity, Transform.ReflectAcrossX,         Transform.ReflectAcrossYeqX,
+                  Transform.ReflectAcrossY, Transform.ReflectAcrossYeqNegXP1, Transform.Rotate90,
+                  Transform.Rotate270,      Transform.Rotate180]
+        if self == StaticSymmetry.D8Even:
+          return [Transform.Identity,           Transform.ReflectAcrossXEven,   Transform.ReflectAcrossYeqX,
+                  Transform.ReflectAcrossYEven, Transform.ReflectAcrossYeqNegX, Transform.Rotate90Even,
+                  Transform.Rotate270Even,      Transform.Rotate180EvenBoth]
+
 
 # Monkey patching, sue me
 def monkey_patch(cls):
@@ -466,6 +601,9 @@ class PatternExt(Pattern):
     def zoi(self):
         return self.convolve(PatternExt.halo1)
 
+    def bigzoi(self):
+        return self.convolve(PatternExt.halobigzoi)
+
     # Until I have proper gencols
     def translation_collisions_with(self, other):
         hits = self.zoi().convolve((LinearTransform.flip * other).zoi())
@@ -484,7 +622,7 @@ class PatternExt(Pattern):
         x,y,_,_ = self.getrect()
         logdiam = self.lifelib('GetDiameterOfPattern', self.ptr)
         if logdiam <= 7:
-            return f"Pattern(x={x}, y={y}, rle='{self.rle_string_only}')"
+            return f"Pattern(x={x}, y={y}, rle='{self.rle_string()}')"
         else:
             return f"Pattern(x={x}, y={y}, logdiam={logdiam})"
 
@@ -509,13 +647,84 @@ class PatternExt(Pattern):
 
         return None
 
+    def invariant_under(self, trans):
+        return self == (trans*self).normalise_origin()[0]
+
     @cached_property
     def symmetries(self) -> set[LinearTransform]:
         p, _ = self.normalise_origin()
-        return { t for t in LinearTransform.all if self.invariant_under(t)}
+        return { t for t in LinearTransform.all if p.invariant_under(t)}
 
-    def invariant_under(self, trans):
-        return self == (trans*self).normalise_origin()[0]
+    # TODO: this could be done better
+    def stabilisers(self, transforms = None) -> set[Transform]:
+        result = set()
+        if transforms is None:
+            transforms = self.symmetries
+        for s in transforms:
+            offset = self.bb.top_left - (s * self).bb.top_left
+            result.add(Transform(s, offset))
+        return result
+
+    @cached_property
+    def symmetry(self):
+        symmetries = self.symmetries
+        widtheven = self.bb.w % 2 == 0
+        heighteven = self.bb.h % 2 == 0
+        if len(symmetries) == 1:
+            return StaticSymmetry.C1
+        if len(symmetries) == 2:
+            if LinearTransform.ReflectAcrossX in symmetries:
+                if heighteven:
+                    return StaticSymmetry.D2AcrossXEven
+                else:
+                    return StaticSymmetry.D2AcrossX
+            if LinearTransform.ReflectAcrossY in symmetries:
+                if widtheven:
+                    return StaticSymmetry.D2AcrossYEven
+                else:
+                    return StaticSymmetry.D2AcrossY
+            if LinearTransform.ReflectAcrossYeqX in symmetries:
+                return StaticSymmetry.D2AcrossDiag
+            if LinearTransform.ReflectAcrossYeqNegX in symmetries:
+                return StaticSymmetry.D2AcrossNegDiag
+            if LinearTransform.Rotate180 in symmetries:
+                if widtheven and heighteven:
+                    return StaticSymmetry.C2Even
+                if not widtheven and heighteven:
+                    return StaticSymmetry.C2VerticalEven
+                if widtheven and not heighteven:
+                    return StaticSymmetry.C2HorizontalEven
+                if not widtheven and not heighteven:
+                    return StaticSymmetry.C2
+        if len(symmetries) == 4:
+            if LinearTransform.Rotate90 in symmetries:
+                if widtheven and heighteven:
+                    return StaticSymmetry.C4Even
+                if not widtheven and not heighteven:
+                    return StaticSymmetry.C4
+            if LinearTransform.ReflectAcrossX in symmetries:
+                if widtheven and heighteven:
+                    return StaticSymmetry.D4Even
+                if not widtheven and heighteven:
+                    return StaticSymmetry.D4VerticalEven
+                if widtheven and not heighteven:
+                    return StaticSymmetry.D4HorizontalEven
+                if not widtheven and not heighteven:
+                    return StaticSymmetry.D4
+            if LinearTransform.ReflectAcrossYeqX in symmetries:
+                if widtheven and heighteven:
+                    return StaticSymmetry.D4DiagEven
+                if not widtheven and not heighteven:
+                    return StaticSymmetry.D4Diag
+        if len(symmetries) == 8:
+            if widtheven and heighteven:
+                return StaticSymmetry.D8Even
+            if not widtheven and not heighteven:
+                return StaticSymmetry.D8
+
+        print("impossible symmetry")
+        exit(1)
+
 
     @cached_property
     def symmetry_classes(self):
