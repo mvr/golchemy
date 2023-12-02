@@ -115,8 +115,6 @@ soups = [
   "5b3o$7bo$5b3o$4bo$4bo$4bo3$3bob2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
 
   # Double interaction
-  "15bo$14bo$b2o11bo$2bo11bo$2bobo9bo$3b2o5bo4bo$9b3o3bo$8bo3bo2b2o$9b4o2b2o$10bob2obo$14bo$3bob2o7bo$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
-
   "21b2o$21b3o$20bo2bo$3bob2o14b2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
   "10bo$9bobo$9bobo$8b2ob3o$14bo$8b2ob3o$8b2obo2$2ob2o$2ob2o$2bo!",
   "9bo$8bobo$8bobo$7b2ob3o$13bo$7b2ob3o$7b2obo$bobo$bo2bo$o2bo$3o$bo!",
@@ -173,7 +171,6 @@ soups = [
   "5b2o$2o2bobo$o3bo4bo$b3ob5o$3bobo$3bobob3o$4b2obo2bo$9b2o5$4b3o$4b3o$5bo2$9b2o$9b2o!",
   "7b2o$2b2o2bobo$2bo3bo4bo$3b3ob5o$5bobo$5bobob3o$6b2obo2bo$bo9b2o$b2o$o2bo$3b2o$2b2o!",
   "13b2o$13bobob2o$15bobo$14b2obo$17bob2o$14b4o2bo$14bo3b2o$15b3o$17bo$17bobo$3bo14b2o$2ob2o$3bo$obo$bo!",
-  "4b2o$4bobo2b2o$bo4bo3bo$b5ob3o$5bobo$b3obobo$o2bob2o$2o2$9b2o$8b2obo$11b2o$10b2o!",
   "3bo$3obo$4o$o2$13b2o$8b2obo2bo$7bobob3o$7bobo$5b3ob5o$4bo3bo4bo$4b2o2bobo$9b2o!",
   "4b2o$4bobo2b2o$bo4bo3bo$b5ob3o$5bobo$b3obobo$o2bob2o$2o2$3bo$2bo2bo$bo4bo$2bo3bo$4b3o!",
   "13b2o$3bo8bobo$2obo8bo$o2bo6b3o$3o6bo3b2o$9b4o2bo$12bob2o$9b2obo$10bobo$8bobob2o$8b2o!",
@@ -181,6 +178,7 @@ soups = [
 uncommon-soups = [
   "4b3o$4bo2bo$3b2o$4bo$o2bo$2obo$b3ob2o$3b2o3$b2o$bo2bob2o$2b3obobo$6bobo$2b5ob3o$2bo4bo3bo$5bobo2b2o$5b2o!",
   "6b2o$2b2obobo$3bobo$3bob2o$2obo$o2b4o$b2o3bo$3b3o$3bo$bobo$b2o5$3b3o$3bobo$2bo2bo$2b2o!",
+  "4b2o$4bobo2b2o$bo4bo3bo$b5ob3o$5bobo$b3obobo$o2bob2o$2o2$9b2o$8b2obo$11b2o$10b2o!",
 ]
 
 [tub]
@@ -275,7 +273,6 @@ soups = [
 
 [clock]
 rle = "bo$bobo$obo$2bo!"
-symmetry = "D4"
 can-smother = true
 can-rock = true
 soups = [
@@ -301,8 +298,11 @@ soups = [
   "8bo$7bobo$8bo2$6b5o$5bo4bo$4bo2bo$bo2bob2o$obobo5bo$bo2bo4bobo$4b2o2bo2bo$9b2o10$14b2o$13b2o$14bob2o$15b3o!",
   "9bo$8bobo$9bo2$7b5o$7bo4bo$10bo2bo$10b2obo2bo$7bo5bobobo$6bobo4bo2bo$6bo2bo2b2o$7b2o$2bo$b3o$2o2bo$bo2b2o$2b3o$3bo!",
   "3bo$2obo$o2bo$3o5b2o$7bo2bo2b2o$7bobo4bo2bo$8bo5bobobo$11b2obo2bo$11bo2bo$8bo4bo$8b5o2$10bo$9bobo$10bo!",
-  "8bo$7bobo$8bo2$6b5o$6bo4bo$9bo2bo$9b2obo2bo$6bo5bobobo$5bobo4bo2bo$bo3bo2bo2b2o$b2o3b2o$o2bo$3b2o$2b2o!",
   "8bo$7bobo$8bo2$6b5o$5bo4bo$4bo2bo$bo2bob2o$obobo5bo$bo2bo4bobo$4b2o2bo2bo$9b2o6$18bo$17b3o$17bobo$15bobo$16bo$16bo!",
+  "9bo$8bobo$9bo2$7b5o$7bo4bo$10bo2bo$10b2obo2bo$7bo5bobobo$6bobo4bo2bo$6bo2bo2b2o$7b2o$2bo$b3o$2o2bo$bo2b2o$2b3o$3bo!",
+]
+uncommon-soups = [
+  "8bo$7bobo$8bo2$6b5o$6bo4bo$9bo2bo$9b2obo2bo$6bo5bobobo$5bobo4bo2bo$bo3bo2bo2b2o$b2o3b2o$o2bo$3b2o$2b2o!",
 ]
 
 # An interesting eater3 replacement
@@ -321,14 +321,12 @@ soups = [
 
 [blinker]
 rle = "3o!"
-symmetry = "D8" 
 soups = [
   "17bo$17bo$17bo4$3bo$2bobo$b2obo$3o!",
   "7b2o$7bo2b2o$o7b3o$o8bo$o!",
   "9bo11b2o$9b3o9b2o$o8bobo$o10bo$o!",
   "7b3o6$3bo$2bobo$b2obo$3o!",
   "2bo2bo$bo3bo$o4bo$o$b3o3$2b3o!",
-  "16bo11b2o$16b3o9b2o$16bobo$18bo$3o!",
   "6b3o15$2o2b2o$o4bo$bo3bo$4bo!",
   "3b3o7$bo$b2o$o2bo$3b2o$2b2o!",
   "8b3o15$2o2b2o$o4bo$bo3bo$4bo!",
@@ -343,7 +341,6 @@ soups = [
   "11bo$11bo$11bo6$3o$b2obo$2b3o$3bo!",
   "6bo2bo$5bo3bo$4bo4bo$4bo$5b3o12$3o!",
   "11b2o$o10bo2bo$o10bo3bo$o11bo3bo$15bo!",
-  "o2bo$bob2o$bo3b2o15bo$4bo17bo$22bo!",
   "3bo$b3o$o$o2bo$b3o3$2b3o!",
   "3o2$7b2o$6bo2bo$6bo2b2o$7bo2bo!",
   "3bo$2ob2o$3bo$obo$bo11bo$13bo$13bo!",
@@ -363,8 +360,6 @@ soups = [
   "2bo$b3o$o2bo$obo$bo5$4bo$4bo$4bo!",
   "2ob2o$2ob2o$2bo10$3bo$3bo$3bo!",
   "6b3o5$bo$b2o$o2bo$3b2o$2b2o!",
-  "19b3o4$o2bo$bob2o$bo3b2o$4bo!",
-  "2o4bo$2o2b2ob2o$7b2o3$13bo$13bo$13bo!",
   "3o$obo$o$b2o$2bo8$6bo$6bo$6bo!",
   "3b3o6$3o$o2bo$b3o$2bo!",
   "3o4$12b2o$9b2obo$10b3o$11bo!",
@@ -379,7 +374,6 @@ soups = [
   "4b2o$4bobo$4bobo$6bo$3o!",
   "18b2o$17bobo$17bobo$16bobo$17bo$3o!",
   "3bo$3bo$3bo5$2o$o2bo$o3bo$bo3bo$4bo!",
-  "2ob2o$2ob2o$2bo12bo$15bo$15bo!",
   "2b3o6$2b2o$3b2o$2b2o$3o$2o$o!",
   "3o$10b2o$9bobo$9bobo$8bobo$9bo!",
   "3o4$6b3o$6bo2bo$7b3o$8bo!",
@@ -387,7 +381,6 @@ soups = [
   "3o2$15b2o$14bobo$14bobo$13bobo$14bo!",
   "2b3o4$2b3o$2ob2o$3b2o!",
   "9bo$9bo$9bo4$3o$obo$o$b2o$2bo!",
-  "2b2o$2b3o$o$3o5bo$bo6bo$8bo!",
   "3b3o16$2bo$b3o$o2b2o$3o!",
   "7bo$6b3o$5bo2bo$5bobo$6bo$3o!",
   "o$o$o2$17bo$16bobo$14bob2o$14b3o$15bo!",
@@ -398,37 +391,26 @@ soups = [
   "13bo$13bo$13bo7$2o4bo$2o2b2ob2o$7b2o!",
   "3bo$3bo$3bo3$5bo$4b3o$2o2b3o$2o!",
   "bo$bo$bo13$2bo2bo$bo3bo$o4bo$o$b3o!",
-  "11b2ob2o$11b2ob2o$o12bo$o$o!",
-  "3o4b2o$7bob2o$8b3o$10bo!",
   "bo$bo$bo9$3o$o2bo$b3o$2bo!",
   "o$o$o9$4b3o$4bobo$4bo$5b2o$6bo!",
   "2o2b2o$o4bo$bo3bo$4bo6$4b3o!",
   "6bo$4bobo$4bo2bo$3bo2bo$4b2o4$3o!",
   "o$o$o3$2bo$2bo$2b2o2$b3o$b2o$2bo!",
   "2bo$b3o$o2bo$obo$bo5$3bo$3bo$3bo!",
-  "b2o$2o$bo2bo$2b3o$3bo6$4bo$4bo$4bo!",
   "4b3o6$bo$b2o$o2bo$3b2o$2b2o!",
   "3b3o$o3bob2o$o3b3o$o4bo!",
   "2bo$b3o$bobo$2bobo$3bo$3bo7$o$o$o!",
-  "3o6b2o$8b2o$9bo2bo$10b3o$11bo!",
   "3bo$b3o2bo$o5bo$o2bo2bo$b3o!",
-  "o$o$o4$8bo2bo$7bo2b2o$7bo2bo$8b2o7$9bo$9bo$9bo!",
   "3bo$bobo4b3o$bo2bo$o2bo$b2o!",
   "4bo$4bo$4bo8$bo$3o$obo$bobo$2bo$2bo!",
-  "b2o$b3o$o2bo$3o$3o13$4bo$4bo$4bo!",
   "bo$3o$obo$bobo$2bo$2bo6$2bo$2bo$2bo!",
   "13b3o4$bo$bo$b2o2$3o$2o$bo!",
   "3bo$3bo$3bo2$2o$o2bo$o3bo$bo3bo$4bo!",
   "11b2o$10bo2bo$2o$2o7bo2bo$5bo4b2o$5bo$5bo!",
   "9b2ob3o$o9b2obo$o10b2o$o!",
   "3b3o9$b2o$b3o$o2bo$b2o!",
-  "2b2o$bobo$o3bo$bobo$2bo5$3o!",
-  "3o14bo$16bobo$14bob2o$14b3o$15bo!",
-  "o2bo$bob2o$bo3b2o$4bo9$14bo$14bo$14bo!",
   "10bo$10bo$10bo5b2o$16b2o$11bo$10b2o6$3o!",
-  "4b3o$2bo4bo10bo$4bob2o10bo$b3o14bo$o!",
   "3o$3o9b3o$o$3bo$2b2o!",
-  "18bo$18bo$18bo2$2bo$bobo$o3bo$bo2bo$3b2o!",
   "6bobo$5bo2bo$4bo3bo$5b3o6$o$o$o!",
   "3o4$4b2o$4b3o$3bo2bo$4b2o!",
   "3o8$2b3o$2bobo$bo2bo$b2o!",
@@ -437,16 +419,34 @@ soups = [
   "2bo$2bo$2bo7$b2o$o2bo$o2b2o$bo2bo!",
   "5b3o11$2bobo$bo2bo$o3bo$b3o!",
   "4bo$3bobo$bob2o$b3o$2bo7$3o!",
-  "3bo$2ob2o$3bo$obo$bo7$5bo$5bo$5bo!",
   "6bo$6bo$6bo5$b2o$o2bo$o2b2o$bo2bo!",
   "9bo$9bo$9bo5$2bobo$bo2bo$o3bo$b3o!",
   "13bo$11b2obo$10bob2o$11b2o5$3o!",
   "9bo$8bobo$6bob2o$6b3o$7bo3$3o!",
   "5bobo$4bo2bo$3bo3bo$4b3o11$3o!",
   "8b3o$6b2obo$6b2obo$8bo6$3o!",
-  "15b3o3$5bo$4b3o$2o2b3o$2o!",
   "5b3o4$2b3o$bo3bo$o4bo$bob2o$2bo!",
-  "o$o$o4$8bo2bo$7bo2b2o$7bo2bo$8b2o5$13bo$13bo$13bo!",
+]
+uncommon-soups = [
+  # Long reactions:
+  "16bo11b2o$16b3o9b2o$16bobo$18bo$3o!",
+  "o2bo$bob2o$bo3b2o15bo$4bo17bo$22bo!",
+  "19b3o4$o2bo$bob2o$bo3b2o$4bo!",
+  "2o4bo$2o2b2ob2o$7b2o3$13bo$13bo$13bo!",
+  "2ob2o$2ob2o$2bo12bo$15bo$15bo!",
+  "2b2o$2b3o$o$3o5bo$bo6bo$8bo!",
+  "11b2ob2o$11b2ob2o$o12bo$o$o!",
+  "3o4b2o$7bob2o$8b3o$10bo!",
+  "b2o$2o$bo2bo$2b3o$3bo6$4bo$4bo$4bo!",
+  "3o6b2o$8b2o$9bo2bo$10b3o$11bo!",
+  "b2o$b3o$o2bo$3o$3o13$4bo$4bo$4bo!",
+  "2b2o$bobo$o3bo$bobo$2bo5$3o!",
+  "3o14bo$16bobo$14bob2o$14b3o$15bo!",
+  "o2bo$bob2o$bo3b2o$4bo9$14bo$14bo$14bo!",
+  "4b3o$2bo4bo10bo$4bob2o10bo$b3o14bo$o!",
+  "18bo$18bo$18bo2$2bo$bobo$o3bo$bo2bo$3b2o!",
+  "3bo$2ob2o$3bo$obo$bo7$5bo$5bo$5bo!",
+  "15b3o3$5bo$4b3o$2o2b3o$2o!",
 ]
 
 [eater-bridge-snake]
@@ -479,7 +479,7 @@ soups = [
 
 [eater2-blinker]
 rle = "8b3o2$3bob2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!"
-check-reaction = true # To prevent acting like a blinker
+# check-reaction = true # To prevent acting like a blinker
 soups = [
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o3$7b3o13$7bo$6b3o$5bo2b2o$5b3o!",
   "10bo$9bobo$9bobo$8b2ob3o$14bo$8b2ob3o$8b2obo3$5b3o19$2bo$b3o$o2b2o$3o!",
@@ -490,14 +490,12 @@ soups = [
   "7b3o2$2b3o$o3bo5b2obo$4o6b2ob3o$bo14bo$10b2ob3o$11bobo$11bobo$12bo!",
   "23bo$22bobo$22bobo$21b2ob3o$2bo24bo$bobo17b2ob3o$o3bo16b2obo$bo2bo$3b2o$18b3o!",
   "9bo18b2o$9bo18b3o$9bo17bo2bo$3bob2o21b2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
-  "8bo$7bobo$7bobo$6b2ob3o$12bo$6b2ob3o$6b2obo$3bo$3bo$3bo9$bo$3o$obo$bobo$2bo$2bo!",
   "4bo$3bobo$3bobo$b3ob2o15bo$o19b2obo$b3ob2o12bob2o$3bob2o13b2o2$8bo$8bo$8bo!",
   "4b3o$4bo2bo$4bo3bo$5bobo$o$o$o$3b2obo$3b2ob3o$9bo$3b2ob3o$4bobo$4bobo$5bo!",
   "b2o$o2bo7bo$ob2o7bo$b2o8bo$14b2obo$14b2ob3o$20bo$14b2ob3o$15bobo$15bobo$16bo!",
   "9bo$9bo$9bo$3bob2o$b3ob2o$o$b3ob2o$3bobo5bo$3bobo5b2o$4bo4b3o$9b2o$9bo!",
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o2$8bo11b2o$8bo10bo$8bo11bobo$20bobo$21b2o!",
   "4bo$3bobo$3bobo$b3ob2o15bo$o20b2o$b3ob2o14bobo$3bob2o15bo3b2o$9bo16bo$9bo$9bo!",
-  "bo2bo$2bob2o$2bo3b2o$5bo8$7b3o3$3bob2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o3$7b3o5$7b2o$6bo$7bobo$7bobo$8b2o!",
   "8bo4b2o$8bo3bo$8bo4bobo$13bobo$3bob2o7b2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
   "12bo$12bo$12bo$15b2obo$2o13b2ob3o$2o3b3o13bo$5b3o7b2ob3o$6bo9bobo$16bobo$17bo!",
@@ -505,12 +503,10 @@ soups = [
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o2$8bo$8bo11bo$8bo10b2o$19bobo$20bo3b2o$24bo!",
   "2b3o$2bo2bo$2b2obo$4b2o4$3o2$4b2obo$4b2ob3o$10bo$4b2ob3o$5bobo$5bobo$6bo!",
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o2$8bo4b2o$8bo4bob2o$8bo5b3o$16bo!",
-  "8bo$8bo$8bo5b2ob3o$15b2obo$3bob2o9b2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
   "9bo$8bobo$8bobo$7b2ob3o$13bo$7b2ob3o$7b2obo3$4b3o3$2bobo$bo2bo$o3bo$b3o!",
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o2$8b3o7$7bo$6b3o$5bo2bo$5bobo$6bo!",
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o2$8bo$8bo$8bo6$13b3o$13bobo$12bo2bo$12b2o!",
   "5bo$4bobo$4bobo$3b2ob3o$9bo$3b2ob3o$3b2obo3$3o9$7bo$6b2o$6bobo$7bo3b2o$11bo!",
-  "4bo$3bobo$3bobo$2b2ob3o$8bo$2b2ob3o$2b2obo2$o$o$o3$4bo2bo$3bo3bo$2bo4bo$2bo$3b3o!",
   "2bo$bo2bo$o4bo13bo$bo3bo13bo$3b3o13bo$22b2obo$22b2ob3o$28bo$22b2ob3o$23bobo$23bobo$24bo!",
   "6bo$5bobo$5bobo$4b2ob3o$10bo$4b2ob3o$4b2obo3$b3o8$b3o$o2bo$b3o2$6b2o$6b2o!",
   "2b3o$2ob2o$3b2o3bo$8bo$8bo$11b2obo$11b2ob3o$17bo$11b2ob3o$12bobo$12bobo$13bo!",
@@ -518,6 +514,12 @@ soups = [
   "15bo$14bobo$14bobo$13b2ob3o$19bo$13b2ob3o$13b2obo$10bo$10bo$10bo5$ob3o$bo2bo$b3o!",
   "4bo$3bobo$3bobo$b3ob2o$o$b3ob2o$3bob2o2$8bo$8bo$8bo14$7b3o$8bobo$8bo2bo$9b2o!",
   "5b3o$3b2ob2o$6b2o5$7b3o3$3bob2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo! ",
+]
+uncommon-reactions = [
+  # Long reactions
+  "8bo$7bobo$7bobo$6b2ob3o$12bo$6b2ob3o$6b2obo$3bo$3bo$3bo9$bo$3o$obo$bobo$2bo$2bo!",
+  "bo2bo$2bob2o$2bo3b2o$5bo8$7b3o3$3bob2o$b3ob2o$o$b3ob2o$3bobo$3bobo$4bo!",
+  "4bo$3bobo$3bobo$2b2ob3o$8bo$2b2ob3o$2b2obo2$o$o$o3$4bo2bo$3bo3bo$2bo4bo$2bo$3b3o!",
 ]
 
 [eater-block]
@@ -606,7 +608,6 @@ soups = [
 
 [floating-preblock]
 rle = "2o$o$2bob2o$b2obo$2bo3bo$bo2bob3o$b4o4bo$6b3o$3b2obo$3bobo!"
-check-reaction = true # To prevent acting like a snake-rock
 soups = [
   "8b2o$3b2obo2bo$3bob3o$2obo$bob2ob2o$o6bo$b2ob2o$2bobo24b2o$2bobo24b3o$3bo24bo2bo$29b2o!",
   "bobo$bo2bo$o2bo$3o$bo3$10bo$9bobo$9bobo$8b2ob2o$6bo6bo$6b2ob2obo$10bob2o$6b3obo$4bo2bob2o$4b2o!",
@@ -742,6 +743,7 @@ soups = [
 [pi-splitter]
 rle = "5bo$4bobo$3bobo2bo$b3o2b2obo$o3b2o3bo2b2o$b3o2b3o3b2o$3bobo$4bobo$5bo!"
 soups = [
+  "5bo$4bobo$3bobo2bo$b3o2b2obo$o3b2o3bo2b2o$b3o2b3o3b2o$3bobo$4bobo$5bo3$3b2o$2bobo$2bobo$3bo!",
   "11b2o$11b2o3$12b2o$11bo2bo$11bobo$9bobobobo$8bobobobobo$9bo2bo2bo$10b2ob2o$11bobo$b2o8bobo$b3o8bo$o2bo$b2o!",
   "4bo$3bobo$3bobo$2b2ob2o$bo2bo2bo$obobobobo$bobobobo$3bobo$2bo2bo$3b2o6b2o$11bobo$11bobo$4b2o7bo$4b2o!",
 ]
@@ -751,6 +753,7 @@ rle = "2b2o$3bo2b2o$3bobobo7b2o$2b2o2bo3b2o3bo$o2bo5bobo4b3o$2o7bobobo5bo$8b2obo
 check-reaction = true # To prevent acting as a fishhook
 soups = [
   "12b2o$10bo2bo$6bob4obob2o$6b2o4bo2bobo$9b2o4bobo$6b3ob2o2b2ob2o$6bo5bo$8b2obob6o$2o7bobobo5bo$o2bo5bobo4b3o$2b2o2bo3b2o3bo$3bobobo7b2o$3bo2b2o$2b2o7$10b2o$10b3o$9bo2bo$10b2o!",
+  "8bo$5bobobo$3b3obobo$2bo4bobobo$2b4obo2b2o$5bobo$3o4b2o6b2o$o2bo2bo8bobo$2bo2bob4o4bobo$b2ob2o4bo6bo$2bobo2b3o$2bo2bobo$3bobo5b2o$2b2ob2o3bobo$11bo2$9b5o$10bo2bo$8bo$8b2o!",
 ]
 
 [sturdy-block]
@@ -763,7 +766,7 @@ soups = [
 
 [traffic-stop]
 rle = "8bo$8bo$8bo2$10b3o2$2b2o4bo$bobo4bo$bo6bo$2o!"
-check-reaction = true # To prevent acting like a blinker
+# check-reaction = true # To prevent acting like a blinker
 soups = [
   "4b3o2$2bo5bo$2bo5bo$2bo5bo4$2b2o9b3o$3bo9bobo$3o9bo2bo$o11b2o!",
   "17bo11b2o$17b3o9b2o$17bobo$19bo4$2b3o2$o$o$o$8b2o$2b3o3bobo$10bo$10b2o!",
@@ -771,7 +774,6 @@ soups = [
   "7bo$7b3o$10bo$9b2o4$9bo5bo$9bo5bo$9bo5bo2$11b3o4$bo$3o$obo$bobo$2bo$2bo!",
   "10bo$9bobo$7bob2o$7b3o$8bo8$7b3o2$11bo$11bo$11bo$2b2o$bobo3b3o$bo$2o!",
   "9b3o$9bo2bo$9b2obo$4bo6b2o$4bo$4bo2$3o2$4bo4b2o$4bo4bobo$4bo6bo$11b2o!",
-  "13bo$10b2obo$10bo2bo$10b3o2$4bo$4bo$4bo2$3o3b3o5$6b2o$6bo$7b3o$9bo!",
   "4bo$4bo$4bo2$3o2$4bo4b2o$4bo4bobo$4bo6bo$11b2o4$4bo$b2obo$bo2bo$b3o!",
   "8bo$8bo$8bo2$10b3o2$2b2o4bo$bobo4bo$bo6bo$2o5$3b2o4bo$3b2o2b2ob2o$10b2o!",
   "12b3o$3bo$bobo6bo5bo$bo2bo5bo5bo$o2bo6bo5bo$b2o3$15b2o$15bo$16b3o$18bo!",
@@ -850,6 +852,7 @@ soups = [
 rle = "4bo$3bobo5bo$b3obo4bobo4b2o$o4b2o4bobobo2bo$b3o3bo5bob2o$3b3o2bo4bo$6b2obobobo$3b2o4bob2o$3bob3o2bo$8b2o2b3o$7bo2b2o2bo$8bo2bo$9b2o!"
 check-reaction = true # To prevent acting like a tub
 soups = [
+  "10b3o$10bobo$10b3o2$4bo$3bobo5bo$b3obo4bobo4b2o$o4b2o4bobobo2bo$b3o3bo5bob2o$3b3o2bo4bo$6b2obobobo$3b2o4bob2o$3bob3o2bo$8b2o2b3o$7bo2b2o2bo$8bo2bo$9b2o!",
   "9b2ob2o$9b2ob2o$11bo14$4bo$3bobo5bo$b3obo4bobo4b2o$o4b2o4bobobo2bo$b3o3bo5bob2o$3b3o2bo4bo$6b2obobobo$3b2o4bob2o$3bob3o2bo$8b2o2b3o$7bo2b2o2bo$8bo2bo$9b2o!",
   "9b2o$9bo$3o8bo$bo8b2o$bob2o11b2o$2b2o6b4o2bo$9bo4bobo$8bobo2b2o2b2o$9bo5bobobo$13b2obo2bo$12bo3bobo$11bobobobo$10bo2bobo$8b3obo2bo$7bo4bobo$8b2ob2ob2o$9bobo$9bobo$10bo!",
 ]
@@ -932,6 +935,7 @@ soups = [
   "6b2o$5bo2bo$5b3obo$3b2o4bo$3bo2bobob2obo$o4b2obobob2o$5o3bo$5b4o$2b3o$2bo2b4o$3b2o3bo11bo$5b3o11bobo$5bo11bob2o$3bobo11b3o$3b2o13bo!",
   "17b2o$16bo2bo$15bob3o$15bo4b2o$11bob2obobo2bo$11b2obobob2o4bo$16bo3b5o$16b4o$20b3o$16b4o2bo$16bo3b2o$b2o14b3o$2obo15bo$3b2o14bobo$2b2o16b2o!",
   "7b2o$6bo2bo$5bob3o$5bo4b2o$bob2obobo2bo$b2obobob2o4bo$6bo3b5o$6b4o$10b3o$6b4o2bo$6bo3b2o$7b3o$9bo$b3o5bobo$bobo6b2o$o2bo$2o!",
+  "4b2o7b3o$5bo5bo3bo$4bo6b4o$4b2o6bo$2b2o$bo2b4ob2o$obo4bobobo$obob2obobobo$b2o2bobobob3o$3bo2bobobo3bo$3b2obobobo2b2o$6bob2o$6bo$5b2o!",
 ]
 
 [ship]
@@ -1005,6 +1009,7 @@ soups = [
 rle = "6bo$5bobo$b2obobo$obobobobo$o4bobobo$b4o2bobo$7b2o$b2o$b2o!"
 check-reaction = true
 soups = [
+  "8b2o$8b2o$2b2o$bobo2b4o$bobobo4bo$2bobobobobo$4bobob2o$3bobo$4bo4$b2o$obo$obo$bo!",
   "18b2o$17bo2bob2o$17b2obob2o$20bo$17b2obo$16bo2bo$15bob2o$2o4b2o8bo2b3o$2o4b3o9bo2bo$6b2o11b2o!",
   "2bo$bobo$o3bo17b2o$bo2bo16bo2bo$3b2o14bo2b3o$18bob2o$19bo2bo$20b2obo$23bo$20b2obob2o$20bo2bob2o$21b2o!",
 ]
@@ -1021,6 +1026,7 @@ soups = [
 [xs28_wgadharzoggldzw66]
 rle = "3b2o$3bo$2obo4bo$2obobobobobo$4b2obob2obo$8bo3bo$9bobo$8b2ob2o!"
 soups = [
+  "8b2ob2o$9bobo$8bo3bo$4b2obob2obo$2obobobobobo$2obo4bo$3bo$3b2o$7b2o$6bobo$6bobo$7bo!",
   "8b2o$8b2o2$6b4o$6bo3bo$9b2o2$9b2o$8bo2bobo$9b2ob2o$10bo$b2o6bo2b2o$b3o6b2obo$o2bo$b2o!",
 ]
 
@@ -1050,6 +1056,7 @@ soups = [
 [xs35_3iab8bbgz011o49b42sgzw11]
 rle = "7b2o$2o5bo$bo2b2obo$bobo2bo$2bobo$4b2o2b2o$3bo5bo$4b5o2$4b2ob4o$4b2obo2bo!"
 soups = [
+  "13bo$12b3o$11b2o2bo$bo10bo2b2o$b3o9b3o$4bo9bo$3bo2bo$2bob2obob2o$2bo2bobob2o$3bo3bo$3o4bob2o$o4bobobo$5b2o2bo$9b2o!",
   "12bo$9b3obo$9b4o$bo7bo$b3o$4bo$3bo2bo$2bob2obob2o$2bo2bobob2o$3bo3bo$3o4bob2o$o4bobobo$5b2o2bo$9b2o!",
   "8b2o$9bo2b2o$9bobobo4bo$8b2obo4b3o$11bo3bo$8b2obobo2bo$8b2obob2obo$12bo2bo$14bo$15b3o$17bo$2o$2o3b3o$5b3o$6bo!",
   "10b2o$11bo2b2o$11bobobo4bo$10b2obo4b3o$13bo3bo$10b2obobo2bo$10b2obob2obo$14bo2bo$16bo$17b3o$2o4bo12bo$2o2b2ob2o$7b2o!",
@@ -1066,7 +1073,6 @@ soups = [
 
 [half-blockade]
 rle = "2o$2o2b2o$4b2o!"
-check-recovery = true
 soups = [
   "2o$o2b2o$b3o$2bo10b2o$13b2o3$14b2o$14b2o!",
   "2bo2bo$bo3bo$o4bo$o$b3o$8b2o$8b2o3$9b2o$9b2o!",
@@ -1085,8 +1091,7 @@ soups = [
 
 [eater-blinker]
 rle = "6bo$6bo$6bo$2b2o$bobo$bo$2o!"
-check-recovery = true
-check-reaction = true # To prevent acting like a blinker
+# check-reaction = true # To prevent acting like a blinker
 soups = [
   "2o$bo$bobo$2b2o2$5b3o6$7bo$7b2o$5b3o$5b2o$5bo!",
   "o$3o$3bo$2b2o2$5bo4b2o$5bo4bob2o$5bo5b3o$13bo!",
@@ -1331,6 +1336,7 @@ soups = [
 rle = "3bob2o$b3ob2o$o$b3ob2o$3bobobob2o$6b2ob2o2$6b2ob2o$7bobo$7bobo$8bo!"
 soups = [
   "8bo$7bobo$7bobo$6b2ob2o2$6b2ob2o$6b2obobobo$10b2ob3o$16bo$10b2ob3o$10b2obo5$b2o$b3o$o2bo$b2o!",
+  "11bo$10b3o$9b2o2bo$10bo2b2o$3bob2o4b3o$b3ob2o5bo$o$b3ob2o$3bobobob2o$6b2ob2o2$6b2ob2o$7bobo$7bobo$8bo!",
 ]
 
 [diagonal-scramble]
@@ -1397,7 +1403,6 @@ soups = [
 rle = "b2o$bobo$3bo$3b2o$b2o4bo$o2b5o$bobo$2o2b2o3b2o$2bobo2bo2bo$2bo2b5o$b2o$7bo$6bobo$7bo!"
 soups = [
   "2ob2o10b2o$2ob2o10bobo$2bo14bo2bo$12b2o2b2obobo$13bo3bo2bo$13bobobo$11bobob2o$9b3ob2o$8bo3bo3b3o$8b2o2bob2o2bo$13bobo!",
-  "18bobo$13b2o2bob2o2bo$13bo3bo3b3o$14b3ob2o$16bobob2o$18bobobo$18bo3bo2bo$17b2o2b2obobo$22bo2bo$2b2o16bobo$3b2o15b2o$2b2o$3o$2o$o!",
 ]
 
 [xs25_32acz0cik8y2cczy36a8o]
@@ -1468,6 +1473,7 @@ soups = [
 rle = "b2o$o2bo$b2o$9b2o$9b2o4$4b2o$4b2o!"
 check-reaction = true
 soups = [
+  "6b2o$5bo2bo$3o3b2o$obo11b2o$3o11b2o4$9b2o$9b2o!",
   "bobo$bo2bo$o2bo$3o$bo8$2bo$bobo$bobo$2bo$9b2o$9b2o4$4b2o$4b2o!",
 ]
 
