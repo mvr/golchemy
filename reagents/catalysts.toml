@@ -188,26 +188,71 @@ can-rock = true
 can-smother = true
 frequency = 1.17273
 soups = [
-  # Standard
-  "5b2obo$4b3obo$bo2bo2bo$obo3b2o$bo!",
-  "bo$obo$bo3b3o$5bo$6bo$8bo$8bo$8bo!",
-  "bo$obo$bo9b3o$11bobo$11bobo!",
-
-  # Herschel rock  
-  "2bo$3o$obo$o4$bo$obo$bo!",
-  # B rock
-  "9bo$8b2o$7b2o$8b2o3$bo$obo$bo!",
-  # Long reaction
-  "6bo$5bo$4b2o5bo$3bo6b2o$4bo4b2o$bo2bobob3o$obo6b4o$bo8bobo$11bo!",
+  "2bo$bobo$2bo3$2o$obo$obo$2bo!",
+  "19bo$18bobo$2bo16bo$bobo$o3bo$bo2bo$3b2o!",
+  "13bo$12bobo$13bo3$2bo$bobo$o3bo$bo2bo$3b2o!",
+  "2b2o$2b3o$bo2bo$2b2o5$bo$obo$bo!",
+  "3bo11b2o$3b3o9b2o$3bobo$5bo3$bo$obo$bo!",
+  "8bo$7bobo$8bo8$2bo$b3o$o2b2o$3o!",
+  "bo$obo$bo$10bo$7b2obo$7bo2bo$7b3o!",
+  "bo$obo$bo4$9bo$8b3o$7bo2bo$7bobo$8bo!",
+  "3b2o$2b4o$bo4bo$2b4o$3b2o2$bo$obo$bo!",
+  "3o$bo$bob2o$2b2o5$10bo$9bobo$10bo!",
+  "7bo$6bobo$7bo$b3o$o3bo$3b2o$3o!",
+  "19b2o$19b3o$18bo2bo$19b2o2$bo$obo$bo!",
+  "8bo$7bobo$b3o4bo$o3bo$3b2o$3o!",
+  "4b3o$5bo$5bob2o$bo4b2o$obo$bo!",
+  "4bo$3bobo$4bo3$2bo$bobo$o3bo$bo2bo$3b2o!",
+  "bo$obo$bo2$7b2o$7bob2o$8b3o$10bo!",
+  "4b3o$4bo2bo$bo3b3o$obo3bo$bo!",
+  "bo$obo$bo4$7b2o$6bo2bo$6bo2b2o$7bo2bo!",
+  "bo$obo5b3o$bo6bobo$8bo$9b2o$10bo!",
+  "2b2o$2b3o$o$3o$bo5$5bo$4bobo$5bo!",
+  "4bo$3b3o$3b6o4$bo$obo$bo!",
+  "bo$obo$bo7$5bo$3b2obo$2bob2o$3b2o!",
+  "4bo$3bobo$4bo3$3bo$2obo$o2bo$3o!",
+  "bo$obo$bo6$5bo$4b3o$2o2b3o$2o!",
+  "bo$obo$bo2$7b3o$7b2o$7b2ob2o$9b2o!",
+  "3o$3o$bo2$5b2o$5b2o8$3bo$2bobo$3bo!",
+  "2bo2bo$bo3bo$o4bo$o$b3o10$4bo$3bobo$4bo!",
+  "bo$obo$bo2$4b3o$3bo3bo$4b3o$5bo!",
+  "8bo$7bobo$8bo2$ob3o$bo2bo$b3o!",
+  "3o$obo$o8bo$b2o5bobo$2bo6bo!",
+  "8bo$7bobo$8bo7$b2o$2ob2o$2b3o!",
 ]
 uncommon-soups = [
-  # B transparent
-  "bo$obo$bo4$bo$3o$ob2o!",
-
-  # Temporary barge
-  "2bo$2bo$4bo$2b2obo$2bo2b2o$2b4o$3b2o5bo$10bo$10bo$bo$obo$bo!",
+  "2bo$b3o$o2bo$obo$bo2$5bo$4bobo$5bo!",
+  "o2bo$bob2o$bo3b2o$4bo17bo$21bobo$22bo!",
+  "2bo$bobo$2bo3$2bo$b3o$o2b2o$3o!",
+  "bo8b3o$obo7bo2bo$bo8bo3bo$11bobo!",
+  "bo16b2o$obo15b3o$bo15bo2bo$18b2o!",
+  "5bo$4bobo$5bo7$2b3o$bo3bo$o4bo$bob2o$2bo!",
 ]
 
+[boat]
+rle = "bo$obo$bo!"
+soups = [
+  "bo$obo$2o$7bo$6b3o$6bobo$7bobo$8bo$8bo!",
+  "b2o$obo$bo4$4b2o$4b3o$3bo2bo$4b2o!",
+  "12b2o$11bobo$12bo14$2bo$b3o$o2b2o$3o!",
+  "14b2o$13bobo$14bo3$2ob2o$2ob2o$2bo!",
+  "7b2o$6bobo$3o4bo$bobo$bo2bo$2b2o!",
+  "8bo$7bobo$bo6b2o$3o$6o!",
+  "o$o$o5b2o$6b2o$bo$2o10$3b2o$2bobo$3bo!",
+  "3o$bob2o$b3o$2bo2$6bo$5bobo$6b2o!",
+  "10bo$8b2obo$7bob2o$8b2o5$b2o$obo$bo!",
+  "3bo$2bobo$3b2o4$2bo$2b2o$3o$2o$o!",
+  "2o$obo$bo2$12bo$10b2obo$9bob2o$10b2o!",
+]
+uncommon-soups = [
+  "6b2o$6bobo$7bo3$b2ob2o$3ob3o$b2ob2o!",
+  "6bo$5bobo$5b2o3$b2o$o$b2ob2o$5b2o!",
+  "15bo$14bobo$14b2o10$2o2b2o$o4bo$bo3bo$4bo!",
+  "9bo$bo5bo3bo$obo4bo3bo$2o5bo4bo$10b2o!",
+  "2o$obo$bo3$4b2o$3b2ob2o$5b3o!",
+  "11bo$9bo3bo$b2o6bo3bo$obo6bo4bo$bo10b2o!",
+  "15b2o$3o12bobo$b2obo11bo$2b3o$3bo!",
+]
 
 [bts]
 rle = "o2bob2o$4obo$5bobo$2b2o2b2o$2bo$3bo$2b2o!"
@@ -474,7 +519,6 @@ rle = "6b2ob2o$7bobo$2b2obo5bob2o$bobob2o3b2obobo$o6bobo6bo$7o3b7o2$2b3o7b3o$bo2
 check-reaction = true
 soups = [
   "7bo$6bob2o$6bo2bo$7b3o3$8bo$7bobo$b2o4bobo4b2o$bo2bo3bo3bo2bo$2b3o7b3o2$7o3b7o$o6bobo6bo$bobob2o3b2obobo$2b2obo5bob2o$7bobo$6b2ob2o!",
-    "4b2o$3bobo2b2o$2bo2bobobo7b3o$2b2obobo7b2ob2o$5bob2o6bobo$2b2obo9bo$o2bobo10bo$2o2bo4b2o4bobo$8bo2bo3bobo$2o2bo4b2o5bo$o2bobo$2b2obo$5bob2o$2b2obobo$2bo2bobobo$3bobo2b2o$4b2o!",
 ]
 
 [eater2-blinker]
